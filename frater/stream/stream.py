@@ -17,9 +17,7 @@ class InputStream(Stream):
 
 class OutputStream(Stream):
     def send(self, data):
-        if type(data) != self.stream_type:
-            raise TypeError('Incorrect data type for stream - '
-                            'stream type: {} output type: {} output: {}'.format(self.stream_type, type(data), data))
+        raise NotImplementedError
 
     def __call__(self, data):
         return self.send(data)

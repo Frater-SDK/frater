@@ -1,9 +1,9 @@
 import json
 from typing import Callable
 
-from ..core import Activity, Object
-from ..core.factory.activity import activity_to_json, json_to_activity
-from ..core.factory.object import object_to_json, json_to_object
+from frater.core import Activity, Object
+from frater.core.factory.activity import activity_to_json, json_to_activity
+from frater.core.factory.object import object_to_json, json_to_object
 
 
 def get_json_serializer(stream_type: type) -> Callable:

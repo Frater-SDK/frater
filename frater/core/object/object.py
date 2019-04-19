@@ -1,7 +1,5 @@
-from ..proto import core
 from .object_type import ObjectType
 from ..trajectory import Trajectory
-from typing import Dict
 
 
 class Object:
@@ -16,11 +14,11 @@ class Object:
 
     def __eq__(self, other: 'Object') -> bool:
         return (
-            self.object_id == other.object_id and
-            self.object_type == other.object_type and
-            self.source_video == other.source_video and
-            self.trajectory == other.trajectory and
-            self.experiment == other.experiment
+                self.object_id == other.object_id and
+                self.object_type == other.object_type and
+                self.source_video == other.source_video and
+                self.trajectory == other.trajectory and
+                self.experiment == other.experiment
         )
 
     @property
