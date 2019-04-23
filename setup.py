@@ -10,5 +10,11 @@ setup(
     license='Apache 2.0 License',
     author='John Henning',
     author_email='john.l.henning@ibm.com',
-    description='An Activity Detection SDK'
+    description='An Activity Detection SDK',
+    install_requires=[
+        'numpy',
+        'protobuf',
+        'pyyaml',
+        'kafka-python'
+    ]
 )
