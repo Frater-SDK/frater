@@ -1,8 +1,3 @@
-from typing import List
-
-from ..stream import InputStream, OutputStream
-
-
 def is_valid_composition(tasks):
     for i in range(len(tasks) - 1):
         if not tasks[i].output_type == tasks[i + 1].input_type:
