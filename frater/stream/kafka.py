@@ -12,8 +12,7 @@ class KafkaOutputStream(OutputStream):
         self.topic = topic
 
     def send(self, data):
-        super(KafkaOutputStream, self).send(data)
-        self._producer.send(self.topic, data)
+        self._producer.send(self.topic, data).get()
 
 
 class KafkaInputStream(InputStream):

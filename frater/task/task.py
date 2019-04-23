@@ -1,6 +1,6 @@
 from functools import reduce
 
-from frater.validation import is_valid_composition
+from ..validation.task import is_valid_composition
 
 
 class Task:
