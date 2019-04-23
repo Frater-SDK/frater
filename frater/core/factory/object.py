@@ -1,5 +1,6 @@
 from typing import Dict
 
+from frater.validation.json import validate_json
 from .trajectory import *
 from ..object import Object, ObjectType
 from ..proto import core
@@ -9,6 +10,7 @@ __all__ = ['json_to_object', 'object_to_json',
            'protobuf_to_object', 'object_to_protobuf']
 
 
+@validate_json(default=True, data_type=Object)
 def json_to_object(obj: Dict) -> Object:
     object_id = obj['_id']
     object_type = ObjectType(obj['object_type'])

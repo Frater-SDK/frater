@@ -1,5 +1,6 @@
 from typing import Dict
 
+from frater.validation.json import validate_json
 from .bounding_box import *
 from .temporal_range import (json_to_temporal_range,
                              temporal_range_to_json,
@@ -13,6 +14,7 @@ __all__ = ['json_to_trajectory', 'trajectory_to_json',
            'protobuf_to_trajectory', 'trajectory_to_protobuf']
 
 
+@validate_json(default=True, data_type=Trajectory)
 def json_to_trajectory(trajectory: Dict) -> Trajectory:
     bounding_boxes = [json_to_bounding_box(
         box) for box in trajectory['bounding_boxes']]

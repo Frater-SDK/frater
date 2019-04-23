@@ -1,11 +1,13 @@
 from typing import Tuple, Dict, Union
 
 from ..proto import core
+from ...validation.json import validate_json
 
 __all__ = ['json_to_temporal_range', 'temporal_range_to_json', 'protobuf_to_temporal_range',
            'temporal_range_to_protobuf']
 
 
+@validate_json(default=True, data_type='temporal_range')
 def json_to_temporal_range(temporal_range: Union[None, Dict]) -> Union[Tuple[int, int], None]:
     if temporal_range is None:
         return None

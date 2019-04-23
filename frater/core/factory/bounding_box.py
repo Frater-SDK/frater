@@ -2,12 +2,14 @@ from typing import Dict, Tuple
 
 from ..bounding_box import BoundingBox
 from ..proto import core
+from ...validation.json import validate_json
 
 __all__ = ['json_to_bounding_box', 'bounding_box_to_json',
            'diva_format_to_bounding_box',
            'protobuf_to_bounding_box', 'bounding_box_to_protobuf']
 
 
+@validate_json(default=True, data_type=BoundingBox)
 def json_to_bounding_box(bounding_box: Dict) -> BoundingBox:
     x = bounding_box['x']
     y = bounding_box['y']

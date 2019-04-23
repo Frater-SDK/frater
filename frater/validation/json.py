@@ -5,7 +5,7 @@ from .error import ValidationError
 from ..core import JSON_DEFAULTS
 
 
-def validate(_func=None, default=True, data_type=None):
+def validate_json(_func=None, default=True, data_type=None):
     def decorator_validate(func):
         @functools.wraps(func)
         def wrapper_validate(data):

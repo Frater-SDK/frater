@@ -5,12 +5,14 @@ from .temporal_range import *
 from .trajectory import *
 from ..activity import Activity, ActivityType
 from ..proto import core
+from ...validation.json import validate_json
 
 __all__ = ['json_to_activity', 'activity_to_json',
            'diva_format_to_activity', 'activity_to_diva_format',
            'protobuf_to_activity', 'activity_to_protobuf']
 
 
+@validate_json(default=True, data_type=Activity)
 def json_to_activity(activity: Dict) -> Activity:
     activity_id = activity['_id']
     activity_type = ActivityType(activity['activity_type'])
