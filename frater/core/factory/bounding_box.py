@@ -19,17 +19,6 @@ def json_to_bounding_box(bounding_box: Dict) -> BoundingBox:
     return BoundingBox(x, y, w, h, confidence, frame_index)
 
 
-def diva_format_to_bounding_box(bounding_box: Tuple[str, Dict]) -> BoundingBox:
-    frame_index, data = bounding_box
-    frame_index = int(frame_index)
-    x = data['boundingBox']['x']
-    y = data['boundingBox']['y']
-    w = data['boundingBox']['w']
-    h = data['boundingBox']['h']
-    confidence = data['presenceConf']
-    return BoundingBox(x, y, w, h, confidence, frame_index)
-
-
 def bounding_box_to_json(bounding_box: BoundingBox) -> Dict:
     return {
         'x': bounding_box.x,
@@ -39,6 +28,17 @@ def bounding_box_to_json(bounding_box: BoundingBox) -> Dict:
         "confidence": bounding_box.confidence,
         "frame_index": bounding_box.frame
     }
+
+
+def diva_format_to_bounding_box(bounding_box: Tuple[str, Dict]) -> BoundingBox:
+    frame_index, data = bounding_box
+    frame_index = int(frame_index)
+    x = data['boundingBox']['x']
+    y = data['boundingBox']['y']
+    w = data['boundingBox']['w']
+    h = data['boundingBox']['h']
+    confidence = data['presenceConf']
+    return BoundingBox(x, y, w, h, confidence, frame_index)
 
 
 def protobuf_to_bounding_box(bounding_box: core.BoundingBox) -> BoundingBox:

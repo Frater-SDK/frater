@@ -2,16 +2,19 @@ from typing import List, Tuple
 
 from .activity_type import ActivityType
 from ..object import Object
+from ..trajectory import Trajectory
 
 
 class Activity:
     def __init__(self, activity_type: ActivityType = ActivityType.NULL,
                  temporal_range: Tuple[int, int] = None, source_video: str = '', experiment: str = '',
-                 objects: List[Object] = None, activity_id='', confidence=0.0):
+                 objects: List[Object] = None, trajectory: Trajectory = None, activity_id='', confidence=0.0):
         if objects is None:
             objects = []
         if temporal_range is None:
             temporal_range = 0, 0
+        if trajectory is None:
+            trajectory = Trajectory(temporal_range=temporal_range)
 
         self._activity_id = activity_id
         self._activity_type = activity_type
@@ -19,6 +22,7 @@ class Activity:
         self._source_video = source_video
         self._experiment = experiment
         self._objects = objects
+        self._trajectory = trajectory
         self._confidence = confidence
 
     def __eq__(self, other: 'Activity') -> bool:
@@ -36,8 +40,7 @@ class Activity:
         return self.__str__().replace('\n', ' ')
 
     def __str__(self):
-        objects_string = '\n'.join('({obj.object_id} - {obj.object_type.long_name} '
-                                   '- {obj.trajectory.temporal_range}'.format(obj=obj)
+        objects_string = '\n'.join('{obj}'.format(obj=obj)
                                    for obj in self.objects)
         return 'Activity {act.activity_id} - {act.activity_type.long_name}' \
                '\nObjects:\n{objects}' \
@@ -57,6 +60,10 @@ class Activity:
     @property
     def objects(self) -> List[Object]:
         return self._objects
+
+    @property
+    def trajectory(self) -> Trajectory:
+        return self._trajectory
 
     @property
     def temporal_range(self) -> Tuple[int, int]:

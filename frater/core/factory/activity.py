@@ -2,6 +2,7 @@ from typing import Dict
 
 from .object import *
 from .temporal_range import *
+from .trajectory import *
 from ..activity import Activity, ActivityType
 from ..proto import core
 
@@ -18,7 +19,10 @@ def json_to_activity(activity: Dict) -> Activity:
     source_video = activity['source_video']
     experiment = activity['experiment']
     confidence = activity['confidence']
-    return Activity(activity_type, temporal_range, source_video, experiment, objects, activity_id, confidence)
+    trajectory = json_to_trajectory(activity['trajectory'])
+    return Activity(activity_type=activity_type, temporal_range=temporal_range, source_video=source_video,
+                    experiment=experiment, objects=objects, trajectory=trajectory,
+                    activity_id=activity_id, confidence=confidence)
 
 
 def activity_to_json(activity: Activity) -> Dict:
@@ -26,6 +30,7 @@ def activity_to_json(activity: Activity) -> Dict:
         '_id': activity.activity_id,
         'activity_type': activity.activity_type.value,
         'objects': [object_to_json(obj) for obj in activity.objects],
+        'trajectory': trajectory_to_json(activity.trajectory),
         'temporal_range': temporal_range_to_json(activity.temporal_range),
         'source_video': activity.source_video,
         'experiment': activity.experiment,
@@ -43,7 +48,8 @@ def diva_format_to_activity(activity: Dict) -> Activity:
     temporal_range = min(ranges), max(ranges)
     experiment = ''
 
-    return Activity(activity_type, temporal_range, source_video, experiment, objects, activity_id, confidence)
+    return Activity(activity_type=activity_type, temporal_range=temporal_range, source_video=source_video,
+                    experiment=experiment, objects=objects, activity_id=activity_id, confidence=confidence)
 
 
 def activity_to_diva_format(activity: Activity) -> Dict:
