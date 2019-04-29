@@ -76,17 +76,23 @@ def protobuf_to_activity(activity: core.Activity) -> Activity:
     activity_id = activity.activity_id
     confidence = activity.confidence
     objects = [protobuf_to_object(obj) for obj in activity.objects]
+    trajectory = protobuf_to_trajectory(activity.trajectory)
     temporal_range = protobuf_to_temporal_range(activity.temporal_range)
     source_video = activity.source_video
     experiment = activity.experiment
 
-    return Activity(activity_type, temporal_range, source_video, experiment, objects, activity_id, confidence)
+    return Activity(activity_id=activity_id, activity_type=activity_type,
+                    temporal_range=temporal_range, source_video=source_video,
+                    experiment=experiment, objects=objects,
+                    trajectory=trajectory, confidence=confidence)
 
 
 def activity_to_protobuf(activity: Activity) -> core.Activity:
     return core.Activity(activity_id=activity.activity_id, activity_type=activity.activity_type.value,
                          objects=[object_to_protobuf(obj)
                                   for obj in activity.objects],
+                         trajectory=trajectory_to_protobuf(activity.trajectory),
+                         confidence=activity.confidence,
                          temporal_range=temporal_range_to_protobuf(activity.temporal_range),
                          source_video=activity.source_video, experiment=activity.experiment
                          )

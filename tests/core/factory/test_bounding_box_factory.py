@@ -1,15 +1,30 @@
 from unittest import TestCase
 
+from frater.core import BoundingBox
+from frater.core.factory.bounding_box import *
+from frater.core.proto import core
+from .mocks import MOCKS
+
 
 class TestBoundingBoxFactory(TestCase):
     def test_json_to_bounding_box(self):
-        self.fail()
+        bounding_box = MOCKS.frater.bounding_box
+        bounding_box_json = MOCKS.json.bounding_box
+
+        assert json_to_bounding_box(bounding_box_json) == bounding_box
 
     def test_bounding_box_to_json(self):
-        self.fail()
+        bounding_box = MOCKS.frater.bounding_box
+        bounding_box_json = MOCKS.json.bounding_box
+
+        assert bounding_box_to_json(bounding_box) == bounding_box_json
 
     def test_protobuf_to_bounding_box(self):
-        self.fail()
+        bounding_box = MOCKS.frater.bounding_box
+        bounding_box_proto = MOCKS.proto.bounding_box
+        assert protobuf_to_bounding_box(bounding_box_proto) == bounding_box
 
     def test_bounding_box_to_protobuf(self):
-        self.fail()
+        bounding_box = MOCKS.frater.bounding_box
+        bounding_box_proto = MOCKS.proto.bounding_box
+        assert bounding_box_to_protobuf(bounding_box) == bounding_box_proto

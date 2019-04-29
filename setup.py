@@ -15,6 +15,7 @@ setup(
         'numpy',
         'protobuf',
         'pyyaml',
-        'kafka-python'
+        'kafka-python',
+        'pillow'
     ]
 )

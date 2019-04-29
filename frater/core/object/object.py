@@ -22,7 +22,7 @@ class Object:
         )
 
     def __str__(self):
-        return 'obj.object_id} - {obj.object_type.long_name} - {obj.trajectory.temporal_range}'.format(obj=self)
+        return '{obj.object_id} - {obj.object_type.long_name} - {obj.trajectory.temporal_range}'.format(obj=self)
     
     @property
     def object_id(self):

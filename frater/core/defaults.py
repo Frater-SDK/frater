@@ -11,7 +11,7 @@ JSON_DEFAULTS.update({
         'w': 0.0,
         'h': 0.0,
         'confidence': 0.0,
-        'frame_index': 0.0
+        'frame': 0
     }})
 JSON_DEFAULTS.update({
     'temporal_range': {
@@ -36,7 +36,7 @@ JSON_DEFAULTS.update({
         '_id': '',
         'activity_type': 0,
         'objects': [],
-        'trajectory': JSON_DEFAULTS[Trajectory],
+        'trajectory': None,
         'temporal_range': JSON_DEFAULTS['temporal_range'],
         'source_video': '',
         'experiment': '',

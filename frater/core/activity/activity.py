@@ -33,6 +33,7 @@ class Activity:
                 self.source_video == other.source_video and
                 self.experiment == other.experiment and
                 self.objects == other.objects and
+                self.trajectory == other.trajectory and
                 self.confidence == other.confidence
         )
 

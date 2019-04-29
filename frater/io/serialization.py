@@ -1,7 +1,7 @@
 import json
 from typing import Callable
 
-from frater.core import JSON_DESERIALIZERS
+from ..core import JSON_DESERIALIZERS
 from ..core import JSON_SERIALIZERS
 
 

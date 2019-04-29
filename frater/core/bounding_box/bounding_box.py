@@ -1,6 +1,6 @@
 class BoundingBox:
     def __init__(self, x: float = 0, y: float = 0, w: float = 0, h: float = 0,
-                 confidence: float = 0.0, frame: int = -1):
+                 confidence: float = 0.0, frame: int = 0):
         self._x = x
         self._y = y
 

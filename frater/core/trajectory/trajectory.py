@@ -4,7 +4,7 @@ from ..bounding_box import BoundingBox
 
 
 class Trajectory:
-    def __init__(self, bounding_boxes: List[BoundingBox] = None, temporal_range: Tuple[int,int] = None, scale=1.0):
+    def __init__(self, bounding_boxes: List[BoundingBox] = None, temporal_range: Tuple[int, int] = None, scale=1.0):
         if bounding_boxes is None:
             bounding_boxes = list()
         if temporal_range is None:
