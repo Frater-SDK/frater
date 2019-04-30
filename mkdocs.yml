@@ -1,0 +1,18 @@
+site_name: Frater
+nav:
+    - Home: index.md
+    - Overview: overview.md
+    - Installation: install.md
+    - Getting Started: getting_started.md
+    - Examples: examples.md
+    - API:
+      - About the Frater API: api/api.md
+      - Core: api/core.md
+      - Task: api/task.md
+      - Stream: api/stream.md
+      - IO: api/io.md
+      - Logging: api/logging.md
+      - Validation: api/validation.md
+    - About: about.md
+theme:
+  name: readthedocs
