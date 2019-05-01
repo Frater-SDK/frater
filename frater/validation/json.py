@@ -2,17 +2,16 @@ import copy
 import functools
 
 from .error import ValidationError
-from ..core import JSON_DEFAULTS
 
 
-def validate_json(_func=None, default=True, data_type=None):
+def validate_json(_func=None, default=None, completion=True):
     def decorator_validate(func):
         @functools.wraps(func)
         def wrapper_validate(data):
-            if default:
-                data = add_defaults(copy.deepcopy(data), data_type)
+            if completion:
+                data = add_defaults(copy.deepcopy(data), default)
             else:
-                validate_helper(data, data_type)
+                validate_helper(data, default)
             return func(data)
 
         return wrapper_validate
@@ -23,12 +22,11 @@ def validate_json(_func=None, default=True, data_type=None):
         return decorator_validate(_func)
 
 
-def validate_helper(data, data_type):
-    defaults = get_defaults(data_type)
-    for key, value in defaults.items():
+def validate_helper(data, default):
+    for key, value in default.items():
         if key not in data:
             raise ValidationError(
-                'Key {} not found in {} Object'.format(key, data_type))
+                'Key {} not found in {} Object'.format(key, type(data)))
         elif type(value) != type(data[key]):
             raise ValidationError(
                 'Key {} is invalid type: default - {}, data - {}'.format(
@@ -37,18 +35,12 @@ def validate_helper(data, data_type):
             )
 
 
-def get_defaults(data_type):
-    return JSON_DEFAULTS[data_type]
-
-
-def add_defaults(data, data_type):
-    defaults = get_defaults(data_type)
-
-    default_keys = set(defaults.keys())
+def add_defaults(data, default):
+    default_keys = set(default.keys())
     data_keys = set(data.keys())
     default_keys.difference_update(data_keys)
 
     for key in default_keys:
-        data[key] = defaults[key]
+        data[key] = default[key]
 
     return data

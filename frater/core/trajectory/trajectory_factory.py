@@ -1,20 +1,19 @@
 from typing import Dict
 
-from frater.validation.json import validate_json
-from .bounding_box import *
-from .temporal_range import (json_to_temporal_range,
-                             temporal_range_to_json,
-                             protobuf_to_temporal_range,
-                             temporal_range_to_protobuf)
+from frater.core.temporal_range import TemporalRange
+from .trajectory import Trajectory
+from .trajectory_defaults import JSON_DEFAULT
+from ..bounding_box.bounding_box_factory import *
 from ..proto import core
-from ..trajectory import Trajectory
+from ..temporal_range.temporal_range_factory import *
+from ...validation.json import validate_json
 
 __all__ = ['json_to_trajectory', 'trajectory_to_json',
            'diva_format_to_trajectory',
            'protobuf_to_trajectory', 'trajectory_to_protobuf']
 
 
-@validate_json(default=True, data_type=Trajectory)
+@validate_json(default=JSON_DEFAULT, completion=True)
 def json_to_trajectory(trajectory: Dict) -> Trajectory:
     bounding_boxes = [json_to_bounding_box(
         box) for box in trajectory['bounding_boxes']]
@@ -40,7 +39,7 @@ def diva_format_to_trajectory(trajectory: Dict) -> Trajectory:
         bounding_boxes.append(diva_format_to_bounding_box(bounding_box))
     start = min(bounding_boxes, key=lambda b: b.frame).frame
     end = max(bounding_boxes, key=lambda b: b.frame).frame
-    temporal_range = start, end
+    temporal_range = TemporalRange(start, end)
     scale = 1.0
     return Trajectory(bounding_boxes, temporal_range, scale)
 

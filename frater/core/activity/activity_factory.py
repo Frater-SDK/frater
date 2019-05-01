@@ -1,10 +1,11 @@
 from typing import Dict
 
-from .object import *
-from .temporal_range import *
-from .trajectory import *
-from ..activity import Activity, ActivityType
+from .activity import Activity, ActivityType
+from .activity_defaults import JSON_DEFAULT
+from ..object import *
 from ..proto import core
+from ..temporal_range import *
+from ..trajectory import *
 from ...validation.json import validate_json
 
 __all__ = ['json_to_activity', 'activity_to_json',
@@ -12,7 +13,7 @@ __all__ = ['json_to_activity', 'activity_to_json',
            'protobuf_to_activity', 'activity_to_protobuf']
 
 
-@validate_json(default=True, data_type=Activity)
+@validate_json(default=JSON_DEFAULT, completion=True)
 def json_to_activity(activity: Dict) -> Activity:
     activity_id = activity['_id']
     activity_type = ActivityType(activity['activity_type'])

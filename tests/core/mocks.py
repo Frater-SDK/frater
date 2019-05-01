@@ -1,6 +1,6 @@
 from easydict import EasyDict
 
-from frater.core import BoundingBox, Trajectory, ObjectType, Object, Activity, ActivityType
+from frater.core import BoundingBox, Trajectory, ObjectType, Object, Activity, ActivityType, TemporalRange
 from frater.core.proto import core
 
 
@@ -39,7 +39,7 @@ MOCKS = EasyDict({'proto': MockTypes('proto'), 'json': MockTypes('json'), 'frate
 # Temporal Range
 MOCKS.proto._temporal_range = lambda: core.TemporalRange(start_frame=10, end_frame=15)
 MOCKS.json._temporal_range = lambda: {'start_frame': 10, 'end_frame': 15}
-MOCKS.frater._temporal_range = lambda: (10, 15)
+MOCKS.frater._temporal_range = lambda: TemporalRange(10, 15)
 
 # Bounding Box
 MOCKS.proto._bounding_box = lambda: core.BoundingBox(x=10, y=10, w=15, h=15, confidence=0.23, frame=10)

@@ -8,7 +8,7 @@ class KafkaOutputStream(OutputStream):
     def __init__(self, stream_type, topic, bootstrap_servers=None):
         super(KafkaOutputStream, self).__init__(stream_type)
         self._producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
-                                       value_serializer=get_kafka_serializer(self.stream_type))
+                                       value_serializer=get_kafka_serializer())
         self.topic = topic
 
     def send(self, data):

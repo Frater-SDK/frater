@@ -1,18 +1,19 @@
-from typing import List, Tuple
+from typing import List
 
 from .activity_type import ActivityType
 from ..object import Object
+from ..temporal_range import TemporalRange
 from ..trajectory import Trajectory
 
 
 class Activity:
     def __init__(self, activity_type: ActivityType = ActivityType.NULL,
-                 temporal_range: Tuple[int, int] = None, source_video: str = '', experiment: str = '',
+                 temporal_range: TemporalRange = None, source_video: str = '', experiment: str = '',
                  objects: List[Object] = None, trajectory: Trajectory = None, activity_id='', confidence=0.0):
         if objects is None:
             objects = []
         if temporal_range is None:
-            temporal_range = 0, 0
+            temporal_range = TemporalRange()
         if trajectory is None:
             trajectory = Trajectory(temporal_range=temporal_range)
 
@@ -67,7 +68,7 @@ class Activity:
         return self._trajectory
 
     @property
-    def temporal_range(self) -> Tuple[int, int]:
+    def temporal_range(self) -> TemporalRange:
         return self._temporal_range
 
     @property
@@ -81,3 +82,11 @@ class Activity:
     @property
     def confidence(self):
         return self._confidence
+
+    @property
+    def start_frame(self):
+        return self.temporal_range.start_frame
+
+    @property
+    def end_frame(self):
+        return self.temporal_range.end_frame

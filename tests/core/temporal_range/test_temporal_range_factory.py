@@ -1,6 +1,6 @@
 from unittest import TestCase
-from frater.core.factory.temporal_range import *
-from .mocks import MOCKS
+from frater.core.temporal_range.temporal_range_factory import *
+from ..mocks import MOCKS
 
 
 class TestTemporalRangeFactory(TestCase):

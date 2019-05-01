@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from frater.core.factory.object import *
-from .mocks import MOCKS
+from frater.core.object.object_factory import *
+from ..mocks import MOCKS
 
 
 class TestObjectFactory(TestCase):
@@ -28,5 +28,3 @@ class TestObjectFactory(TestCase):
         object_proto = MOCKS.proto.object
 
         assert object_to_protobuf(obj) == object_proto
-
-
