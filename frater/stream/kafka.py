@@ -1,6 +1,6 @@
 from kafka import KafkaProducer, KafkaConsumer
 
-from frater.io.serialization import get_kafka_serializer, get_kafka_deserializer
+from frater.io import get_kafka_serializer, get_kafka_deserializer
 from frater.stream.stream import OutputStream, InputStream
 
 

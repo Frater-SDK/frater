@@ -1,3 +1,7 @@
+__all__ = ['is_valid_composition', 'is_valid_input_stream_for_task', 'is_valid_output_stream_for_task',
+           'is_valid_input_stream_for_composed_task', 'is_valid_output_stream_for_composed_task']
+
+
 def is_valid_composition(tasks):
     for i in range(len(tasks) - 1):
         if not tasks[i].output_type == tasks[i + 1].input_type:
