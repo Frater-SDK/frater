@@ -3,18 +3,23 @@
 Frater is an Machine Learning System Framework and SDK (Currently focused on activity detection) for researchers 
 and developers to easily deploy their components into a system and quickly prototype and get results.
 Frater's main goal is to provide tools that are easy to use for researchers and engineers alike and allow them to 
-spend less time dealing with headaches of system design, and more time 
-running experiments and discovering the next state of the art.
+spend less time dealing with headaches of system design, and more time running experiments and 
+discovering the next state of the art.
 
 Frater is library agnostic, so developers are free to use any standard tools for machine learning,
-deep learning, computer vision, etc. Out of the box, we provide a quick docker compose deploy
-
+deep learning, computer vision, NLP, etc. By providing an ecosystem which encourages researchers to focus just on 
+the research problem at hand, we hope Frater can be the catalyst for helping explore innovative 
+and novel ideas on the system level, the same way the GPUs were the catalyst on the computation and algorithmic level.
 
 ## About
 Frater is divided into two main components:  
 
-- The Frater system which contains a suite of tools to get you off the ground with deploying your system 
+- The Frater system which is a set of preconfigured tools to get you off the ground when deploying your system 
 - The Frater API for developing components to work with the Frater system
+
+At the moment, the main focus of development is the Frater API and specifically libraries for developing 
+activity detection systems, as this project originated as a framework for teams participating 
+in the [DIVA](https://www.iarpa.gov/index.php/research-programs/diva) research program. 
 
 #### Note
 *Both the Frater system and API are still under active development, so be aware of any changes
