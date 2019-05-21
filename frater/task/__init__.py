@@ -1,1 +1,1 @@
-from .task import Task, ComposedTask
+from .task import Task, ComposedTask, IOTask, InputTask, OutputTask

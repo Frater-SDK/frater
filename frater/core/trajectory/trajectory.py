@@ -1,7 +1,7 @@
 from typing import List
 
-from frater.core.temporal_range import TemporalRange
 from ..bounding_box import BoundingBox
+from ..temporal_range import TemporalRange
 
 
 class Trajectory:

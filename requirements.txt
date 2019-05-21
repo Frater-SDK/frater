@@ -1,3 +1,4 @@
+requests
 grpcio
 grpcio-tools
 easydict

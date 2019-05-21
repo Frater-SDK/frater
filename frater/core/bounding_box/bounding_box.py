@@ -65,3 +65,7 @@ class BoundingBox:
     @property
     def frame(self) -> int:
         return self._frame
+
+    def get_corners(self):
+        return self.x_0, self.y_0, self.x_1, self.y_1
+    

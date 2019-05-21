@@ -1,6 +1,7 @@
 from functools import reduce
 from typing import List
 
+from ..stream import InputStream, OutputStream
 from ..validation.error import ValidationError
 from ..validation.task import is_valid_composition
 
@@ -63,3 +64,64 @@ class ComposedTask(Task):
     @property
     def output_type(self):
         return self.tasks[-1].output_type
+
+
+class IOTask(Task):
+    def __init__(self, input_stream: InputStream, output_stream: OutputStream):
+        super(IOTask, self).__init__(input_stream.stream_type, output_stream.stream_type)
+        self._input_stream = input_stream
+        self._output_stream = output_stream
+
+    @property
+    def input_stream(self):
+        return self._input_stream
+
+    @property
+    def output_stream(self):
+        return self._output_stream
+
+    def run(self):
+        for data in self.input_stream:
+            output = self.perform_task(data)
+            self.output_stream(output)
+
+    def perform_task(self, data):
+        raise NotImplementedError
+
+
+class InputTask(Task):
+    def __init__(self, input_stream: InputStream):
+        super(InputTask, self).__init__(input_stream.stream_type)
+        self._input_stream = input_stream
+
+    @property
+    def input_stream(self):
+        return self._input_stream
+
+    def run(self):
+        for data in self.input_stream:
+            self.perform_task(data)
+
+    def perform_task(self, data):
+        raise NotImplementedError
+
+
+class OutputTask(Task):
+    def __init__(self, output_stream: OutputStream):
+        super(OutputTask, self).__init__(output_type=output_stream.stream_type)
+        self._output_stream = output_stream
+
+    @property
+    def output_stream(self):
+        return self._output_stream
+
+    def run(self):
+        while self.run_condition():
+            output = self.perform_task()
+            self.output_stream(output)
+
+    def perform_task(self, **kwargs):
+        raise NotImplementedError
+
+    def run_condition(self) -> bool:
+        raise NotImplementedError
