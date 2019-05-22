@@ -49,7 +49,7 @@ These requirements are for running the full system out of the box:
 - `docker`  
 - `docker-compose`  
 
-As you develop your own system,  
+As you develop your own system, you can pick and choose which components are used in your system. For example, 
 
 ## Frater API
 

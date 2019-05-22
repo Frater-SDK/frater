@@ -1,5 +1,8 @@
+import copy
+from typing import Union
+
 from .object_type import ObjectType
-from ..trajectory import Trajectory
+from .. import BoundingBox, TemporalRange, Trajectory
 
 
 class Object:
@@ -23,7 +26,16 @@ class Object:
 
     def __str__(self):
         return '{obj.object_id} - {obj.object_type.long_name} - {obj.trajectory.temporal_range}'.format(obj=self)
-    
+
+    def __getitem__(self, item) -> Union[BoundingBox, 'Object']:
+        if isinstance(item, int):
+            return self.trajectory[item]
+        elif isinstance(item, slice):
+            trajectory = self.trajectory[item]
+            object = copy.deepcopy(self)
+            object._trajectory = trajectory
+            return object
+
     @property
     def object_id(self):
         return self._object_id
@@ -43,3 +55,15 @@ class Object:
     @property
     def experiment(self) -> str:
         return self._experiment
+
+    @property
+    def temporal_range(self) -> TemporalRange:
+        return self.trajectory.temporal_range
+
+    @property
+    def start_frame(self) -> int:
+        return self.temporal_range.start_frame
+
+    @property
+    def end_frame(self) -> int:
+        return self.temporal_range.end_frame
