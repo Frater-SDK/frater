@@ -10,7 +10,9 @@ nav:
 
   - API:
       - Frater API: api/api.md
-      - Core: api/core.md
+      - Core:
+          - core: api/core/core.md
+          - object: api/core/object.md
       - Stream: api/stream.md
       - Task: api/task.md
       - IO: api/io.md

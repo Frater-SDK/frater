@@ -7,12 +7,12 @@ some classes for activity detection systems.
 The `core` package contains classes and factory methods (and eventually related methods using these classes) for 
 core concepts related to activity detection. These include
 
-- [`Activity`](api/core.md#fratercoreactivity)
-- [`Object`](api/core.md#fratercoreobject)
-- [`Frame`](api/core.md#fratercoreframe)
-- [`Trajectory`](api/core.md#fratercoretrajectory)
-- [`BoundingBox`](api/core.md#fratercorebounding_box)
-- [`TemporalRange`](api/core.md#fratercoretemporal_range)
+- [`Activity`](api/core/core.md#fratercoreactivity)
+- [`Object`](api/core/core.md#fratercoreobject)
+- [`Frame`](api/core/core.md#fratercoreframe)
+- [`Trajectory`](api/core/core.md#fratercoretrajectory)
+- [`BoundingBox`](api/core/core.md#fratercorebounding_box)
+- [`TemporalRange`](api/core/core.md#fratercoretemporal_range)
 
 The schema for these classes can be found in the API documentation. 
 

@@ -2,7 +2,9 @@ import copy
 from typing import Union
 
 from .object_type import ObjectType
-from .. import BoundingBox, TemporalRange, Trajectory
+from ..bounding_box import BoundingBox
+from ..temporal_range import TemporalRange
+from ..trajectory import Trajectory
 
 
 class Object:

@@ -1,4 +1,4 @@
-from . import ObjectType
+from .object_type import ObjectType
 from ..bounding_box import BoundingBox
 
 

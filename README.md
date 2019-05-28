@@ -1,2 +1,2 @@
 # frater
-Frater - an Activity Detection SDK
+Frater - a Machine Learning System Framework and Toolkit
