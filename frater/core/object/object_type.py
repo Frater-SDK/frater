@@ -1,7 +1,7 @@
 from enum import Enum
 
 __long_names__ = ['Null', 'Person', 'Vehicle', 'Door', 'Prop',
-                  'Push_Pulled_Object', 'Other', 'Bike', 'Parking_Meter', 'Tree']
+                  'Push_Pulled_Object', 'Other', 'Bike', 'Parking_Meter', 'Tree', 'Construction_Vehicle']
 
 
 class ObjectType(Enum):
@@ -17,7 +17,8 @@ class ObjectType(Enum):
     OTHER = 6  # Other
     BIKE = 7  # Bike
     PARKING_METER = 8  # Parking_Meter
-    TREE = 9
+    TREE = 9  # Tree
+    CONSTRUCTION_VEHICLE = 10  # Construction_Vehicle
 
     # sub groups
     TRANSPORT_OBJECTS = {PROP, PULLED_OBJECT, OTHER}
