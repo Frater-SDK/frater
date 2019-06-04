@@ -5,9 +5,11 @@ from frater.stream.stream import OutputStream, InputStream
 
 
 class KafkaOutputStream(OutputStream):
-    def __init__(self, stream_type, topic, bootstrap_servers=None):
+    def __init__(self, topic, stream_type=None, servers=None):
         super(KafkaOutputStream, self).__init__(stream_type)
-        self._producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
+        if servers is None:
+            servers = ['localhost:9092']
+        self._producer = KafkaProducer(bootstrap_servers=servers,
                                        value_serializer=get_kafka_serializer())
         self.topic = topic
 
@@ -16,10 +18,12 @@ class KafkaOutputStream(OutputStream):
 
 
 class KafkaInputStream(InputStream):
-    def __init__(self, stream_type, topic, bootstrap_servers=None):
+    def __init__(self, topic, stream_type=None, servers=None):
         super(KafkaInputStream, self).__init__(stream_type)
-
-        self._consumer = KafkaConsumer(topic, bootstrap_servers=bootstrap_servers,
+        if servers is None:
+            servers = ['localhost:9092']
+            
+        self._consumer = KafkaConsumer(topic, bootstrap_servers=servers,
                                        value_deserializer=get_kafka_deserializer(self.stream_type))
         self._topic = topic
 

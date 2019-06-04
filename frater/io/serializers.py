@@ -6,6 +6,7 @@ from ..core.bounding_box import *
 from ..core.object import *
 from ..core.temporal_range import *
 from ..core.trajectory import *
+from ..utilities.json import is_json_serializable
 
 JSON_SERIALIZERS = {
     Activity: activity_to_json,
@@ -29,6 +30,8 @@ def frater_to_json(data, d_type=None):
         d_type = type(data)
     if d_type in JSON_SERIALIZERS:
         return JSON_SERIALIZERS[d_type](data)
+    elif is_json_serializable(data):
+        return data
     else:
         raise TypeError(f'Object can\'t be serialized to json: {data}')
 

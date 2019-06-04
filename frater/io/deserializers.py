@@ -25,12 +25,15 @@ PROTO_DESERIALIZERS = {
 
 
 def json_to_frater(data, d_type):
-    return JSON_DESERIALIZERS[d_type](data)
+    if d_type in JSON_DESERIALIZERS:
+        return JSON_DESERIALIZERS[d_type](data)
+    else:
+        return data
 
 
 def proto_to_frater(data, d_type):
-    return JSON_DESERIALIZERS[d_type](data)
+    return PROTO_DESERIALIZERS[d_type](data)
 
 
 def get_kafka_deserializer(stream_type: type) -> Callable:
-    return lambda m: json_to_frater(stream_type, json.loads(m.decode('utf-8')))
+    return lambda m: json_to_frater(json.loads(m.decode('utf-8')), stream_type)
