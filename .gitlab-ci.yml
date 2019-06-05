@@ -1,0 +1,86 @@
+# do not use "latest" here, if you want this to work in the future
+image: docker:18
+
+stages:
+  - build
+  - push
+
+variables:
+  # fill those if you have a proxy in your environment
+  http_proxy: 
+  https_proxy: 
+  no_proxy: 
+
+# Use this if your GitLab runner does not use socket binding
+# services:
+#   - docker:dind
+
+before_script:
+  - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+
+Build:
+  stage: build
+  script:
+    # CPU build
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - >
+      docker build
+      --pull
+      --build-arg http_proxy=$http_proxy
+      --build-arg https_proxy=$https_proxy
+      --build-arg no_proxy=$no_proxy
+      --build-arg VCS_REF=$CI_COMMIT_SHA
+      --build-arg VCS_URL=$CI_PROJECT_URL
+      --cache-from $CI_REGISTRY_IMAGE:latest
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+      .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    
+    # GPU build
+    - docker pull  $CI_REGISTRY_IMAGE:latest-gpu || true
+    - >
+      docker build
+      --pull
+      --build-arg http_proxy=$http_proxy
+      --build-arg https_proxy=$https_proxy
+      --build-arg no_proxy=$no_proxy
+      --build-arg VCS_REF=$CI_COMMIT_SHA
+      --build-arg VCS_URL=$CI_PROJECT_URL
+      --cache-from $CI_REGISTRY_IMAGE:latest
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+      -f GPU.Dockerfile
+      .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
+
+# Here, the goal is to tag the "master" branch as "latest"
+Push latest:
+  variables:
+    GIT_STRATEGY: none
+  stage: push
+  only:
+    - master
+  script:
+    # CPU build
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+    # GPU build
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest-gpu
+    - docker push $CI_REGISTRY_IMAGE:latest-gpu
+    
+
+Push tag:
+  variables:
+    GIT_STRATEGY: none
+  stage: push
+  only:
+    - tags
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME-gpu
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME-gpu
