@@ -12,8 +12,8 @@ variables:
   no_proxy: ''
 
 # Use this if your GitLab runner does not use socket binding
-# services:
-#   - docker:dind
+services:
+  - docker:dind
 
 before_script:
   - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
