@@ -46,8 +46,8 @@ Build:
       --build-arg no_proxy=$no_proxy
       --build-arg VCS_REF=$CI_COMMIT_SHA
       --build-arg VCS_URL=$CI_PROJECT_URL
-      --cache-from $CI_REGISTRY_IMAGE:latest
-      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+      --cache-from $CI_REGISTRY_IMAGE:latest-gpu
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
       -f GPU.Dockerfile
       .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
