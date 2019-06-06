@@ -6,7 +6,7 @@ from .bounding_box import BoundingBox
 __all__ = ['combine_bounding_boxes', 'compute_spatial_iou']
 
 
-def combine_bounding_boxes(bounding_boxes: List['BoundingBox']) -> Union['BoundingBox', None]:
+def combine_bounding_boxes(bounding_boxes: List[BoundingBox]) -> Union[BoundingBox, None]:
     if len(bounding_boxes) > 1:
         return reduce(lambda x, y: x + y, bounding_boxes)
     elif len(bounding_boxes) == 1:

@@ -11,9 +11,9 @@ class Trajectory:
         if temporal_range is None:
             temporal_range = TemporalRange()
 
-        self._bounding_boxes = bounding_boxes
-        self._temporal_range = temporal_range
-        self._scale = scale
+        self.bounding_boxes = bounding_boxes
+        self.temporal_range = temporal_range
+        self.scale = scale
 
     def __eq__(self, other: 'Trajectory') -> bool:
         return (self.bounding_boxes == other.bounding_boxes
@@ -41,18 +41,6 @@ class Trajectory:
             bounding_boxes.append(combine_bounding_boxes(current_boxes))
 
         return Trajectory(bounding_boxes, temporal_range, self.scale)
-
-    @property
-    def bounding_boxes(self) -> List[BoundingBox]:
-        return self._bounding_boxes
-
-    @property
-    def temporal_range(self) -> TemporalRange:
-        return self._temporal_range
-
-    @property
-    def scale(self) -> float:
-        return self._scale
 
     @property
     def start_frame(self) -> int:

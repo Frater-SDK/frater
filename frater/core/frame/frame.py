@@ -9,31 +9,11 @@ from .modality import Modality
 class Frame:
     def __init__(self, image: Image = None, modality: Modality = Modality.RGB,
                  index: int = 0, source_video: str = '', timestamp: str = ''):
-        self._image = image
-        self._modality = modality
-        self._index = index
-        self._source_video = source_video
-        self._timestamp = timestamp
-
-    @property
-    def image(self) -> Image:
-        return self._image
-
-    @property
-    def modality(self) -> Modality:
-        return self._modality
-
-    @property
-    def index(self) -> int:
-        return self._index
-
-    @property
-    def source_video(self) -> str:
-        return self._source_video
-
-    @property
-    def timestamp(self):
-        return self._timestamp
+        self.image = image
+        self.modality = modality
+        self.index = index
+        self.source_video = source_video
+        self.timestamp = timestamp
 
     @property
     def width(self):

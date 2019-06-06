@@ -29,7 +29,7 @@ def bounding_box_to_json(bounding_box: BoundingBox) -> Dict:
         "w": bounding_box.w,
         "h": bounding_box.h,
         'confidence': bounding_box.confidence,
-        'frame': bounding_box.frame
+        'frame': bounding_box.frame_index
     }
 
 
@@ -54,5 +54,5 @@ def bounding_box_to_protobuf(bounding_box: BoundingBox) -> core.BoundingBox:
     return core.BoundingBox(x=bounding_box.x, y=bounding_box.y,
                             w=bounding_box.w, h=bounding_box.h,
                             confidence=bounding_box.confidence,
-                            frame=bounding_box.frame
+                            frame=bounding_box.frame_index
                             )

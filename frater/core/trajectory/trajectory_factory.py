@@ -37,8 +37,8 @@ def diva_format_to_trajectory(trajectory: Dict) -> Trajectory:
         if 'boundingBox' not in bounding_box[1] or 'presenceConf' not in bounding_box[1]:
             continue
         bounding_boxes.append(diva_format_to_bounding_box(bounding_box))
-    start = min(bounding_boxes, key=lambda b: b.frame).frame
-    end = max(bounding_boxes, key=lambda b: b.frame).frame
+    start = min(bounding_boxes, key=lambda b: b.frame).frame_index
+    end = max(bounding_boxes, key=lambda b: b.frame).frame_index
     temporal_range = TemporalRange(start, end)
     scale = 1.0
     return Trajectory(bounding_boxes, temporal_range, scale)

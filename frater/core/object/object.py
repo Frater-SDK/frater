@@ -11,11 +11,11 @@ class Object:
     def __init__(self, object_type: ObjectType = ObjectType.NULL,
                  source_video: str = '', experiment: str = '',
                  trajectory: Trajectory = None, object_id=''):
-        self._object_id = object_id
-        self._object_type = object_type
-        self._source_video = source_video
-        self._trajectory = trajectory
-        self._experiment = experiment
+        self.object_id = object_id
+        self.object_type = object_type
+        self.source_video = source_video
+        self.trajectory = trajectory
+        self.experiment = experiment
 
     def __eq__(self, other: 'Object') -> bool:
         return (
@@ -36,27 +36,8 @@ class Object:
             trajectory = self.trajectory[item]
             object = copy.deepcopy(self)
             object._trajectory = trajectory
+
             return object
-
-    @property
-    def object_id(self):
-        return self._object_id
-
-    @property
-    def object_type(self) -> ObjectType:
-        return self._object_type
-
-    @property
-    def trajectory(self) -> Trajectory:
-        return self._trajectory
-
-    @property
-    def source_video(self) -> str:
-        return self._source_video
-
-    @property
-    def experiment(self) -> str:
-        return self._experiment
 
     @property
     def temporal_range(self) -> TemporalRange:

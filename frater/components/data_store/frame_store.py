@@ -3,11 +3,13 @@ from functools import lru_cache
 
 from PIL import Image
 
+from .file_store import FileStore
 from ...core import Frame, Modality, TemporalRange
 
 
-class FrameStore:
+class FrameStore(FileStore):
     def __init__(self, root, extension='.jpeg', frame_filename_format='%08d%s'):
+        super(FrameStore, self).__init__(root)
         self._root = root
         self._extension = extension
         self._frame_filename_format = frame_filename_format

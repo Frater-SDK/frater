@@ -3,6 +3,8 @@ from easydict import EasyDict
 from frater.core import BoundingBox, Trajectory, ObjectType, Object, Activity, ActivityType, TemporalRange
 from frater.core.proto import core
 
+__all__ = ['MOCKS']
+
 
 class MockTypes:
     def __init__(self, name):

@@ -5,8 +5,7 @@ from PIL import Image
 
 
 def load_image_from_file(filename):
-    with open(filename, 'rb') as f:
-        return Image.open(f)
+    return Image.open(filename)
 
 
 def save_image_to_file(image: Image.Image, filename):
