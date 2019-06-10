@@ -20,6 +20,9 @@ class Task:
     def perform_task(self, data):
         raise NotImplementedError
 
+    def stop(self):
+        pass
+
     @property
     def input_type(self) -> type:
         if 'data' in self.perform_task.__annotations__:
@@ -31,10 +34,6 @@ class Task:
         if 'return' in self.perform_task.__annotations__:
             return self.perform_task.__annotations__['return']
         return self._output_type
-
-
-class TaskError(Exception):
-    pass
 
 
 class ComposedTask(Task):
@@ -125,3 +124,7 @@ class OutputTask(Task):
 
     def run_condition(self) -> bool:
         raise NotImplementedError
+
+
+class TaskError(Exception):
+    pass

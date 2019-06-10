@@ -1,6 +1,7 @@
 import logging
 import time
-from typing import Callable
+from threading import Thread
+from typing import Callable, Union
 
 import flask
 
@@ -19,6 +20,9 @@ class TaskServer:
 
         self.server.run(host, port)
 
+        self.task: Union[Task, None] = None
+        self.task_thread: Union[Thread, None] = None
+
     def available(self):
         return True
 
@@ -27,8 +31,11 @@ class TaskServer:
             logger.info('Task not available yet')
             time.sleep(4)
 
-        task = self.task_builder()
-        task.run()
+        self.task = self.task_builder()
+        self.task_thread = Thread(target=self.task.run, daemon=True)
+        self.task_thread.start()
+
+        return True
 
 
 class KafkaTaskServer(TaskServer):
