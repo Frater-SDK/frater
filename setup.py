@@ -14,6 +14,7 @@ setup(
     description='An Activity Detection SDK',
     install_requires=[
         'requests',
+        'flask',
         'grpcio',
         'grpcio-tools',
         'easydict',
