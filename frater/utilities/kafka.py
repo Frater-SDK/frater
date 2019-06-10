@@ -7,16 +7,20 @@ from kafka.errors import NoBrokersAvailable
 logger = logging.getLogger()
 
 
-def wait_for_servers(servers):
+def wait_for_kafka_servers(servers):
     logger.info(f'waiting for servers: {servers}')
     unavailable = True
     while unavailable:
-        unavailable = False
-        try:
-            client = KafkaAdminClient(bootstrap_servers=servers)
-            client.close()
-        except NoBrokersAvailable:
-            unavailable = True
+        unavailable = kafka_servers_available(servers)
         logging.info(f'Hosts: {", ".join(servers)}, Available: {not unavailable}')
         if unavailable:
             time.sleep(4)
+
+
+def kafka_servers_available(servers):
+    try:
+        client = KafkaAdminClient(bootstrap_servers=servers)
+        client.close()
+    except NoBrokersAvailable:
+        return False
+    return True

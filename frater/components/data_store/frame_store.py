@@ -17,7 +17,7 @@ class FrameStore(FileStore):
     @property
     def root(self):
         return self._root
-
+    
     @property
     def extension(self):
         return self._extension
