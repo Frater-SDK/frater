@@ -2,7 +2,7 @@ from typing import Dict
 
 from frater.core.temporal_range import TemporalRange
 from .trajectory import Trajectory
-from .trajectory_defaults import JSON_DEFAULT
+from .trajectory_defaults import TRAJECTORY_JSON_DEFAULT
 from ..bounding_box.bounding_box_factory import *
 from ..proto import core
 from ..temporal_range.temporal_range_factory import *
@@ -13,7 +13,7 @@ __all__ = ['json_to_trajectory', 'trajectory_to_json',
            'protobuf_to_trajectory', 'trajectory_to_protobuf']
 
 
-@validate_json(default=JSON_DEFAULT, completion=True)
+@validate_json(default=TRAJECTORY_JSON_DEFAULT, completion=True)
 def json_to_trajectory(trajectory: Dict) -> Trajectory:
     bounding_boxes = [json_to_bounding_box(
         box) for box in trajectory['bounding_boxes']]

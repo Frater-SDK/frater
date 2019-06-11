@@ -1,3 +1,6 @@
+from typing import Tuple
+
+
 class BoundingBox:
     def __init__(self, x: float = 0, y: float = 0, w: float = 0, h: float = 0,
                  confidence: float = 0.0, frame: int = 0):
@@ -74,3 +77,10 @@ class BoundingBox:
         confidence = max(self.confidence, other.confidence)
         frame = self.frame_index
         return BoundingBox(x, y, w, h, confidence, frame)
+
+    @classmethod
+    def init_from_corners(cls, corners: Tuple[float, float, float, float]):
+        x_0, y_0, x_1, y_1 = corners
+        width = x_1 - x_0
+        height = y_1 - y_0
+        return BoundingBox(x_0, y_0, width, height)

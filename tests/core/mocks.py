@@ -75,8 +75,7 @@ MOCKS.json._object = lambda: {
     'trajectory': MOCKS.json.trajectory
 }
 MOCKS.frater._object = lambda: Object(object_id='sdf431', object_type=ObjectType.PERSON,
-                                      source_video='test.mp4', experiment='test',
-                                      trajectory=MOCKS.frater.trajectory)
+                                      trajectory=MOCKS.frater.trajectory, source_video='test.mp4', experiment='test')
 
 # Activity
 MOCKS.proto._activity = lambda: core.Activity(activity_id='1234', activity_type=5,

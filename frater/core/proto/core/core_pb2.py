@@ -2,175 +2,170 @@
 # source: core/core.proto
 
 import sys
-_b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+
+_b = sys.version_info[0] < 3 and (lambda x: x) or (lambda x: x.encode('latin1'))
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
-
-
-
 DESCRIPTOR = _descriptor.FileDescriptor(
-  name='core/core.proto',
-  package='core',
-  syntax='proto3',
-  serialized_options=_b('Z\006corepb'),
-  serialized_pb=_b('\n\x0f\x63ore/core.proto\x12\x04\x63ore\"7\n\rTemporalRange\x12\x13\n\x0bstart_frame\x18\x01 \x01(\x05\x12\x11\n\tend_frame\x18\x02 \x01(\x05\"s\n\nTrajectory\x12)\n\x0e\x62ounding_boxes\x18\x01 \x03(\x0b\x32\x11.core.BoundingBox\x12+\n\x0etemporal_range\x18\x02 \x01(\x0b\x32\x13.core.TemporalRange\x12\r\n\x05scale\x18\x03 \x01(\x02\"\\\n\x0b\x42oundingBox\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01w\x18\x03 \x01(\x02\x12\t\n\x01h\x18\x04 \x01(\x02\x12\x12\n\nconfidence\x18\x05 \x01(\x02\x12\r\n\x05\x66rame\x18\x06 \x01(\x05\x42\x08Z\x06\x63orepbb\x06proto3')
+    name='core/core.proto',
+    package='core',
+    syntax='proto3',
+    serialized_options=_b('Z\006corepb'),
+    serialized_pb=_b(
+        '\n\x0f\x63ore/core.proto\x12\x04\x63ore\"7\n\rTemporalRange\x12\x13\n\x0bstart_frame\x18\x01 \x01(\x05\x12\x11\n\tend_frame\x18\x02 \x01(\x05\"s\n\nTrajectory\x12)\n\x0e\x62ounding_boxes\x18\x01 \x03(\x0b\x32\x11.core.BoundingBox\x12+\n\x0etemporal_range\x18\x02 \x01(\x0b\x32\x13.core.TemporalRange\x12\r\n\x05scale\x18\x03 \x01(\x02\"\\\n\x0b\x42oundingBox\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01w\x18\x03 \x01(\x02\x12\t\n\x01h\x18\x04 \x01(\x02\x12\x12\n\nconfidence\x18\x05 \x01(\x02\x12\r\n\x05\x66rame\x18\x06 \x01(\x05\x42\x08Z\x06\x63orepbb\x06proto3')
 )
-
-
-
 
 _TEMPORALRANGE = _descriptor.Descriptor(
-  name='TemporalRange',
-  full_name='core.TemporalRange',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='start_frame', full_name='core.TemporalRange.start_frame', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='end_frame', full_name='core.TemporalRange.end_frame', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=25,
-  serialized_end=80,
+    name='TemporalRange',
+    full_name='core.TemporalRange',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='start_frame', full_name='core.TemporalRange.start_frame', index=0,
+            number=1, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='end_frame', full_name='core.TemporalRange.end_frame', index=1,
+            number=2, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=25,
+    serialized_end=80,
 )
-
 
 _TRAJECTORY = _descriptor.Descriptor(
-  name='Trajectory',
-  full_name='core.Trajectory',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='bounding_boxes', full_name='core.Trajectory.bounding_boxes', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='temporal_range', full_name='core.Trajectory.temporal_range', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='scale', full_name='core.Trajectory.scale', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=82,
-  serialized_end=197,
+    name='Trajectory',
+    full_name='core.Trajectory',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='bounding_boxes', full_name='core.Trajectory.bounding_boxes', index=0,
+            number=1, type=11, cpp_type=10, label=3,
+            has_default_value=False, default_value=[],
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='temporal_range', full_name='core.Trajectory.temporal_range', index=1,
+            number=2, type=11, cpp_type=10, label=1,
+            has_default_value=False, default_value=None,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='scale', full_name='core.Trajectory.scale', index=2,
+            number=3, type=2, cpp_type=6, label=1,
+            has_default_value=False, default_value=float(0),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=82,
+    serialized_end=197,
 )
 
-
 _BOUNDINGBOX = _descriptor.Descriptor(
-  name='BoundingBox',
-  full_name='core.BoundingBox',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='x', full_name='core.BoundingBox.x', index=0,
-      number=1, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='y', full_name='core.BoundingBox.y', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='w', full_name='core.BoundingBox.w', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='h', full_name='core.BoundingBox.h', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='confidence', full_name='core.BoundingBox.confidence', index=4,
-      number=5, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='frame', full_name='core.BoundingBox.frame', index=5,
-      number=6, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=199,
-  serialized_end=291,
+    name='BoundingBox',
+    full_name='core.BoundingBox',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='x', full_name='core.BoundingBox.x', index=0,
+            number=1, type=2, cpp_type=6, label=1,
+            has_default_value=False, default_value=float(0),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='y', full_name='core.BoundingBox.y', index=1,
+            number=2, type=2, cpp_type=6, label=1,
+            has_default_value=False, default_value=float(0),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='w', full_name='core.BoundingBox.w', index=2,
+            number=3, type=2, cpp_type=6, label=1,
+            has_default_value=False, default_value=float(0),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='h', full_name='core.BoundingBox.h', index=3,
+            number=4, type=2, cpp_type=6, label=1,
+            has_default_value=False, default_value=float(0),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='confidence', full_name='core.BoundingBox.confidence', index=4,
+            number=5, type=2, cpp_type=6, label=1,
+            has_default_value=False, default_value=float(0),
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='frame', full_name='core.BoundingBox.frame', index=5,
+            number=6, type=5, cpp_type=1, label=1,
+            has_default_value=False, default_value=0,
+            message_type=None, enum_type=None, containing_type=None,
+            is_extension=False, extension_scope=None,
+            serialized_options=None, file=DESCRIPTOR),
+    ],
+    extensions=[
+    ],
+    nested_types=[],
+    enum_types=[
+    ],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+    ],
+    serialized_start=199,
+    serialized_end=291,
 )
 
 _TRAJECTORY.fields_by_name['bounding_boxes'].message_type = _BOUNDINGBOX
@@ -181,26 +176,25 @@ DESCRIPTOR.message_types_by_name['BoundingBox'] = _BOUNDINGBOX
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TemporalRange = _reflection.GeneratedProtocolMessageType('TemporalRange', (_message.Message,), dict(
-  DESCRIPTOR = _TEMPORALRANGE,
-  __module__ = 'core.core_pb2'
-  # @@protoc_insertion_point(class_scope:core.TemporalRange)
-  ))
+    DESCRIPTOR=_TEMPORALRANGE,
+    __module__='core.core_pb2'
+    # @@protoc_insertion_point(class_scope:core.TemporalRange)
+))
 _sym_db.RegisterMessage(TemporalRange)
 
 Trajectory = _reflection.GeneratedProtocolMessageType('Trajectory', (_message.Message,), dict(
-  DESCRIPTOR = _TRAJECTORY,
-  __module__ = 'core.core_pb2'
-  # @@protoc_insertion_point(class_scope:core.Trajectory)
-  ))
+    DESCRIPTOR=_TRAJECTORY,
+    __module__='core.core_pb2'
+    # @@protoc_insertion_point(class_scope:core.Trajectory)
+))
 _sym_db.RegisterMessage(Trajectory)
 
 BoundingBox = _reflection.GeneratedProtocolMessageType('BoundingBox', (_message.Message,), dict(
-  DESCRIPTOR = _BOUNDINGBOX,
-  __module__ = 'core.core_pb2'
-  # @@protoc_insertion_point(class_scope:core.BoundingBox)
-  ))
+    DESCRIPTOR=_BOUNDINGBOX,
+    __module__='core.core_pb2'
+    # @@protoc_insertion_point(class_scope:core.BoundingBox)
+))
 _sym_db.RegisterMessage(BoundingBox)
-
 
 DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

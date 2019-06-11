@@ -1,5 +1,5 @@
 class Stream:
-    def __init__(self, stream_type):
+    def __init__(self, stream_type: type):
         self._stream_type = stream_type
 
     @property

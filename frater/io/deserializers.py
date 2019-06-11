@@ -3,6 +3,7 @@ from typing import Callable
 
 from frater.core.activity import *
 from frater.core.bounding_box import *
+from frater.core.frame import *
 from frater.core.object import *
 from frater.core.temporal_range import *
 from frater.core.trajectory import *
@@ -10,9 +11,12 @@ from frater.core.trajectory import *
 JSON_DESERIALIZERS = {
     Activity: json_to_activity,
     Object: json_to_object,
+    ObjectDetection: json_to_object_detection,
     Trajectory: json_to_trajectory,
     BoundingBox: json_to_bounding_box,
-    TemporalRange: json_to_temporal_range
+    TemporalRange: json_to_temporal_range,
+    Frame: json_to_frame,
+    CroppedFrame: json_to_cropped_frame,
 }
 
 PROTO_DESERIALIZERS = {

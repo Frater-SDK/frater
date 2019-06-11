@@ -6,6 +6,7 @@ from kafka import KafkaProducer
 
 class KafkaHandler(logging.Handler):
     """Class to instantiate the kafka logging facility."""
+
     def __init__(self, bootstrap_servers, topic='test', tls=None):
         """Initialize an instance of the kafka handler."""
         logging.Handler.__init__(self)

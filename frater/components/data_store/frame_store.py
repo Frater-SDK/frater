@@ -17,7 +17,7 @@ class FrameStore(FileStore):
     @property
     def root(self):
         return self._root
-    
+
     @property
     def extension(self):
         return self._extension
@@ -27,11 +27,11 @@ class FrameStore(FileStore):
         return self._frame_filename_format
 
     @lru_cache(maxsize=128)
-    def get_frame(self, video, frame_index, modality=Modality.RGB):
+    def get_frame(self, video, frame_index, modality=Modality.RGB, timestamp=''):
         frame_path = self.get_frame_path(video, modality, frame_index)
         frame_img = Image.open(frame_path)
 
-        return Frame(frame_img, modality, index=frame_index, source_video=video)
+        return Frame(frame_img, modality, index=frame_index, source_video=video, timestamp=timestamp)
 
     def get_frames(self, video, frame_indices, modality=Modality.RGB):
         return [self.get_frame(video, frame_index, modality) for frame_index in frame_indices]

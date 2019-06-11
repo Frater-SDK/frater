@@ -8,13 +8,17 @@ from ..trajectory import Trajectory
 
 
 class Object:
-    def __init__(self, object_type: ObjectType = ObjectType.NULL,
-                 source_video: str = '', experiment: str = '',
-                 trajectory: Trajectory = None, object_id=''):
+    def __init__(self, object_id: str = '', object_type: ObjectType = ObjectType.NULL,
+                 trajectory: Trajectory = None, source_video: str = '', experiment: str = ''):
         self.object_id = object_id
         self.object_type = object_type
+
+        if trajectory is None:
+            self.trajectory = Trajectory()
+        else:
+            self.trajectory = trajectory
+
         self.source_video = source_video
-        self.trajectory = trajectory
         self.experiment = experiment
 
     def __eq__(self, other: 'Object') -> bool:
@@ -27,7 +31,8 @@ class Object:
         )
 
     def __str__(self):
-        return '{obj.object_id} - {obj.object_type.long_name} - {obj.trajectory.temporal_range}'.format(obj=self)
+        return '{obj.object_id} - {obj.object_type.long_name} - ' \
+               '{obj.trajectory.temporal_range} - {obj.source_video}'.format(obj=self)
 
     def __getitem__(self, item) -> Union[BoundingBox, 'Object']:
         if isinstance(item, int):

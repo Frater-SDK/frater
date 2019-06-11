@@ -3,6 +3,7 @@ from typing import Callable
 
 from ..core.activity import *
 from ..core.bounding_box import *
+from ..core.frame import *
 from ..core.object import *
 from ..core.temporal_range import *
 from ..core.trajectory import *
@@ -13,7 +14,8 @@ JSON_SERIALIZERS = {
     Object: object_to_json,
     Trajectory: trajectory_to_json,
     BoundingBox: bounding_box_to_json,
-    TemporalRange: temporal_range_to_json
+    TemporalRange: temporal_range_to_json,
+    Frame: frame_to_json
 }
 
 PROTO_SERIALIZERS = {

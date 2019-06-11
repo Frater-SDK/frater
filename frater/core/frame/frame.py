@@ -1,5 +1,3 @@
-from typing import Tuple
-
 from PIL.Image import Image
 
 from frater.core import BoundingBox
@@ -17,25 +15,28 @@ class Frame:
 
     @property
     def width(self):
-        return self.image.width
+        if self.image:
+            return self.image.width
+        return None
 
     @property
     def height(self):
-        return self.image.height
+        if self.image:
+            return self.image.height
+        return None
 
     def crop(self, bounding_box: BoundingBox) -> 'CroppedFrame':
         location = bounding_box.get_corners()
-        image = self.image.crop(location)
-        return CroppedFrame(image, location, self.modality, self.index, self.source_video, self.timestamp)
+        if self.image:
+            image = self.image.crop(location)
+        else:
+            image = None
+        return CroppedFrame(image, bounding_box, self.modality, self.index, self.source_video, self.timestamp)
 
 
 class CroppedFrame(Frame):
-    def __init__(self, image: Image = None, source_location: Tuple[float, float, float, float] = None,
+    def __init__(self, image: Image = None, source_location: BoundingBox = None,
                  modality: Modality = Modality.RGB, index: int = 0, source_video: str = '', timestamp: str = ''):
         super(CroppedFrame, self).__init__(image, modality, index, source_video, timestamp)
 
-        self._source_location = source_location
-
-    @property
-    def source_location(self):
-        return self._source_location
+        self.source_location = source_location

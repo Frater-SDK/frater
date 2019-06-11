@@ -1,7 +1,7 @@
 from typing import Dict, Tuple
 
 from .bounding_box import BoundingBox
-from .bounding_box_defaults import JSON_DEFAULT
+from .bounding_box_defaults import BOUNDING_BOX_JSON_DEFAULT
 from ..proto import core
 from ...validation.json import validate_json
 
@@ -10,7 +10,7 @@ __all__ = ['json_to_bounding_box', 'bounding_box_to_json',
            'protobuf_to_bounding_box', 'bounding_box_to_protobuf']
 
 
-@validate_json(default=JSON_DEFAULT, completion=True)
+@validate_json(default=BOUNDING_BOX_JSON_DEFAULT, completion=True)
 def json_to_bounding_box(bounding_box: Dict) -> BoundingBox:
     x = bounding_box['x']
     y = bounding_box['y']
