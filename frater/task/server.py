@@ -33,6 +33,14 @@ class TaskServer:
                 mimetype='application/json'
             )
 
+        @self.server.route('/stop')
+        def stop():
+            return self.server.response_class(
+                response=json.dumps({'stopped': self.stop()}),
+                status=200,
+                mimetype='application/json'
+            )
+
         self.task_builder = task_builder
         self.task: Union[Task, None] = None
         self.task_thread: Union[Thread, None] = None
@@ -51,7 +59,8 @@ class TaskServer:
 
     def stop(self):
         self.task.stop()
-        
+        return True
+
     def run(self):
         self.server.run(self.host, self.port)
 
