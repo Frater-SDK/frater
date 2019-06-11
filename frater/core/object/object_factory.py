@@ -9,8 +9,8 @@ from ..proto import core
 from ..trajectory.trajectory_factory import *
 from ...validation.json import validate_json
 
-__all__ = ['json_to_object', 'object_to_json',
-           'diva_format_to_object', 'object_to_diva_format',
+__all__ = ['json_to_object', 'json_to_object_detection', 'object_to_json',
+           'object_detection_to_json', 'diva_format_to_object', 'object_to_diva_format',
            'protobuf_to_object', 'object_to_protobuf']
 
 

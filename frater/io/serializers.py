@@ -12,10 +12,12 @@ from ..utilities.json import is_json_serializable
 JSON_SERIALIZERS = {
     Activity: activity_to_json,
     Object: object_to_json,
+    ObjectDetection: object_detection_to_json,
     Trajectory: trajectory_to_json,
     BoundingBox: bounding_box_to_json,
     TemporalRange: temporal_range_to_json,
-    Frame: frame_to_json
+    Frame: frame_to_json,
+    CroppedFrame: cropped_frame_to_json
 }
 
 PROTO_SERIALIZERS = {
