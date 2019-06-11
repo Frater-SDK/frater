@@ -59,6 +59,7 @@ class TaskServer:
 
     def stop(self):
         self.task.stop()
+        self.task_thread.join()
         return True
 
     def run(self):
