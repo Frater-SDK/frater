@@ -28,7 +28,7 @@ class TaskServer:
         @self.server.route('/start')
         def start():
             return self.server.response_class(
-                response=json.dumps({'started': self.start_task()}),
+                response=json.dumps(self.start()),
                 status=200,
                 mimetype='application/json'
             )
@@ -36,7 +36,7 @@ class TaskServer:
         @self.server.route('/stop')
         def stop():
             return self.server.response_class(
-                response=json.dumps({'stopped': self.stop()}),
+                response=json.dumps(self.stop()),
                 status=200,
                 mimetype='application/json'
             )
@@ -48,19 +48,24 @@ class TaskServer:
     def available(self):
         return True
 
-    def start_task(self):
+    def start(self):
         if not self.available():
-            return False
+            return {'started': False, 'available': False, 'message': 'task unavailable'}
 
         self.task = self.task_builder()
         self.task_thread = Thread(target=self.task.run)
         self.task_thread.start()
-        return True
+        return {'started': True, 'available': True, 'message': 'task started'}
 
     def stop(self):
-        self.task.stop()
-        self.task_thread.join()
-        return True
+        if self.task and self.task_thread:
+            self.task.stop()
+            self.task_thread.join()
+            message = 'task stopped'
+        else:
+            message = 'task not started'
+
+        return {'stopped': True, 'message': message}
 
     def run(self):
         self.server.run(self.host, self.port)
