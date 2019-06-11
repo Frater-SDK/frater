@@ -1,3 +1,4 @@
+import json
 import logging
 from threading import Thread
 from typing import Callable, Union
@@ -13,13 +14,26 @@ logger = logging.getLogger()
 class TaskServer:
     def __init__(self, host, port, task_builder: Callable[[], Task]):
         self.server = flask.Flask(__name__)
+        self.host = host
+        self.port = port
 
-        self.server.route('/available')(lambda: flask.jsonify({'available': self.available()}))
-        self.server.route('/start')(lambda: {'started': flask.jsonify({'started': self.start_task()})})
+        @self.server.route('/available')
+        def available():
+            return self.server.response_class(
+                response=json.dumps({'available': self.available()}),
+                status=200,
+                mimetype='application/json'
+            )
+
+        @self.server.route('/start')
+        def start():
+            return self.server.response_class(
+                response=json.dumps({'started': self.start_task()}),
+                status=200,
+                mimetype='application/json'
+            )
+
         self.task_builder = task_builder
-
-        self.server.run(host, port)
-
         self.task: Union[Task, None] = None
         self.task_thread: Union[Thread, None] = None
 
@@ -31,10 +45,15 @@ class TaskServer:
             return False
 
         self.task = self.task_builder()
-        self.task_thread = Thread(target=self.task.run, daemon=True)
+        self.task_thread = Thread(target=self.task.run)
         self.task_thread.start()
-
         return True
+
+    def stop(self):
+        self.task.stop()
+        
+    def run(self):
+        self.server.run(self.host, self.port)
 
 
 class KafkaTaskServer(TaskServer):

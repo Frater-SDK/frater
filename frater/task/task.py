@@ -11,6 +11,8 @@ class Task:
         self._input_type = input_type
         self._output_type = output_type
 
+        self._stop = False
+
     def __call__(self, data):
         return self.perform_task(data)
 
@@ -21,7 +23,7 @@ class Task:
         raise NotImplementedError
 
     def stop(self):
-        pass
+        self._stop = True
 
     @property
     def input_type(self) -> type:
@@ -99,6 +101,8 @@ class InputTask(Task):
 
     def run(self):
         for data in self.input_stream:
+            if self._stop:
+                break
             self.perform_task(data)
 
     def perform_task(self, data):
@@ -115,7 +119,7 @@ class OutputTask(Task):
         return self._output_stream
 
     def run(self):
-        while self.run_condition():
+        while self.run_condition() and not self._stop:
             output = self.perform_task()
             self.output_stream(output)
 
