@@ -16,13 +16,16 @@ class KafkaOutputStream(OutputStream):
     def send(self, data):
         self._producer.send(self.topic, data).get()
 
+    def close(self):
+        self._producer.close()
+
 
 class KafkaInputStream(InputStream):
     def __init__(self, topic, stream_type=None, servers=None):
         super(KafkaInputStream, self).__init__(stream_type)
         if servers is None:
             servers = ['localhost:9092']
-            
+
         self._consumer = KafkaConsumer(topic, bootstrap_servers=servers,
                                        value_deserializer=get_kafka_deserializer(self.stream_type))
         self._topic = topic
@@ -33,3 +36,6 @@ class KafkaInputStream(InputStream):
     def __iter__(self):
         for msg in self._consumer:
             yield msg.value
+
+    def close(self):
+        self._consumer.close()

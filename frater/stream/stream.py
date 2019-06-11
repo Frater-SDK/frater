@@ -6,6 +6,9 @@ class Stream:
     def stream_type(self):
         return self._stream_type
 
+    def close(self):
+        pass
+
 
 class InputStream(Stream):
     def __next__(self):

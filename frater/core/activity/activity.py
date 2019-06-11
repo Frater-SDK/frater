@@ -18,15 +18,15 @@ class Activity:
         if trajectory is None:
             trajectory = Trajectory(temporal_range=temporal_range)
 
-        self._activity_id = activity_id
-        self._activity_type = activity_type
-        self._temporal_range = temporal_range
-        self._source_video = source_video
-        self._experiment = experiment
-        self._objects = objects
-        self._trajectory = trajectory
-        self._confidence = confidence
-        self._is_proposal = is_proposal
+        self.activity_id = activity_id
+        self.activity_type = activity_type
+        self.temporal_range = temporal_range
+        self.source_video = source_video
+        self.experiment = experiment
+        self.objects = objects
+        self.trajectory = trajectory
+        self.confidence = confidence
+        self.is_proposal = is_proposal
 
     def __eq__(self, other: 'Activity') -> bool:
         return (
@@ -54,45 +54,9 @@ class Activity:
                '\nConfidence: {act.confidence}'.format(act=self, objects=objects_string)
 
     @property
-    def activity_id(self):
-        return self._activity_id
-
-    @property
-    def activity_type(self) -> ActivityType:
-        return self._activity_type
-
-    @property
-    def objects(self) -> List[Object]:
-        return self._objects
-
-    @property
-    def trajectory(self) -> Trajectory:
-        return self._trajectory
-
-    @property
-    def temporal_range(self) -> TemporalRange:
-        return self._temporal_range
-
-    @property
-    def source_video(self) -> str:
-        return self._source_video
-
-    @property
-    def experiment(self) -> str:
-        return self._experiment
-
-    @property
-    def confidence(self):
-        return self._confidence
-
-    @property
     def start_frame(self):
         return self.temporal_range.start_frame
 
     @property
     def end_frame(self):
         return self.temporal_range.end_frame
-
-    @property
-    def is_proposal(self):
-        return self._is_proposal

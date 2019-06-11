@@ -1,9 +1,12 @@
+import logging
 from functools import reduce
 from typing import List
 
 from ..stream import InputStream, OutputStream
 from ..validation.error import ValidationError
 from ..validation.task import is_valid_composition
+
+logger = logging.getLogger()
 
 
 class Task:
@@ -24,6 +27,9 @@ class Task:
 
     def stop(self):
         self._stop = True
+
+    def stopped(self):
+        return self._stop
 
     @property
     def input_type(self) -> type:
@@ -66,6 +72,13 @@ class ComposedTask(Task):
     def output_type(self):
         return self.tasks[-1].output_type
 
+    def stop(self):
+        for task in self.tasks:
+            task.stop()
+
+    def stopped(self):
+        return all(task.stopped() for task in self.tasks)
+
 
 class IOTask(Task):
     def __init__(self, input_stream: InputStream, output_stream: OutputStream):
@@ -83,11 +96,18 @@ class IOTask(Task):
 
     def run(self):
         for data in self.input_stream:
+            if self.stopped():
+                break
             output = self.perform_task(data)
             self.output_stream(output)
 
     def perform_task(self, data):
         raise NotImplementedError
+
+    def stop(self):
+        self.input_stream.close()
+        self.output_stream.close()
+        super(IOTask, self).stop()
 
 
 class InputTask(Task):
@@ -102,8 +122,14 @@ class InputTask(Task):
     def run(self):
         for data in self.input_stream:
             if self._stop:
+                logger.info('task stopped')
                 break
             self.perform_task(data)
+        logger.info('finished running')
+
+    def stop(self):
+        self.input_stream.close()
+        super(InputTask, self).stop()
 
     def perform_task(self, data):
         raise NotImplementedError
@@ -128,6 +154,10 @@ class OutputTask(Task):
 
     def run_condition(self) -> bool:
         raise NotImplementedError
+
+    def stop(self):
+        self.output_stream.close()
+        super(OutputTask, self).stop()
 
 
 class TaskError(Exception):

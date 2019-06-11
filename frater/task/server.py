@@ -17,6 +17,52 @@ class TaskServer:
         self.host = host
         self.port = port
 
+        self.task_builder = task_builder
+        self.task: Union[Task, None] = None
+        self.task_thread: Union[Thread, None] = None
+
+        self._register_endpoints()
+
+    def available(self):
+        return True
+
+    def start(self):
+        if not self.available():
+            return {'started': False, 'available': False, 'message': 'task unavailable'}
+
+        if self.started():
+            return {'started': True, 'available': True, 'message': 'task already started'}
+
+        self.task = self.task_builder()
+        self.task_thread = Thread(target=self.task.run)
+        self.task_thread.start()
+        return {'started': True, 'available': True, 'message': 'task started'}
+
+    def started(self):
+        return bool(self.task and self.task_thread)
+
+    def stop(self):
+        if self.task and self.task_thread:
+            logger.info('stopping task')
+            self.task.stop()
+            logger.info('joining thread')
+            # self.task_thread.join()
+
+            self.task = None
+            self.task_thread = None
+            message = 'task stopped'
+        else:
+            message = 'task not started'
+
+        return {'stopped': True, 'message': message}
+
+    def stopped(self):
+        return not self.started()
+
+    def run(self):
+        self.server.run(self.host, self.port)
+
+    def _register_endpoints(self):
         @self.server.route('/available')
         def available():
             return self.server.response_class(
@@ -33,6 +79,14 @@ class TaskServer:
                 mimetype='application/json'
             )
 
+        @self.server.route('/started')
+        def started():
+            return self.server.response_class(
+                response=json.dumps({'started': self.started()}),
+                status=200,
+                mimetype='application/json'
+            )
+
         @self.server.route('/stop')
         def stop():
             return self.server.response_class(
@@ -41,34 +95,13 @@ class TaskServer:
                 mimetype='application/json'
             )
 
-        self.task_builder = task_builder
-        self.task: Union[Task, None] = None
-        self.task_thread: Union[Thread, None] = None
-
-    def available(self):
-        return True
-
-    def start(self):
-        if not self.available():
-            return {'started': False, 'available': False, 'message': 'task unavailable'}
-
-        self.task = self.task_builder()
-        self.task_thread = Thread(target=self.task.run)
-        self.task_thread.start()
-        return {'started': True, 'available': True, 'message': 'task started'}
-
-    def stop(self):
-        if self.task and self.task_thread:
-            self.task.stop()
-            self.task_thread.join()
-            message = 'task stopped'
-        else:
-            message = 'task not started'
-
-        return {'stopped': True, 'message': message}
-
-    def run(self):
-        self.server.run(self.host, self.port)
+        @self.server.route('/stopped')
+        def stopped():
+            return self.server.response_class(
+                response=json.dumps({'stopped': self.stopped()}),
+                status=200,
+                mimetype='application/json'
+            )
 
 
 class KafkaTaskServer(TaskServer):
