@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Iterator
 
 from frater.core import ActivityProposal, Object
 from frater.task import IOTask
@@ -8,13 +8,13 @@ class ActivityProposer(IOTask):
     def __init__(self, input_stream, output_stream):
         super(ActivityProposer, self).__init__(input_stream, output_stream)
 
-    def perform_task(self, object: Object) -> Generator[ActivityProposal]:
+    def perform_task(self, object: Object) -> Iterator[ActivityProposal]:
         """
-        This should take in a stream of objects and yield Activity Proposals from a generator
+        This should take in a stream of objects and yield Activity Proposals from an iterator
         :param object:
         :return:
         """
-
+    
     def run(self):
         for object in self.input_stream:
             for proposal in self.perform_task(object):

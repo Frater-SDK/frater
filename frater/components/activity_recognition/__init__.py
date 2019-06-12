@@ -1,1 +1,1 @@
-from .activity_recognition_task import ActivityRecognitionTask
+from .activity_recognizer import ActivityRecognizer

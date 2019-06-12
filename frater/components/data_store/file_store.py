@@ -1,7 +1,9 @@
 import os
 
+from frater.utilities.singleton import Singleton
 
-class FileStore:
+
+class FileStore(metaclass=Singleton):
     def __init__(self, root):
         self._root = os.path.abspath(os.path.expandvars(os.path.expanduser(root)))
 

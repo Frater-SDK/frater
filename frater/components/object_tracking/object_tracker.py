@@ -5,6 +5,8 @@ from frater.core import ObjectDetection, Object
 from frater.stream import InputStream, OutputStream
 from frater.task import IOTask
 
+__all__ = ['ObjectTracker']
+
 
 class ObjectTracker(IOTask):
     def __init__(self, input_stream: InputStream, output_stream: OutputStream, frame_store: FrameStore):

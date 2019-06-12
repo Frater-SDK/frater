@@ -3,7 +3,6 @@ from typing import Dict
 from .frame import Frame, CroppedFrame
 from .modality import Modality
 from ..bounding_box import json_to_bounding_box, bounding_box_to_json
-from ...components.data_store import FrameStore
 
 __all__ = ['frame_to_json', 'cropped_frame_to_json', 'json_to_frame', 'json_to_cropped_frame']
 
@@ -25,17 +24,13 @@ def cropped_frame_to_json(frame: CroppedFrame):
     return frame_json
 
 
-def json_to_frame(frame_json: Dict, frame_store: FrameStore = None) -> Frame:
+def json_to_frame(frame_json: Dict) -> Frame:
     source_video = frame_json['source_video']
     index = frame_json['index']
     timestamp = frame_json['timestamp']
     modality = Modality[frame_json['modality']]
-    if frame_store:
-        frame = frame_store.get_frame(source_video, index, modality, timestamp)
-    else:
-        frame = Frame(None, modality, index, source_video, timestamp)
 
-    return frame
+    return Frame(None, modality, index, source_video, timestamp)
 
 
 def json_to_cropped_frame(frame_json: Dict) -> CroppedFrame:
