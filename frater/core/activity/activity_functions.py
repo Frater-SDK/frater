@@ -6,7 +6,7 @@ __all__ = ['activity_to_proposal']
 
 
 def proposal_to_activity(proposal: ActivityProposal, activity_type: ActivityType):
-    return Activity(activity_id=proposal.activity_proposal_id,
+    return Activity(activity_id=proposal.proposal_id,
                     activity_type=activity_type,
                     temporal_range=proposal.temporal_range,
                     trajectory=proposal.trajectory,
@@ -17,7 +17,7 @@ def proposal_to_activity(proposal: ActivityProposal, activity_type: ActivityType
 
 
 def activity_to_proposal(activity: Activity):
-    return ActivityProposal(activity_proposal_id=activity.activity_id,
+    return ActivityProposal(proposal_id=activity.activity_id,
                             temporal_range=activity.temporal_range,
                             trajectory=activity.trajectory,
                             objects=activity.objects,

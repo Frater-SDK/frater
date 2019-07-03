@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import List
 
 from ..object import Object
@@ -5,8 +6,9 @@ from ..temporal_range import TemporalRange
 from ..trajectory import Trajectory
 
 
+@dataclass
 class ActivityProposal:
-    def __init__(self, activity_proposal_id='', temporal_range: TemporalRange = None, trajectory: Trajectory = None,
+    def __init__(self, proposal_id='', temporal_range: TemporalRange = None, trajectory: Trajectory = None,
                  objects: List[Object] = None, source_video: str = '', experiment: str = '', confidence=0.0):
         if objects is None:
             objects = []
@@ -15,7 +17,7 @@ class ActivityProposal:
         if trajectory is None:
             trajectory = Trajectory(temporal_range=temporal_range)
 
-        self.activity_proposal_id = activity_proposal_id
+        self.proposal_id = proposal_id
         self.temporal_range = temporal_range
         self.source_video = source_video
         self.experiment = experiment
@@ -25,7 +27,7 @@ class ActivityProposal:
 
     def __eq__(self, other: 'ActivityProposal') -> bool:
         return (
-                self.activity_proposal_id == other.activity_proposal_id and
+                self.proposal_id == other.proposal_id and
                 self.temporal_range == other.temporal_range and
                 self.source_video == other.source_video and
                 self.experiment == other.experiment and
@@ -40,7 +42,7 @@ class ActivityProposal:
     def __str__(self):
         objects_string = '\n'.join('{obj}'.format(obj=obj)
                                    for obj in self.objects)
-        return 'Activity Proposal {act.activity_id} - {act.activity_type.long_name}' \
+        return 'Activity Proposal {act.proposal_id} - {act.activity_type.long_name}' \
                '\nObjects:\n{objects}' \
                '\nTemporal Range: {act.temporal_range}' \
                '\nSource Video: {act.source_video} ' \

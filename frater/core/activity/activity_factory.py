@@ -1,5 +1,6 @@
 from typing import Dict
 
+from frater.core import ActivityProposal
 from .activity import Activity, ActivityType
 from .activity_defaults import ACTIVITY_JSON_DEFAULT
 from ..object.object_factory import *
@@ -11,7 +12,8 @@ from ...validation.json import validate_json
 
 __all__ = ['json_to_activity', 'activity_to_json',
            'diva_format_to_activity', 'activity_to_diva_format',
-           'protobuf_to_activity', 'activity_to_protobuf']
+           'protobuf_to_activity', 'activity_to_protobuf',
+           'json_to_activity_proposal', 'activity_proposal_to_json']
 
 
 @validate_json(default=ACTIVITY_JSON_DEFAULT, completion=True)
@@ -32,6 +34,7 @@ def json_to_activity(activity: Dict) -> Activity:
 def activity_to_json(activity: Activity) -> Dict:
     return {
         '_id': activity.activity_id,
+        'proposal_id': activity.proposal_id,
         'activity_type': activity.activity_type.value,
         'objects': [object_to_json(obj) for obj in activity.objects],
         'trajectory': trajectory_to_json(activity.trajectory),
@@ -97,3 +100,27 @@ def activity_to_protobuf(activity: Activity) -> core.Activity:
                          temporal_range=temporal_range_to_protobuf(activity.temporal_range),
                          source_video=activity.source_video, experiment=activity.experiment
                          )
+
+
+def json_to_activity_proposal(proposal: Dict) -> ActivityProposal:
+    proposal_id = proposal['_id']
+    objects = [json_to_object(obj) for obj in proposal['objects']]
+    temporal_range = json_to_temporal_range(proposal['temporal_range'])
+    source_video = proposal['source_video']
+    experiment = proposal['experiment']
+    confidence = proposal['confidence']
+    trajectory = json_to_trajectory(proposal['trajectory'])
+    return ActivityProposal(proposal_id=proposal_id, temporal_range=temporal_range, trajectory=trajectory,
+                            objects=objects, source_video=source_video, experiment=experiment, confidence=confidence)
+
+
+def activity_proposal_to_json(proposal: ActivityProposal) -> Dict:
+    return {
+        '_id': proposal.proposal_id,
+        'objects': [object_to_json(obj) for obj in proposal.objects],
+        'trajectory': trajectory_to_json(proposal.trajectory),
+        'temporal_range': temporal_range_to_json(proposal.temporal_range),
+        'source_video': proposal.source_video,
+        'experiment': proposal.experiment,
+        'confidence': proposal.confidence
+    }

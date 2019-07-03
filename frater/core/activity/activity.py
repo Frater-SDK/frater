@@ -9,7 +9,7 @@ from ..trajectory import Trajectory
 class Activity:
     def __init__(self, activity_id='', activity_type: ActivityType = ActivityType.NULL,
                  temporal_range: TemporalRange = None, trajectory: Trajectory = None, objects: List[Object] = None,
-                 source_video: str = '', experiment: str = '', activity_proposal_id: str = '', confidence=0.0):
+                 source_video: str = '', experiment: str = '', proposal_id: str = '', confidence=0.0):
         if objects is None:
             objects = []
         if temporal_range is None:
@@ -18,7 +18,7 @@ class Activity:
             trajectory = Trajectory(temporal_range=temporal_range)
 
         self.activity_id = activity_id
-        self.activity_proposal_id = activity_proposal_id
+        self.proposal_id = proposal_id
         self.activity_type = activity_type
         self.temporal_range = temporal_range
         self.objects = objects
@@ -31,7 +31,7 @@ class Activity:
     def __eq__(self, other: 'Activity') -> bool:
         return (
                 self.activity_id == other.activity_id and
-                self.activity_proposal_id == other.activity_proposal_id and
+                self.proposal_id == other.proposal_id and
                 self.activity_type == other.activity_type and
                 self.temporal_range == other.temporal_range and
                 self.source_video == other.source_video and
