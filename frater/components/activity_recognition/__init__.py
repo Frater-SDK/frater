@@ -1,1 +1,1 @@
-from .activity_recognizer import ActivityRecognizer
+from .activity_classifier import ActivityClassifier

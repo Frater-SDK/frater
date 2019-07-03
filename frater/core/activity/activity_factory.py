@@ -4,6 +4,7 @@ from .activity import Activity, ActivityType
 from .activity_defaults import ACTIVITY_JSON_DEFAULT
 from ..object.object_factory import *
 from ..proto import core
+from ..temporal_range import TemporalRange
 from ..temporal_range.temporal_range_factory import *
 from ..trajectory.trajectory_factory import *
 from ...validation.json import validate_json
@@ -48,7 +49,7 @@ def diva_format_to_activity(activity: Dict) -> Activity:
     source_video = list(activity['localization'].keys())[0]
     objects = [diva_format_to_object(obj) for obj in activity['objects']]
     ranges = list(int(r) for r in activity['localization'][source_video])
-    temporal_range = min(ranges), max(ranges)
+    temporal_range = TemporalRange(min(ranges), max(ranges))
     experiment = ''
 
     return Activity(activity_id=activity_id, activity_type=activity_type, temporal_range=temporal_range,
@@ -62,8 +63,8 @@ def activity_to_diva_format(activity: Activity) -> Dict:
         'presenceConf': activity.confidence,
         'localization': {
             activity.source_video: {
-                str(activity.temporal_range[0]): 1,
-                str(activity.temporal_range[1]): 0
+                str(activity.temporal_range.start_frame): 1,
+                str(activity.temporal_range.end_frame): 0
             }
         },
         'objects': [
