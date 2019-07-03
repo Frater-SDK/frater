@@ -1,7 +1,7 @@
 from typing import List
 
-from frater.components.data_store import FrameStore
 from frater.core import ObjectDetection, Frame
+from frater.data_store import FrameStore
 from ...stream import OutputStream, InputStream
 from ...task import IOTask
 
@@ -14,9 +14,9 @@ class ObjectDetector(IOTask):
 
     def run(self):
         for frame in self.input_stream:
+            frame = self.frame_store.load_image_for_frame(frame)
             for detection in self.perform_task(frame):
                 self.output_stream(detection)
 
-    @FrameStore.instance.load_image_for_frame()
     def perform_task(self, frame: Frame) -> List[ObjectDetection]:
         raise NotImplementedError

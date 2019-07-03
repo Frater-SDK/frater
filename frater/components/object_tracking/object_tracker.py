@@ -1,7 +1,7 @@
 from typing import Generator
 
-from frater.components.data_store import FrameStore
 from frater.core import ObjectDetection, Object
+from frater.data_store import FrameStore
 from frater.stream import InputStream, OutputStream
 from frater.task import IOTask
 

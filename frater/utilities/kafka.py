@@ -2,7 +2,6 @@ import logging
 import time
 
 from kafka import KafkaAdminClient
-from kafka.errors import NoBrokersAvailable
 
 logger = logging.getLogger()
 
@@ -21,6 +20,6 @@ def kafka_servers_available(servers):
     try:
         client = KafkaAdminClient(bootstrap_servers=servers)
         client.close()
-    except NoBrokersAvailable:
+    except Exception:
         return False
     return True

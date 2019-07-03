@@ -3,8 +3,8 @@ from functools import lru_cache
 
 from PIL import Image
 
+from frater.core import Frame, Modality, TemporalRange
 from .file_store import FileStore
-from ...core import Frame, Modality, TemporalRange
 
 
 class FrameStore(FileStore):
@@ -46,6 +46,5 @@ class FrameStore(FileStore):
     def get_frame_filename(self, frame_index):
         return self._frame_filename_format % (frame_index, self._extension)
 
-    def load_image_for_frame(self, frame: Frame, func):
-        frame = self.get_frame(frame.source_video, frame.index, frame.modality, frame.timestamp)
-        return func(frame)
+    def load_image_for_frame(self, frame: Frame):
+        return self.get_frame(frame.source_video, frame.index, frame.modality, frame.timestamp)
