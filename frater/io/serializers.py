@@ -11,6 +11,7 @@ from ..utilities.json import is_json_serializable
 
 JSON_SERIALIZERS = {
     Activity: activity_to_json,
+    ActivityProposal: activity_proposal_to_json,
     Object: object_to_json,
     ObjectDetection: object_detection_to_json,
     Trajectory: trajectory_to_json,

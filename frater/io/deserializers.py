@@ -10,6 +10,7 @@ from frater.core.trajectory import *
 
 JSON_DESERIALIZERS = {
     Activity: json_to_activity,
+    ActivityProposal: json_to_activity_proposal,
     Object: json_to_object,
     ObjectDetection: json_to_object_detection,
     Trajectory: json_to_trajectory,

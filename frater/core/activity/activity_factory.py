@@ -2,7 +2,7 @@ from typing import Dict
 
 from frater.core import ActivityProposal
 from .activity import Activity, ActivityType
-from .activity_defaults import ACTIVITY_JSON_DEFAULT
+from .activity_defaults import ACTIVITY_JSON_DEFAULT, ACTIVITY_PROPOSAL_JSON_DEFAULT
 from ..object.object_factory import *
 from ..proto import core
 from ..temporal_range import TemporalRange
@@ -102,6 +102,7 @@ def activity_to_protobuf(activity: Activity) -> core.Activity:
                          )
 
 
+@validate_json(default=ACTIVITY_PROPOSAL_JSON_DEFAULT, completion=True)
 def json_to_activity_proposal(proposal: Dict) -> ActivityProposal:
     proposal_id = proposal['_id']
     objects = [json_to_object(obj) for obj in proposal['objects']]
