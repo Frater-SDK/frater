@@ -24,6 +24,7 @@ def json_to_trajectory(trajectory: Dict) -> Trajectory:
 
 def trajectory_to_json(trajectory: Trajectory):
     return {
+        'data_type': 'trajectory',
         'bounding_boxes': [bounding_box_to_json(bounding_box)
                            for bounding_box in trajectory.bounding_boxes],
         'temporal_range': temporal_range_to_json(trajectory.temporal_range),

@@ -24,6 +24,7 @@ def json_to_bounding_box(bounding_box: Dict) -> BoundingBox:
 
 def bounding_box_to_json(bounding_box: BoundingBox) -> Dict:
     return {
+        'data_type': 'bounding_box',
         'x': bounding_box.x,
         'y': bounding_box.y,
         "w": bounding_box.w,

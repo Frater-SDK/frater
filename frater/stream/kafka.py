@@ -27,7 +27,7 @@ class KafkaInputStream(InputStream):
             servers = ['localhost:9092']
 
         self._consumer = KafkaConsumer(topic, bootstrap_servers=servers,
-                                       value_deserializer=get_kafka_deserializer(self.stream_type))
+                                       value_deserializer=get_kafka_deserializer())
         self._topic = topic
 
     def __next__(self):

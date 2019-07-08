@@ -36,6 +36,7 @@ def json_to_object_detection(detection: Dict) -> ObjectDetection:
 
 def object_to_json(obj: Object) -> Dict:
     return {
+        'data_type': 'object',
         '_id': obj.object_id,
         'object_type': obj.object_type.value,
         'trajectory': trajectory_to_json(obj.trajectory),
@@ -46,6 +47,7 @@ def object_to_json(obj: Object) -> Dict:
 
 def object_detection_to_json(detection: ObjectDetection) -> Dict:
     return {
+        'data_type': 'object_detection',
         '_id': detection.object_detection_id,
         'object_type': detection.object_type.value,
         'bounding_box': bounding_box_to_json(detection.bounding_box),

@@ -1,8 +1,8 @@
 from typing import Dict
 
-from frater.core import ActivityProposal
 from .activity import Activity, ActivityType
 from .activity_defaults import ACTIVITY_JSON_DEFAULT, ACTIVITY_PROPOSAL_JSON_DEFAULT
+from .activity_proposal import ActivityProposal
 from ..object.object_factory import *
 from ..proto import core
 from ..temporal_range import TemporalRange
@@ -33,6 +33,7 @@ def json_to_activity(activity: Dict) -> Activity:
 
 def activity_to_json(activity: Activity) -> Dict:
     return {
+        'data_type': 'activity',
         '_id': activity.activity_id,
         'proposal_id': activity.proposal_id,
         'activity_type': activity.activity_type.value,
@@ -117,6 +118,7 @@ def json_to_activity_proposal(proposal: Dict) -> ActivityProposal:
 
 def activity_proposal_to_json(proposal: ActivityProposal) -> Dict:
     return {
+        'data_type': 'activity_proposal',
         '_id': proposal.proposal_id,
         'objects': [object_to_json(obj) for obj in proposal.objects],
         'trajectory': trajectory_to_json(proposal.trajectory),

@@ -6,11 +6,12 @@ from .modality import Modality
 
 class Frame:
     def __init__(self, image: Image = None, modality: Modality = Modality.RGB,
-                 index: int = 0, source_video: str = '', timestamp: str = ''):
+                 index: int = 0, source_video: str = '', experiment: str = '', timestamp: str = ''):
         self.image = image
         self.modality = modality
         self.index = index
         self.source_video = source_video
+        self.experiment = experiment
         self.timestamp = timestamp
 
     @property
@@ -31,12 +32,14 @@ class Frame:
             image = self.image.crop(location)
         else:
             image = None
-        return CroppedFrame(image, bounding_box, self.modality, self.index, self.source_video, self.timestamp)
+        return CroppedFrame(image, bounding_box, self.modality, self.index,
+                            self.source_video, self.experiment, self.timestamp)
 
 
 class CroppedFrame(Frame):
     def __init__(self, image: Image = None, source_location: BoundingBox = None,
-                 modality: Modality = Modality.RGB, index: int = 0, source_video: str = '', timestamp: str = ''):
-        super(CroppedFrame, self).__init__(image, modality, index, source_video, timestamp)
+                 modality: Modality = Modality.RGB, index: int = 0, source_video: str = '',
+                 experiment: str = '', timestamp: str = ''):
+        super(CroppedFrame, self).__init__(image, modality, index, source_video, experiment, timestamp)
 
         self.source_location = source_location

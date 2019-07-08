@@ -11,6 +11,7 @@ __all__ = ['frame_to_json', 'cropped_frame_to_json', 'json_to_frame', 'json_to_c
 
 def frame_to_json(frame: Frame):
     return {
+        'data_type': 'frame',
         'source_video': frame.source_video,
         'modality': frame.modality.name,
         'index': frame.index,
@@ -22,7 +23,10 @@ def frame_to_json(frame: Frame):
 
 def cropped_frame_to_json(frame: CroppedFrame):
     frame_json = frame_to_json(frame)
-    frame_json.update({'source_location': bounding_box_to_json(frame.source_location)})
+    frame_json.update({
+        'data_type': 'cropped_frame',
+        'source_location': bounding_box_to_json(frame.source_location)
+    })
     return frame_json
 
 

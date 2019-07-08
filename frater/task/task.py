@@ -2,6 +2,7 @@ import logging
 from functools import reduce
 from typing import List
 
+from frater.stream.stream_state import StreamState
 from ..stream import InputStream, OutputStream
 from ..validation.error import ValidationError
 from ..validation.task import is_valid_composition
@@ -14,7 +15,8 @@ class Task:
         self._input_type = input_type
         self._output_type = output_type
 
-        self._stop = False
+        self._stopped = False
+        self._active = False
 
     def __call__(self, data):
         return self.perform_task(data)
@@ -26,10 +28,14 @@ class Task:
         raise NotImplementedError
 
     def stop(self):
-        self._stop = True
+        self._stopped = True
 
     def stopped(self):
-        return self._stop
+        return self._stopped
+
+    @property
+    def active(self):
+        return self._active
 
     @property
     def input_type(self) -> type:
@@ -96,10 +102,13 @@ class IOTask(Task):
 
     def run(self):
         for data in self.input_stream:
-            if self.stopped():
-                break
-            output = self.perform_task(data)
-            self.output_stream(output)
+            if data == StreamState.EOS:
+                self._active = False
+                self.output_stream(data)
+            else:
+                self._active = True
+                output = self.perform_task(data)
+                self.output_stream(output)
 
     def perform_task(self, data):
         raise NotImplementedError
@@ -121,11 +130,9 @@ class InputTask(Task):
 
     def run(self):
         for data in self.input_stream:
-            if self._stop:
-                logger.info('task stopped')
+            if self.stopped():
                 break
             self.perform_task(data)
-        logger.info('finished running')
 
     def stop(self):
         self.input_stream.close()
@@ -145,7 +152,7 @@ class OutputTask(Task):
         return self._output_stream
 
     def run(self):
-        while self.run_condition() and not self._stop:
+        while self.run_condition() and not self._stopped:
             output = self.perform_task()
             self.output_stream(output)
 

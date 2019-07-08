@@ -7,6 +7,7 @@ from ..core.frame import *
 from ..core.object import *
 from ..core.temporal_range import *
 from ..core.trajectory import *
+from ..stream.stream_state import StreamState, stream_state_to_json
 from ..utilities.json import is_json_serializable
 
 JSON_SERIALIZERS = {
@@ -18,7 +19,8 @@ JSON_SERIALIZERS = {
     BoundingBox: bounding_box_to_json,
     TemporalRange: temporal_range_to_json,
     Frame: frame_to_json,
-    CroppedFrame: cropped_frame_to_json
+    CroppedFrame: cropped_frame_to_json,
+    StreamState: stream_state_to_json
 }
 
 PROTO_SERIALIZERS = {
@@ -30,9 +32,9 @@ PROTO_SERIALIZERS = {
 }
 
 
-def frater_to_json(data, d_type=None):
-    if d_type is None:
-        d_type = type(data)
+def frater_to_json(data):
+    d_type = type(data)
+
     if d_type in JSON_SERIALIZERS:
         return JSON_SERIALIZERS[d_type](data)
     elif is_json_serializable(data):
@@ -50,5 +52,5 @@ def frater_to_proto(data, d_type=None):
         raise TypeError(f'Object can\'t be serialized to protobuf: {data}')
 
 
-def get_kafka_serializer(d_type=None) -> Callable:
-    return lambda m: json.dumps(frater_to_json(m, d_type)).encode('utf-8')
+def get_kafka_serializer() -> Callable:
+    return lambda m: json.dumps(frater_to_json(m)).encode('utf-8')

@@ -23,3 +23,7 @@ def kafka_servers_available(servers):
     except Exception:
         return False
     return True
+
+
+def end_of_sequence(headers):
+    return bool(headers['EOS'])

@@ -1,6 +1,7 @@
 from typing import Iterator
 
 from frater.core import ActivityProposal, Object
+from frater.stream.stream_state import StreamState
 from frater.task import IOTask
 
 
@@ -14,8 +15,13 @@ class ActivityProposer(IOTask):
         :param object:
         :return:
         """
-    
+
     def run(self):
-        for object in self.input_stream:
-            for proposal in self.perform_task(object):
-                self.output_stream(proposal)
+        for data in self.input_stream:
+            if data == StreamState.EOS:
+                self._active = False
+                self.output_stream(data)
+            else:
+                self._active = True
+                for proposal in self.perform_task(data):
+                    self.output_stream(proposal)

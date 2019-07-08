@@ -17,7 +17,11 @@ def json_to_temporal_range(temporal_range: Union[None, Dict]) -> TemporalRange:
 
 
 def temporal_range_to_json(temporal_range: TemporalRange) -> Union[Dict, None]:
-    return {'start_frame': temporal_range.start_frame, 'end_frame': temporal_range.end_frame}
+    return {
+        'data_type': 'temporal_range',
+        'start_frame': temporal_range.start_frame,
+        'end_frame': temporal_range.end_frame
+    }
 
 
 def protobuf_to_temporal_range(temporal_range: core.TemporalRange) -> TemporalRange:

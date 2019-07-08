@@ -22,5 +22,5 @@ class OutputStream(Stream):
     def send(self, data):
         raise NotImplementedError
 
-    def __call__(self, data):
-        return self.send(data)
+    def __call__(self, *args, **kwargs):
+        return self.send(*args, **kwargs)

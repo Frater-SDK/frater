@@ -59,6 +59,9 @@ class TaskServer:
     def stopped(self):
         return not self.started()
 
+    def active(self):
+        return self.task.active if self.task else False
+
     def run(self):
         self.server.run(self.host, self.port)
 
@@ -99,6 +102,14 @@ class TaskServer:
         def stopped():
             return self.server.response_class(
                 response=json.dumps({'stopped': self.stopped()}),
+                status=200,
+                mimetype='application/json'
+            )
+
+        @self.server.route('/active')
+        def end_of_sequence():
+            return self.server.response_class(
+                response=json.dumps({'active': self.active()}),
                 status=200,
                 mimetype='application/json'
             )
