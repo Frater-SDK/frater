@@ -14,4 +14,4 @@ def json_to_stream_state(data: Dict):
 
 
 def stream_state_to_json(state: StreamState):
-    return {'stream_state': state.value}
+    return {'stream_state': state.value, 'data_type': 'stream_state'}

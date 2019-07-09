@@ -2,9 +2,9 @@ from typing import List
 
 from frater.core import ObjectDetection, Frame
 from frater.data_store import FrameStore
-from frater.stream.stream_state import StreamState
-from ...stream import OutputStream, InputStream
-from ...task import IOTask
+from frater.stream import OutputStream, InputStream
+from frater.task import IOTask
+from frater.utilities.stream import StreamState
 
 
 class ObjectDetector(IOTask):
@@ -15,7 +15,7 @@ class ObjectDetector(IOTask):
 
     def run(self):
         for data in self.input_stream:
-            if data == StreamState.EOS:
+            if type(data) is StreamState and data == StreamState.EOS:
                 self._active = False
                 self.output_stream(data)
             else:

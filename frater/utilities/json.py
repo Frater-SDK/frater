@@ -9,9 +9,9 @@ def is_json_serializable(x):
         return False
 
 
-def is_json_deserializable(x):
+def is_json_deserializable(x, decode_type='utf-8'):
     try:
-        json.loads(x)
+        json.loads(x.decode())
         return True
     except:
         return False

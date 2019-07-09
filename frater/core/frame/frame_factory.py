@@ -13,6 +13,7 @@ def frame_to_json(frame: Frame):
     return {
         'data_type': 'frame',
         'source_video': frame.source_video,
+        'experiment': frame.experiment,
         'modality': frame.modality.name,
         'index': frame.index,
         'timestamp': frame.timestamp,
@@ -33,11 +34,12 @@ def cropped_frame_to_json(frame: CroppedFrame):
 @validate_json(default=FRAME_JSON_DEFAULT, completion=True)
 def json_to_frame(frame_json: Dict) -> Frame:
     source_video = frame_json['source_video']
+    experiment = frame_json['experiment']
     index = frame_json['index']
     timestamp = frame_json['timestamp']
     modality = Modality[frame_json['modality']]
 
-    return Frame(None, modality, index, source_video, timestamp)
+    return Frame(None, modality, index, source_video, experiment, timestamp)
 
 
 @validate_json(default=CROPPED_FRAME_JSON_DEFAULT, completion=True)

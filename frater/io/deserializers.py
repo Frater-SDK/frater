@@ -1,14 +1,13 @@
 import json
 from typing import Callable
 
-from frater.core.activity import *
-from frater.core.bounding_box import *
-from frater.core.frame import *
-from frater.core.object import *
-from frater.core.temporal_range import *
-from frater.core.trajectory import *
-from frater.stream.stream_state import json_to_stream_state
-from frater.utilities.json import is_json_deserializable
+from ..core.activity import *
+from ..core.bounding_box import *
+from ..core.frame import *
+from ..core.object import *
+from ..core.temporal_range import *
+from ..core.trajectory import *
+from ..utilities.stream import json_to_stream_state
 
 JSON_DESERIALIZERS = {
     'activity': json_to_activity,
@@ -38,10 +37,8 @@ def json_to_frater(data):
 
     if d_type in JSON_DESERIALIZERS:
         return JSON_DESERIALIZERS[d_type](data)
-    elif is_json_deserializable(data):
-        return data
     else:
-        raise TypeError(f'Object can\'t be deserialized from json: {data}')
+        return data
 
 
 def proto_to_frater(data, d_type):

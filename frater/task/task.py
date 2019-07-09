@@ -2,8 +2,8 @@ import logging
 from functools import reduce
 from typing import List
 
-from frater.stream.stream_state import StreamState
 from ..stream import InputStream, OutputStream
+from ..utilities.stream import StreamState
 from ..validation.error import ValidationError
 from ..validation.task import is_valid_composition
 
@@ -102,7 +102,7 @@ class IOTask(Task):
 
     def run(self):
         for data in self.input_stream:
-            if data == StreamState.EOS:
+            if type(data) is StreamState and data == StreamState.EOS:
                 self._active = False
                 self.output_stream(data)
             else:

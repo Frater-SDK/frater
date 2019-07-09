@@ -8,6 +8,9 @@ class ObjectDetection:
                  frame_index: int = 0, experiment: str = '', confidence: float = 0.0):
         self.object_detection_id = object_detection_id
         self.object_type = object_type
+
+        if bounding_box is None:
+            bounding_box = BoundingBox()
         self.bounding_box = bounding_box
         self.source_image = source_image
         self.source_video = source_video

@@ -7,8 +7,8 @@ from ..core.frame import *
 from ..core.object import *
 from ..core.temporal_range import *
 from ..core.trajectory import *
-from ..stream.stream_state import StreamState, stream_state_to_json
 from ..utilities.json import is_json_serializable
+from ..utilities.stream import StreamState, stream_state_to_json
 
 JSON_SERIALIZERS = {
     Activity: activity_to_json,
