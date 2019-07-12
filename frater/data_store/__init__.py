@@ -1,2 +1,1 @@
-from .frame_store import FrameStore
-from .image_store import ImageStore
+from frater.data_store.file_store import FileStore, FrameStore, ImageStore
