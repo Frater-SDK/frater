@@ -1,7 +1,8 @@
 from enum import Enum
 
-__long_names__ = ['Null', 'Person', 'Vehicle', 'Door', 'Prop',
-                  'Push_Pulled_Object', 'Other', 'Bike', 'Parking_Meter', 'Tree', 'Construction_Vehicle']
+__long_names__ = ['Null', 'Door', 'Tree', 'Receptacle', 'Dumpster', 'Parking_Meter', 'ATM', 'Umbrella',
+                  'Construction_Barrier', 'Other', 'Person', 'Vehicle', 'Bike', 'Construction_Vehicle',
+                  'Push_Pulled_Object', 'Prop', 'Animal', 'Articulated_Infrastructure']
 
 
 class ObjectType(Enum):
@@ -9,20 +10,27 @@ class ObjectType(Enum):
     Object Types for DIVA
     """
     NULL = 0  # Null
-    PERSON = 1  # Person
-    VEHICLE = 2  # Vehicle
-    DOOR = 3  # Door
-    PROP = 4  # Prop
-    PULLED_OBJECT = 5  # Pushed_Pulled_Object
-    OTHER = 6  # Other
-    BIKE = 7  # Bike
-    PARKING_METER = 8  # Parking_Meter
-    TREE = 9  # Tree
-    CONSTRUCTION_VEHICLE = 10  # Construction_Vehicle
+    DOOR = 1  # Door
+    TREE = 2  # Tree
+    RECEPTACLE = 3  # Receptacle
+    DUMPSTER = 4  # Dumpster
+    PARKING_METER = 5
+    ATM = 6
+    UMBRELLA = 7
+    CONSTRUCTION_BARRIER = 8
+    OTHER = 9
+    PERSON = 10
+    VEHICLE = 11
+    BIKE = 12  # Bike
+    CONSTRUCTION_VEHICLE = 13  # Construction_Vehicle
+    PUSH_PULLED_OBJECT = 14  # Push_Pulled_Object
+    PROP = 15  # Prop
+    ANIMAL = 16  # Animal
+    ARTICULATED_INFRASTRUCTURE = 17  # Articulated_Infrastructure
 
     # sub groups
-    TRANSPORT_OBJECTS = {PROP, PULLED_OBJECT, OTHER}
-    INTERACT_OBJECTS = {PROP, PULLED_OBJECT, OTHER, PARKING_METER}
+    TRANSPORT_OBJECTS = {PROP, PUSH_PULLED_OBJECT, OTHER}
+    INTERACT_OBJECTS = {PROP, PUSH_PULLED_OBJECT, OTHER, PARKING_METER}
     RIDING_OBJECTS = {BIKE}
 
     @property
