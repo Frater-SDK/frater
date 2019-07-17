@@ -27,17 +27,18 @@ class FrameStore(FileStore):
         return self._frame_filename_format
 
     @lru_cache(maxsize=128)
-    def get_frame(self, video, frame_index, modality=Modality.RGB, timestamp=''):
+    def get_frame(self, video, frame_index, modality=Modality.RGB, experiment: str = '', timestamp: str = ''):
         frame_path = self.get_frame_path(video, modality, frame_index)
         frame_img = Image.open(frame_path)
 
-        return Frame(frame_img, modality, index=frame_index, source_video=video, timestamp=timestamp)
+        return Frame(frame_img, modality, index=frame_index, source_video=video,
+                     experiment=experiment, timestamp=timestamp)
 
-    def get_frames(self, video, frame_indices, modality=Modality.RGB):
-        return [self.get_frame(video, frame_index, modality) for frame_index in frame_indices]
+    def get_frames(self, video, frame_indices, modality=Modality.RGB, experiment: str = ''):
+        return [self.get_frame(video, frame_index, modality, experiment) for frame_index in frame_indices]
 
-    def get_frame_sequence(self, video, frame_range: TemporalRange, modality=Modality.RGB):
-        return self.get_frames(video, range(frame_range.start_frame, frame_range.end_frame + 1), modality)
+    def get_frame_sequence(self, video, frame_range: TemporalRange, modality=Modality.RGB, experiment: str = ''):
+        return self.get_frames(video, range(frame_range.start_frame, frame_range.end_frame + 1), modality, experiment)
 
     def get_frame_path(self, video, modality, frame_index):
         frame_filename = self.get_frame_filename(frame_index)
@@ -47,4 +48,4 @@ class FrameStore(FileStore):
         return self._frame_filename_format % (frame_index, self._extension)
 
     def load_image_for_frame(self, frame: Frame):
-        return self.get_frame(frame.source_video, frame.index, frame.modality, frame.timestamp)
+        return self.get_frame(frame.source_video, frame.index, frame.modality, frame.experiment, frame.experiment)

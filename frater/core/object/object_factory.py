@@ -55,7 +55,7 @@ def object_detection_to_json(detection: ObjectDetection) -> Dict:
         'source_video': detection.source_video,
         'frame_index': detection.frame_index,
         'experiment': detection.experiment,
-        'confidence': 0.0
+        'confidence': detection.confidence
     }
 
 
