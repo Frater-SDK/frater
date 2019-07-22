@@ -57,4 +57,4 @@ class Object:
         return self.temporal_range.end_frame
 
     def add_bounding_box(self, bounding_box: BoundingBox):
-        self.trajectory.bounding_boxes.append(bounding_box)
+        self.trajectory.add_bounding_box(bounding_box)
