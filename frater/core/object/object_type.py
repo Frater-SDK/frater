@@ -28,11 +28,6 @@ class ObjectType(Enum):
     ANIMAL = 16  # Animal
     ARTICULATED_INFRASTRUCTURE = 17  # Articulated_Infrastructure
 
-    # sub groups
-    TRANSPORT_OBJECTS = {PROP, PUSH_PULLED_OBJECT, OTHER}
-    INTERACT_OBJECTS = {PROP, PUSH_PULLED_OBJECT, OTHER, PARKING_METER}
-    RIDING_OBJECTS = {BIKE}
-
     @property
     def long_name(self):
         return __long_names__[int(self.value)]

@@ -1,6 +1,6 @@
 from typing import List
 
-from ..bounding_box import BoundingBox, combine_bounding_boxes
+from ..bounding_box import BoundingBox, combine_bounding_boxes, linear_interpolate_bounding_boxes
 from ..temporal_range import TemporalRange
 
 
@@ -65,3 +65,12 @@ class Trajectory:
 
     def union(self, other: 'Trajectory') -> 'Trajectory':
         return self + other
+
+    def add_bounding_box(self, bounding_box: BoundingBox):
+        if len(self.bounding_boxes) > 0:
+            end_bounding_box = self.bounding_boxes[-1]
+            if end_bounding_box.frame_index >= bounding_box.frame_index:
+                raise IndexError('Bounding box frame index less than the last')
+            elif end_bounding_box.frame_index + 1 != bounding_box.frame_index:
+                self.bounding_boxes.extend(linear_interpolate_bounding_boxes(bounding_box, end_bounding_box))
+        self.bounding_boxes.append(bounding_box)

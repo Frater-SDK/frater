@@ -55,3 +55,6 @@ class Object:
     @property
     def end_frame(self) -> int:
         return self.temporal_range.end_frame
+
+    def add_bounding_box(self, bounding_box: BoundingBox):
+        self.trajectory.bounding_boxes.append(bounding_box)
