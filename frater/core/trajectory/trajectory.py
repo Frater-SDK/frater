@@ -8,15 +8,13 @@ from ..temporal_range import TemporalRange
 @dataclass
 class Trajectory:
     bounding_boxes: List[BoundingBox] = field(default_factory=list)
-    temporal_range: TemporalRange = field(default_factory=TemporalRange)
 
     def __getitem__(self, item: Union[int, slice]) -> Union[BoundingBox, 'Trajectory']:
         if isinstance(item, int):
             return self.bounding_boxes[item - self.start_frame]
         elif isinstance(item, slice):
-            temporal_range = TemporalRange(item.start, item.stop - 1)
             bounding_boxes = self.bounding_boxes[item.start - self.start_frame:item.stop - self.start_frame]
-            return Trajectory(bounding_boxes, temporal_range)
+            return Trajectory(bounding_boxes)
 
     def __add__(self, other: 'Trajectory') -> 'Trajectory':
         temporal_range = self.temporal_range.union(other.temporal_range)
@@ -30,7 +28,13 @@ class Trajectory:
 
             bounding_boxes.append(combine_bounding_boxes(current_boxes))
 
-        return Trajectory(bounding_boxes, temporal_range, self.scale)
+        return Trajectory(bounding_boxes)
+
+    @property
+    def temporal_range(self):
+        start = self.bounding_boxes[0].frame_index if len(self.bounding_boxes) > 0 else 0
+        end = self.bounding_boxes[-1].frame_index if len(self.bounding_boxes) > 0 else 0
+        return TemporalRange(start, end)
 
     @property
     def start_frame(self) -> int:
@@ -51,7 +55,7 @@ class Trajectory:
             other_bounding_box = other[i]
             bounding_boxes.append(bounding_box.intersect(other_bounding_box))
 
-        return Trajectory(bounding_boxes, temporal_range, self.scale)
+        return Trajectory(bounding_boxes)
 
     def union(self, other: 'Trajectory') -> 'Trajectory':
         return self + other

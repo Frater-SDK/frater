@@ -55,9 +55,8 @@ MOCKS.frater._bounding_box = lambda: BoundingBox(x=10.0, y=10.0, w=15.0, h=15.0,
 
 # Trajectory
 MOCKS.json._trajectory = lambda: {'data_type': 'trajectory',
-                                  'bounding_boxes': [MOCKS.json.bounding_box] * 10,
-                                  'temporal_range': MOCKS.json.temporal_range}
-MOCKS.frater._trajectory = lambda: Trajectory([MOCKS.frater.bounding_box] * 10, MOCKS.frater.temporal_range)
+                                  'bounding_boxes': [MOCKS.json.bounding_box] * 10}
+MOCKS.frater._trajectory = lambda: Trajectory([MOCKS.frater.bounding_box] * 10)
 
 # Object
 MOCKS.json._object = lambda: {
