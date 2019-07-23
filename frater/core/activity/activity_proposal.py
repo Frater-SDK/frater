@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List
+from uuid import uuid4
 
 from ..object import Object
 from ..trajectory import Trajectory
@@ -7,7 +8,7 @@ from ..trajectory import Trajectory
 
 @dataclass
 class ActivityProposal:
-    proposal_id: str = ''
+    proposal_id: str = field(default_factory=lambda: str(uuid4()))
     trajectory: Trajectory = field(default_factory=Trajectory)
     objects: List[Object] = field(default_factory=list)
     source_video: str = ''
