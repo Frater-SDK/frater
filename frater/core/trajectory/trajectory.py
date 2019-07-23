@@ -13,7 +13,9 @@ class Trajectory:
         if isinstance(item, int):
             return self.bounding_boxes[item - self.start_frame]
         elif isinstance(item, slice):
-            bounding_boxes = self.bounding_boxes[item.start - self.start_frame:item.stop - self.start_frame]
+            start = item.start - self.start_frame if item.start else None
+            stop = item.stop - self.start_frame if item.stop else None
+            bounding_boxes = self.bounding_boxes[start:stop]
             return Trajectory(bounding_boxes)
 
     def __add__(self, other: 'Trajectory') -> 'Trajectory':
