@@ -1,19 +1,23 @@
+from dataclasses import dataclass, field
+from uuid import uuid4
+
 from .object_type import ObjectType
 from ..bounding_box import BoundingBox
 
 
+@dataclass
 class ObjectDetection:
-    def __init__(self, object_detection_id: str = '', object_type: ObjectType = ObjectType.NULL,
-                 bounding_box: BoundingBox = None, source_image: str = '', source_video: str = '',
-                 frame_index: int = 0, experiment: str = '', confidence: float = 0.0):
-        self.object_detection_id = object_detection_id
-        self.object_type = object_type
+    object_detection_id: str = field(default_factory=lambda: str(uuid4()))
+    object_type: ObjectType = field(default=ObjectType.NULL)
+    bounding_box: BoundingBox = field(default_factory=BoundingBox)
+    source_image: str = ''
+    source_video: str = ''
+    experiment: str = ''
 
-        if bounding_box is None:
-            bounding_box = BoundingBox()
-        self.bounding_box = bounding_box
-        self.source_image = source_image
-        self.source_video = source_video
-        self.frame_index = frame_index
-        self.experiment = experiment
-        self.confidence = confidence
+    @property
+    def confidence(self):
+        return self.bounding_box.confidence
+
+    @property
+    def frame_index(self):
+        return self.bounding_box.frame_index

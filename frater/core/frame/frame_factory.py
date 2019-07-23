@@ -39,7 +39,7 @@ def json_to_frame(frame_json: Dict) -> Frame:
     timestamp = frame_json['timestamp']
     modality = Modality[frame_json['modality']]
 
-    return Frame(None, modality, index, source_video, experiment, timestamp)
+    return Frame(modality=modality, index=index, source_video=source_video, experiment=experiment, timestamp=timestamp)
 
 
 @validate_json(default=CROPPED_FRAME_JSON_DEFAULT, completion=True)

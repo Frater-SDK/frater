@@ -4,42 +4,38 @@ from .activity import Activity, ActivityType
 from .activity_defaults import ACTIVITY_JSON_DEFAULT, ACTIVITY_PROPOSAL_JSON_DEFAULT
 from .activity_proposal import ActivityProposal
 from ..object.object_factory import *
-from ..proto import core
 from ..temporal_range import TemporalRange
-from ..temporal_range.temporal_range_factory import *
 from ..trajectory.trajectory_factory import *
 from ...validation.json import validate_json
 
 __all__ = ['json_to_activity', 'activity_to_json',
            'diva_format_to_activity', 'activity_to_diva_format',
-           'protobuf_to_activity', 'activity_to_protobuf',
            'json_to_activity_proposal', 'activity_proposal_to_json']
 
 
 @validate_json(default=ACTIVITY_JSON_DEFAULT, completion=True)
 def json_to_activity(activity: Dict) -> Activity:
-    activity_id = activity['_id']
+    activity_id = activity['activity_id']
+    proposal_id = activity['activity_proposal_id']
     activity_type = ActivityType(activity['activity_type'])
     objects = [json_to_object(obj) for obj in activity['objects']]
-    temporal_range = json_to_temporal_range(activity['temporal_range'])
     source_video = activity['source_video']
     experiment = activity['experiment']
     confidence = activity['confidence']
     trajectory = json_to_trajectory(activity['trajectory'])
-    return Activity(activity_id=activity_id, activity_type=activity_type, temporal_range=temporal_range,
-                    trajectory=trajectory, objects=objects, source_video=source_video, experiment=experiment,
-                    confidence=confidence)
+    return Activity(activity_id=activity_id, proposal_id=proposal_id, activity_type=activity_type,
+                    trajectory=trajectory, objects=objects, source_video=source_video,
+                    experiment=experiment, confidence=confidence)
 
 
 def activity_to_json(activity: Activity) -> Dict:
     return {
         'data_type': 'activity',
-        '_id': activity.activity_id,
-        'proposal_id': activity.proposal_id,
+        'activity_id': activity.activity_id,
+        'activity_proposal_id': activity.proposal_id,
         'activity_type': activity.activity_type.value,
         'objects': [object_to_json(obj) for obj in activity.objects],
         'trajectory': trajectory_to_json(activity.trajectory),
-        'temporal_range': temporal_range_to_json(activity.temporal_range),
         'source_video': activity.source_video,
         'experiment': activity.experiment,
         'confidence': activity.confidence
@@ -77,52 +73,25 @@ def activity_to_diva_format(activity: Activity) -> Dict:
     }
 
 
-def protobuf_to_activity(activity: core.Activity) -> Activity:
-    activity_type = ActivityType(activity.activity_type)
-    activity_id = activity.activity_id
-    confidence = activity.confidence
-    objects = [protobuf_to_object(obj) for obj in activity.objects]
-    trajectory = protobuf_to_trajectory(activity.trajectory)
-    temporal_range = protobuf_to_temporal_range(activity.temporal_range)
-    source_video = activity.source_video
-    experiment = activity.experiment
-
-    return Activity(activity_id=activity_id, activity_type=activity_type, temporal_range=temporal_range,
-                    trajectory=trajectory, objects=objects, source_video=source_video, experiment=experiment,
-                    confidence=confidence)
-
-
-def activity_to_protobuf(activity: Activity) -> core.Activity:
-    return core.Activity(activity_id=activity.activity_id, activity_type=activity.activity_type.value,
-                         objects=[object_to_protobuf(obj)
-                                  for obj in activity.objects],
-                         trajectory=trajectory_to_protobuf(activity.trajectory),
-                         confidence=activity.confidence,
-                         temporal_range=temporal_range_to_protobuf(activity.temporal_range),
-                         source_video=activity.source_video, experiment=activity.experiment
-                         )
-
-
 @validate_json(default=ACTIVITY_PROPOSAL_JSON_DEFAULT, completion=True)
 def json_to_activity_proposal(proposal: Dict) -> ActivityProposal:
-    proposal_id = proposal['_id']
+    proposal_id = proposal['activity_proposal_id']
     objects = [json_to_object(obj) for obj in proposal['objects']]
-    temporal_range = json_to_temporal_range(proposal['temporal_range'])
     source_video = proposal['source_video']
     experiment = proposal['experiment']
     confidence = proposal['confidence']
     trajectory = json_to_trajectory(proposal['trajectory'])
-    return ActivityProposal(proposal_id=proposal_id, temporal_range=temporal_range, trajectory=trajectory,
-                            objects=objects, source_video=source_video, experiment=experiment, confidence=confidence)
+    return ActivityProposal(proposal_id=proposal_id, trajectory=trajectory,
+                            objects=objects, source_video=source_video,
+                            experiment=experiment, confidence=confidence)
 
 
 def activity_proposal_to_json(proposal: ActivityProposal) -> Dict:
     return {
         'data_type': 'activity_proposal',
-        '_id': proposal.proposal_id,
+        'activity_proposal_id': proposal.proposal_id,
         'objects': [object_to_json(obj) for obj in proposal.objects],
         'trajectory': trajectory_to_json(proposal.trajectory),
-        'temporal_range': temporal_range_to_json(proposal.temporal_range),
         'source_video': proposal.source_video,
         'experiment': proposal.experiment,
         'confidence': proposal.confidence

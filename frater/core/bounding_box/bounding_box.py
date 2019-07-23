@@ -1,30 +1,15 @@
+from dataclasses import dataclass
 from typing import Tuple
 
 
+@dataclass
 class BoundingBox:
-    def __init__(self, x: float = 0, y: float = 0, w: float = 0, h: float = 0,
-                 confidence: float = 0.0, frame: int = 0):
-        self.x = max(x, 0.0)
-        self.y = max(y, 0.0)
-
-        self.w = max(w, 0.0)
-        self.h = max(h, 0.0)
-
-        self.confidence = confidence
-        self.frame_index = frame
-
-    def __str__(self):
-        return f'x_0: {self.x_0} y_0: {self.y_0}\n' \
-            f'x_1: {self.x_1} y_1: {self.y_1}\n' \
-            f'width: {self.width} height: {self.height}'
-
-    def __eq__(self, other: 'BoundingBox') -> bool:
-        return (self.x == other.x and
-                self.y == other.y and
-                self.w == other.w and
-                self.h == other.h and
-                self.confidence == other.confidence and
-                self.frame_index == other.frame_index)
+    x: float = 0.0
+    y: float = 0.0
+    w: float = 0.0
+    h: float = 0.0
+    confidence: float = 0.0
+    frame_index: int = 0
 
     def __add__(self, other: 'BoundingBox') -> 'BoundingBox':
         x = min(self.x_0, other.x_0)
@@ -32,8 +17,8 @@ class BoundingBox:
         w = max(self.x_1, other.x_1) - x
         h = max(self.y_1, other.y_1) - y
         confidence = max(self.confidence, other.confidence)
-        frame = self.frame_index
-        return BoundingBox(x, y, w, h, confidence, frame)
+        frame_index = self.frame_index
+        return BoundingBox(x, y, w, h, confidence, frame_index)
 
     @property
     def x_0(self) -> float:
@@ -79,8 +64,9 @@ class BoundingBox:
         return BoundingBox(x, y, w, h, confidence, frame)
 
     @classmethod
-    def init_from_corners(cls, corners: Tuple[float, float, float, float]):
+    def init_from_corners(cls, corners: Tuple[float, float, float, float],
+                          confidence: float = 0.0, frame_index: int = 0):
         x_0, y_0, x_1, y_1 = corners
         width = x_1 - x_0
         height = y_1 - y_0
-        return BoundingBox(x_0, y_0, width, height)
+        return BoundingBox(x_0, y_0, width, height, confidence, frame_index)

@@ -5,8 +5,8 @@ FRAME_JSON_DEFAULT = {
     'modality': 'RGB',
     'index': 0,
     'timestamp': '',
-    'width': None,
-    'height': None
+    'width': 0,
+    'height': 0
 }
 
 CROPPED_FRAME_JSON_DEFAULT = FRAME_JSON_DEFAULT.copy()

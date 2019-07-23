@@ -9,6 +9,8 @@ from ..core.temporal_range import *
 from ..core.trajectory import *
 from ..utilities.stream import json_to_stream_state
 
+__all__ = ['json_to_frater', 'get_kafka_deserializer']
+
 JSON_DESERIALIZERS = {
     'activity': json_to_activity,
     'activity_proposal': json_to_activity_proposal,
@@ -23,14 +25,6 @@ JSON_DESERIALIZERS = {
 
 }
 
-PROTO_DESERIALIZERS = {
-    Activity: protobuf_to_activity,
-    Object: protobuf_to_object,
-    Trajectory: protobuf_to_trajectory,
-    BoundingBox: protobuf_to_bounding_box,
-    TemporalRange: protobuf_to_temporal_range
-}
-
 
 def json_to_frater(data):
     d_type = data['data_type'] if 'data_type' in data else None
@@ -39,10 +33,6 @@ def json_to_frater(data):
         return JSON_DESERIALIZERS[d_type](data)
     else:
         return data
-
-
-def proto_to_frater(data, d_type):
-    return PROTO_DESERIALIZERS[d_type](data)
 
 
 def get_kafka_deserializer() -> Callable:

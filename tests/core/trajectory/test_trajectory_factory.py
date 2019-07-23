@@ -16,14 +16,3 @@ class TestTrajectoryFactory(TestCase):
         trajectory_json = MOCKS.json.trajectory
 
         assert trajectory_to_json(trajectory) == trajectory_json
-
-    def test_protobuf_to_trajectory(self):
-        trajectory = MOCKS.frater.trajectory
-        trajectory_proto = MOCKS.proto.trajectory
-        assert protobuf_to_trajectory(trajectory_proto) == trajectory
-
-    def test_trajectory_to_protobuf(self):
-        trajectory = MOCKS.frater.trajectory
-        trajectory_proto = MOCKS.proto.trajectory
-
-        assert trajectory_to_protobuf(trajectory) == trajectory_proto

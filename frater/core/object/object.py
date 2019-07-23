@@ -1,5 +1,6 @@
-import copy
+from dataclasses import dataclass, field
 from typing import Union
+from uuid import uuid4
 
 from .object_type import ObjectType
 from ..bounding_box import BoundingBox
@@ -7,42 +8,20 @@ from ..temporal_range import TemporalRange
 from ..trajectory import Trajectory
 
 
+@dataclass
 class Object:
-    def __init__(self, object_id: str = '', object_type: ObjectType = ObjectType.NULL,
-                 trajectory: Trajectory = None, source_video: str = '', experiment: str = ''):
-        self.object_id = object_id
-        self.object_type = object_type
+    object_id: str = field(default_factory=lambda: str(uuid4()))
+    object_type: ObjectType = field(default=ObjectType.NULL)
+    trajectory: Trajectory = field(default_factory=Trajectory)
+    source_video: str = ''
+    experiment: str = ''
 
-        if trajectory is None:
-            self.trajectory = Trajectory()
-        else:
-            self.trajectory = trajectory
-
-        self.source_video = source_video
-        self.experiment = experiment
-
-    def __eq__(self, other: 'Object') -> bool:
-        return (
-                self.object_id == other.object_id and
-                self.object_type == other.object_type and
-                self.source_video == other.source_video and
-                self.trajectory == other.trajectory and
-                self.experiment == other.experiment
-        )
-
-    def __str__(self):
-        return '{obj.object_id} - {obj.object_type.long_name} - ' \
-               '{obj.trajectory.temporal_range} - {obj.source_video}'.format(obj=self)
-
-    def __getitem__(self, item) -> Union[BoundingBox, 'Object']:
+    def __getitem__(self, item: Union[int, slice]) -> Union[BoundingBox, 'Object']:
         if isinstance(item, int):
             return self.trajectory[item]
         elif isinstance(item, slice):
             trajectory = self.trajectory[item]
-            object = copy.deepcopy(self)
-            object._trajectory = trajectory
-
-            return object
+            return Object(self.object_id, self.object_type, trajectory, self.source_video, self.experiment)
 
     @property
     def temporal_range(self) -> TemporalRange:

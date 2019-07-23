@@ -1,7 +1,6 @@
 from easydict import EasyDict
 
 from frater.core import BoundingBox, Trajectory, ObjectType, Object, Activity, ActivityType, TemporalRange
-from frater.core.proto import core
 
 __all__ = ['MOCKS']
 
@@ -36,56 +35,48 @@ class MockTypes:
         return self._activity()
 
 
-MOCKS = EasyDict({'proto': MockTypes('proto'), 'json': MockTypes('json'), 'frater': MockTypes('frater')})
+MOCKS = EasyDict({'json': MockTypes('json'), 'frater': MockTypes('frater')})
 
 # Temporal Range
-MOCKS.proto._temporal_range = lambda: core.TemporalRange(start_frame=10, end_frame=15)
-MOCKS.json._temporal_range = lambda: {'start_frame': 10, 'end_frame': 15}
+MOCKS.json._temporal_range = lambda: {'data_type': 'temporal_range', 'start_frame': 10, 'end_frame': 15}
 MOCKS.frater._temporal_range = lambda: TemporalRange(10, 15)
 
 # Bounding Box
-MOCKS.proto._bounding_box = lambda: core.BoundingBox(x=10, y=10, w=15, h=15, confidence=0.23, frame=10)
 MOCKS.json._bounding_box = lambda: {
-    'x': 10,
-    'y': 10,
-    'w': 15,
-    'h': 15,
+    'data_type': 'bounding_box',
+    'x': 10.0,
+    'y': 10.0,
+    'w': 15.0,
+    'h': 15.0,
     'confidence': 0.23,
-    'frame': 10
+    'frame_index': 10
 }
-MOCKS.frater._bounding_box = lambda: BoundingBox(x=10, y=10, w=15, h=15, confidence=0.23, frame=10)
+MOCKS.frater._bounding_box = lambda: BoundingBox(x=10.0, y=10.0, w=15.0, h=15.0, confidence=0.23, frame_index=10)
 
 # Trajectory
-MOCKS.proto._trajectory = lambda: core.Trajectory(bounding_boxes=[MOCKS.proto.bounding_box] * 10,
-                                                  temporal_range=MOCKS.proto.temporal_range, scale=1.4)
-MOCKS.json._trajectory = lambda: {'bounding_boxes': [MOCKS.json.bounding_box] * 10,
-                                  'temporal_range': MOCKS.json.temporal_range,
-                                  'scale': 1.4}
-MOCKS.frater._trajectory = lambda: Trajectory([MOCKS.frater.bounding_box] * 10, MOCKS.frater.temporal_range, 1.4)
+MOCKS.json._trajectory = lambda: {'data_type': 'trajectory',
+                                  'bounding_boxes': [MOCKS.json.bounding_box] * 10,
+                                  'temporal_range': MOCKS.json.temporal_range}
+MOCKS.frater._trajectory = lambda: Trajectory([MOCKS.frater.bounding_box] * 10, MOCKS.frater.temporal_range)
 
 # Object
-MOCKS.proto._object = lambda: core.Object(object_id='sdf431', object_type=1,
-                                          source_video='test.mp4', experiment='test',
-                                          trajectory=MOCKS.proto.trajectory)
 MOCKS.json._object = lambda: {
-    '_id': 'sdf431',
+    'data_type': 'object',
+    'object_id': 'sdf431',
     'object_type': 1,
     'source_video': 'test.mp4',
     'experiment': 'test',
     'trajectory': MOCKS.json.trajectory
 }
-MOCKS.frater._object = lambda: Object(object_id='sdf431', object_type=ObjectType.PERSON,
+MOCKS.frater._object = lambda: Object(object_id='sdf431', object_type=ObjectType.DOOR,
                                       trajectory=MOCKS.frater.trajectory, source_video='test.mp4', experiment='test')
 
 # Activity
-MOCKS.proto._activity = lambda: core.Activity(activity_id='1234', activity_type=5,
-                                              temporal_range=MOCKS.proto.temporal_range,
-                                              trajectory=MOCKS.proto.trajectory, objects=[MOCKS.proto.object] * 2,
-                                              source_video='test.mp4', experiment='test', confidence=0.9)
 MOCKS.json._activity = lambda: {
-    '_id': '1234',
+    'data_type': 'activity',
+    'activity_id': '1234',
+    'activity_proposal_id': '',
     'activity_type': 5,
-    'temporal_range': MOCKS.json.temporal_range,
     'trajectory': MOCKS.json.trajectory,
     'objects': [MOCKS.json.object] * 2,
     'source_video': 'test.mp4',
@@ -94,6 +85,5 @@ MOCKS.json._activity = lambda: {
 }
 
 MOCKS.frater._activity = lambda: Activity(activity_id='1234', activity_type=ActivityType.LOAD,
-                                          temporal_range=MOCKS.frater.temporal_range,
                                           trajectory=MOCKS.frater.trajectory, objects=[MOCKS.frater.object] * 2,
                                           source_video='test.mp4', experiment='test', confidence=0.9)

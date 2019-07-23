@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from frater.core.temporal_range.temporal_range_factory import *
 from ..mocks import MOCKS
 
@@ -13,15 +14,3 @@ class TestTemporalRangeFactory(TestCase):
         temporal_range_json = MOCKS.json.temporal_range
         temporal_range = MOCKS.frater.temporal_range
         assert temporal_range_to_json(temporal_range) == temporal_range_json
-
-    def test_protobuf_to_temporal_range(self):
-        temporal_range_proto = MOCKS.proto.temporal_range
-        temporal_range = MOCKS.frater.temporal_range
-
-        assert protobuf_to_temporal_range(temporal_range_proto) == temporal_range
-
-    def test_temporal_range_to_protobuf(self):
-        temporal_range_proto = MOCKS.proto.temporal_range
-        temporal_range = MOCKS.frater.temporal_range
-
-        assert temporal_range_to_protobuf(temporal_range) == temporal_range_proto

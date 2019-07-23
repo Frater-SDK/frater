@@ -16,14 +16,3 @@ class TestActivityFactory(TestCase):
         activity_json = MOCKS.json.activity
 
         assert activity_to_json(activity) == activity_json
-
-    def test_protobuf_to_activity(self):
-        activity = MOCKS.frater.activity
-        activity_proto = MOCKS.proto.activity
-
-        assert protobuf_to_activity(activity_proto) == activity
-
-    def test_activity_to_protobuf(self):
-        activity = MOCKS.frater.activity
-        activity_proto = MOCKS.proto.activity
-        assert activity_to_protobuf(activity) == activity_proto

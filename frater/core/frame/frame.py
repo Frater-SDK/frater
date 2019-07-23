@@ -1,30 +1,27 @@
+from dataclasses import dataclass, field
+
 from PIL.Image import Image
 
 from frater.core import BoundingBox
 from .modality import Modality
 
 
+@dataclass
 class Frame:
-    def __init__(self, image: Image = None, modality: Modality = Modality.RGB,
-                 index: int = 0, source_video: str = '', experiment: str = '', timestamp: str = ''):
-        self.image = image
-        self.modality = modality
-        self.index = index
-        self.source_video = source_video
-        self.experiment = experiment
-        self.timestamp = timestamp
+    image: Image = field(default_factory=Image)
+    modality: Modality = field(default=Modality.RGB)
+    index: int = 0
+    source_video: str = ''
+    experiment: str = ''
+    timestamp: str = ''
 
     @property
     def width(self):
-        if self.image:
-            return self.image.width
-        return None
+        return self.image.width
 
     @property
     def height(self):
-        if self.image:
-            return self.image.height
-        return None
+        return self.image.height
 
     def crop(self, bounding_box: BoundingBox) -> 'CroppedFrame':
         location = bounding_box.get_corners()
@@ -32,14 +29,10 @@ class Frame:
             image = self.image.crop(location)
         else:
             image = None
-        return CroppedFrame(image, bounding_box, self.modality, self.index,
-                            self.source_video, self.experiment, self.timestamp)
+        return CroppedFrame(image, self.modality, self.index, self.source_video,
+                            self.experiment, self.timestamp, bounding_box)
 
 
+@dataclass
 class CroppedFrame(Frame):
-    def __init__(self, image: Image = None, source_location: BoundingBox = None,
-                 modality: Modality = Modality.RGB, index: int = 0, source_video: str = '',
-                 experiment: str = '', timestamp: str = ''):
-        super(CroppedFrame, self).__init__(image, modality, index, source_video, experiment, timestamp)
-
-        self.source_location = source_location
+    source_location: BoundingBox = field(default_factory=BoundingBox)

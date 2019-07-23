@@ -4,5 +4,5 @@ BOUNDING_BOX_JSON_DEFAULT = {
     'w': 0.0,
     'h': 0.0,
     'confidence': 0.0,
-    'frame': 0
+    'frame_index': 0
 }
