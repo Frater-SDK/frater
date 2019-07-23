@@ -3,6 +3,7 @@ from typing import List, Union, Tuple
 
 import numpy as np
 
+from frater.utilities.interpolation import lerp
 from .bounding_box import BoundingBox
 
 __all__ = ['combine_bounding_boxes', 'compute_spatial_iou', 'linear_interpolate_bounding_boxes']
@@ -40,12 +41,10 @@ def linear_interpolate_bounding_boxes(bounding_box_0: BoundingBox, bounding_box_
     confidence_0 = bounding_box_0.confidence
     corner_1 = np.array(bounding_box_1.get_corners())
     confidence_1 = bounding_box_1.confidence
-    corner_deltas = corner_1 - corner_0
-    confidence_delta = confidence_1 - confidence_0
 
-    corners = [(corner_0 + corner_deltas * t / timesteps).tolist() for t in range(1, timesteps + 1)]
+    corners = [lerp(corner_0, corner_1, t / timesteps).tolist() for t in range(1, timesteps + 1)]
     corners = [tuple(corner) for corner in corners]
-    confidences = [confidence_0 + confidence_delta * t / timesteps for t in range(1, timesteps + 1)]
+    confidences = [lerp(confidence_0, confidence_1, t / timesteps) for t in range(1, timesteps + 1)]
 
     return [convert_descriptors_to_bounding_box(corner, confidence, frame_index)
             for corner, confidence, frame_index in
