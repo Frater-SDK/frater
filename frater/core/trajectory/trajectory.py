@@ -14,7 +14,8 @@ class Trajectory:
             return self.bounding_boxes[item - self.start_frame]
         elif isinstance(item, slice):
             start = item.start - self.start_frame if item.start else None
-            stop = item.stop - self.start_frame if item.stop else None
+            # inclusive end index
+            stop = item.stop - self.start_frame + 1 if item.stop else None
             bounding_boxes = self.bounding_boxes[start:stop]
             return Trajectory(bounding_boxes)
 
