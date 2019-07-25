@@ -13,7 +13,6 @@ class ActivityProposal:
     objects: List[Object] = field(default_factory=list)
     source_video: str = ''
     experiment: str = ''
-    confidence: float = 0.0
 
     @property
     def temporal_range(self):
