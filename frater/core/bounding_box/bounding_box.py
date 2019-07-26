@@ -44,6 +44,10 @@ class BoundingBox:
     def y_1(self) -> float:
         return self.y_0 + self.h
 
+    @property
+    def center(self) -> Tuple[float, float]:
+        return self.x + (self.w / 2), self.y + (self.h / 2)
+
     def get_corners(self):
         return self.x_0, self.y_0, self.x_1, self.y_1
 
@@ -56,8 +60,8 @@ class BoundingBox:
     def intersect(self, other: 'BoundingBox') -> 'BoundingBox':
         x = max(self.x_0, other.x_0)
         y = max(self.y_0, other.y_0)
-        w = min(self.x_1, other.x_1) - x
-        h = min(self.y_1, other.y_1) - y
+        w = max(min(self.x_1, other.x_1) - x, 0.0)
+        h = max(min(self.y_1, other.y_1) - y, 0.0)
 
         confidence = max(self.confidence, other.confidence)
         frame = self.frame_index
@@ -65,8 +69,15 @@ class BoundingBox:
 
     @classmethod
     def init_from_corners(cls, corners: Tuple[float, float, float, float],
-                          confidence: float = 0.0, frame_index: int = 0):
+                          confidence: float = 0.0, frame_index: int = 0) -> 'BoundingBox':
         x_0, y_0, x_1, y_1 = corners
         width = x_1 - x_0
         height = y_1 - y_0
         return BoundingBox(x_0, y_0, width, height, confidence, frame_index)
+
+    @classmethod
+    def init_from_center(cls, center: Tuple[float, float], width: float, height: float,
+                         confidence: float = 0.0, frame_index: int = 0) -> 'BoundingBox':
+        x = center[0] - (width / 2)
+        y = center[1] - (height / 2)
+        return BoundingBox(x, y, width, height, confidence, frame_index)

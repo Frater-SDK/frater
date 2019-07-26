@@ -6,7 +6,8 @@ import numpy as np
 from frater.utilities.interpolation import lerp
 from .bounding_box import BoundingBox
 
-__all__ = ['combine_bounding_boxes', 'compute_spatial_iou', 'linear_interpolate_bounding_boxes']
+__all__ = ['combine_bounding_boxes', 'compute_spatial_iou', 'linear_interpolate_bounding_boxes',
+           'scale_bounding_box']
 
 
 def combine_bounding_boxes(bounding_boxes: List[BoundingBox]) -> Union[BoundingBox, None]:
@@ -49,3 +50,12 @@ def linear_interpolate_bounding_boxes(bounding_box_0: BoundingBox, bounding_box_
     return [convert_descriptors_to_bounding_box(corner, confidence, frame_index)
             for corner, confidence, frame_index in
             zip(corners, confidences, range(bounding_box_0.frame_index + 1, bounding_box_1.frame_index))]
+
+
+def scale_bounding_box(bounding_box: BoundingBox, scale: float = 1.0) -> BoundingBox:
+    center = bounding_box.center
+    width = bounding_box.width * scale
+    height = bounding_box.height * scale
+    confidence = bounding_box.confidence
+    frame_index = bounding_box.frame_index
+    return BoundingBox.init_from_center(center, width, height, confidence, frame_index)

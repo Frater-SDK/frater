@@ -69,5 +69,5 @@ class Trajectory:
             if end_bounding_box.frame_index >= bounding_box.frame_index:
                 raise IndexError('Bounding box frame index less than the last')
             elif end_bounding_box.frame_index + 1 != bounding_box.frame_index:
-                self.bounding_boxes.extend(linear_interpolate_bounding_boxes(bounding_box, end_bounding_box))
+                self.bounding_boxes.extend(linear_interpolate_bounding_boxes(end_bounding_box, bounding_box))
         self.bounding_boxes.append(bounding_box)
