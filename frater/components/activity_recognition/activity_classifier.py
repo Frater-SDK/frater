@@ -1,18 +1,36 @@
+from dataclasses import dataclass, field
 from typing import List
 
-from frater.core import Activity, ActivityProposal
+from frater.core import Activity, ActivityProposal, Modality
 from frater.stream import InputStream, OutputStream
 from frater.task import IOTask
 from frater.utilities.stream import StreamState
 
 
+@dataclass
+class ActivityClassifierConfig:
+    weights: str = ''
+    num_categories: int = 0
+    batch_size: int = 1
+    modality: str = field(default='RGB')
+    gpus: List[int] = field(default_factory=list)
+
+    @property
+    def modality_type(self) -> Modality:
+        return Modality[self.modality]
+
+
 class ActivityClassifier(IOTask):
-    def __init__(self, input_stream: InputStream, output_stream: OutputStream, batch_size: int = 1):
+    def __init__(self, input_stream: InputStream, output_stream: OutputStream, config: ActivityClassifierConfig):
         super(ActivityClassifier, self).__init__(input_stream, output_stream)
-        self.batch_size = batch_size
+        self.config = config
         self.current_batch: List[ActivityProposal] = list()
 
-    def perform_task(self, proposal: List[ActivityProposal]) -> List[Activity]:
+    @property
+    def batch_size(self):
+        return self.config.batch_size
+
+    def perform_task(self, proposals: List[ActivityProposal]) -> List[Activity]:
         raise NotImplementedError
 
     def run(self):
