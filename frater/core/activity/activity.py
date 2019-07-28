@@ -17,6 +17,7 @@ class Activity:
     source_video: str = ''
     experiment: str = ''
     confidence: float = 0.0
+    probabilities: List[float] = field(default_factory=lambda: [0.0] * len(ActivityType))
 
     @property
     def temporal_range(self):
