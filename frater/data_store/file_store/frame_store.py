@@ -8,23 +8,12 @@ from frater.data_store.file_store import FileStore
 
 
 class FrameStore(FileStore):
-    def __init__(self, root, extension='.jpeg', frame_filename_format='%08d%s'):
+    def __init__(self, root, extension='.jpeg', frame_filename_format='%08d%s', ignore_modality: bool = False):
         super(FrameStore, self).__init__(root)
-        self._root = root
-        self._extension = extension
-        self._frame_filename_format = frame_filename_format
-
-    @property
-    def root(self):
-        return self._root
-
-    @property
-    def extension(self):
-        return self._extension
-
-    @property
-    def frame_filename_format(self):
-        return self._frame_filename_format
+        self.root = root
+        self.extension = extension
+        self.frame_filename_format = frame_filename_format
+        self.ignore_modality = ignore_modality
 
     @lru_cache(maxsize=128)
     def get_frame(self, video, frame_index, modality=Modality.RGB, experiment: str = '', timestamp: str = ''):
@@ -42,10 +31,12 @@ class FrameStore(FileStore):
 
     def get_frame_path(self, video, modality, frame_index):
         frame_filename = self.get_frame_filename(frame_index)
+        if self.ignore_modality:
+            return os.path.join(self.root, video, frame_filename)
         return os.path.join(self.root, video, modality.name, frame_filename)
 
     def get_frame_filename(self, frame_index):
-        return self._frame_filename_format % (frame_index, self._extension)
+        return self.frame_filename_format % (frame_index, self.extension)
 
     def load_image_for_frame(self, frame: Frame):
         return self.get_frame(frame.source_video, frame.index, frame.modality, frame.experiment, frame.experiment)
