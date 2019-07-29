@@ -9,6 +9,7 @@ from frater.utilities.stream import StreamState
 
 @dataclass
 class ActivityClassifierConfig:
+    classifier_name: str = ''
     weights: str = ''
     num_categories: int = 0
     batch_size: int = 1
