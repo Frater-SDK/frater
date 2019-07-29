@@ -10,7 +10,6 @@ from frater.data_store.file_store import FileStore
 class FrameStore(FileStore):
     def __init__(self, root, extension='.jpeg', frame_filename_format='%08d%s', ignore_modality: bool = False):
         super(FrameStore, self).__init__(root)
-        self.root = root
         self.extension = extension
         self.frame_filename_format = frame_filename_format
         self.ignore_modality = ignore_modality
