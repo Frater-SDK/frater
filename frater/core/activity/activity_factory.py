@@ -22,9 +22,10 @@ def json_to_activity(activity: Dict) -> Activity:
     experiment = activity['experiment']
     confidence = activity['confidence']
     trajectory = json_to_trajectory(activity['trajectory'])
+    probabilities = activity['probabilities']
     return Activity(activity_id=activity_id, proposal_id=proposal_id, activity_type=activity_type,
                     trajectory=trajectory, objects=objects, source_video=source_video,
-                    experiment=experiment, confidence=confidence)
+                    experiment=experiment, confidence=confidence, probabilities=probabilities)
 
 
 def activity_to_json(activity: Activity) -> Dict:
@@ -37,7 +38,8 @@ def activity_to_json(activity: Activity) -> Dict:
         'trajectory': trajectory_to_json(activity.trajectory),
         'source_video': activity.source_video,
         'experiment': activity.experiment,
-        'confidence': activity.confidence
+        'confidence': activity.confidence,
+        'probabilities': activity.probabilities
     }
 
 
