@@ -19,6 +19,9 @@ class Activity:
     confidence: float = 0.0
     probabilities: List[float] = field(default_factory=lambda: [0.0] * len(ActivityType))
 
+    def __len__(self):
+        return len(self.temporal_range)
+
     @property
     def temporal_range(self):
         return self.trajectory.temporal_range

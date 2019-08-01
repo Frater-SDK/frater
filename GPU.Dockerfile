@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.1-cudnn7-runtime
+FROM nvidia/cuda:10-cudnn7-runtime
 MAINTAINER 'John Henning'
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8

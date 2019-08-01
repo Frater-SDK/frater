@@ -106,3 +106,6 @@ venv.bak/
 # Other
 .idea/
 example/
+*.DS_Store
+
+scripts/
