@@ -37,6 +37,11 @@ class ActivityClassifier(IOTask):
     def run(self):
         for data in self.input_stream:
             if type(data) is StreamState and data == StreamState.EOS:
+                outputs = self.perform_task(self.current_batch)
+                for output in outputs:
+                    self.output_stream(output)
+                self.reset_batch()
+
                 self._active = False
                 self.output_stream(data)
             else:
