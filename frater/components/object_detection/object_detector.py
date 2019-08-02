@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Set
 
-from frater.core import ObjectDetection, Frame
+from frater.core import ObjectDetection, Frame, ObjectType
 from frater.data_store import FrameStore
 from frater.stream import OutputStream, InputStream
 from frater.task import IOTask
@@ -8,10 +8,12 @@ from frater.utilities.stream import StreamState
 
 
 class ObjectDetector(IOTask):
-    def __init__(self, input_stream: InputStream, output_stream: OutputStream, frame_store: FrameStore, batch_size=1):
+    def __init__(self, input_stream: InputStream, output_stream: OutputStream,
+                 frame_store: FrameStore, object_types: Set[ObjectType], batch_size: int = 1):
         super(ObjectDetector, self).__init__(input_stream, output_stream)
 
         self.frame_store = frame_store
+        self.object_types = object_types
         self.batch_size = batch_size
         self.current_batch: List[Frame] = list()
 
@@ -33,7 +35,8 @@ class ObjectDetector(IOTask):
                 if self.batch_is_ready():
                     outputs = self.perform_task(self.current_batch)
                     for output in outputs:
-                        self.output_stream(output)
+                        if output.object_type in self.object_types:
+                            self.output_stream(output)
                     self.reset_batch()
 
     def perform_task(self, frames: List[Frame]) -> List[ObjectDetection]:
