@@ -1,5 +1,4 @@
 import json
-import logging
 from threading import Thread
 from typing import Callable, Union
 
@@ -7,8 +6,6 @@ import flask
 
 from .task import Task
 from ..utilities.kafka import kafka_servers_available
-
-logger = logging.getLogger()
 
 
 class TaskServer:
@@ -43,9 +40,9 @@ class TaskServer:
 
     def stop(self):
         if self.task and self.task_thread:
-            logger.info('stopping task')
+            self.server.logger.info('stopping task')
             self.task.stop()
-            logger.info('joining thread')
+            self.server.logger.info('joining thread')
             # self.task_thread.join()
 
             self.task = None
