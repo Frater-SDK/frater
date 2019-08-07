@@ -1,5 +1,5 @@
-# frater
-> Frater - Streamlining Machine Learning Systems
+# Frater
+> Frater - Streamlining Large Scale Machine Learning Systems
 
 Frater is a framework and toolkit whose goal is to simplify and streamline building 
 large scale machine learning systems in research and production, as well as providing 
@@ -9,7 +9,7 @@ Even more, building systems that use more than one model can be an even bigger h
 Along with this transition process, there is a need to build out ways to retrieve and 
 understand the data passing through the system.
 
-Frater will accomplish its goal by providing a set of tools that abstract away the 
+Frater accomplishes its goal by providing a set of tools that abstract away the 
 engineering side of machine learning for researchers, while still letting software engineers 
 build powerful systems with the work done by their research counterparts. The plan is to provide a hub 
 for any task that would come up in the process of building machine learning systems: 
@@ -26,8 +26,27 @@ which allows for portability and flexibility. All of this will be available thro
 interface as well as a CLI. Frater will be able to be installed on to a local system, or 
 deployed in a cloud environment. 
 
+## Install
+ To install Frater, execute the following:
+```shell 
+git clone git@gitlab.com:diva-phase-2/frater.git
+cd frater/   
+pip install .
+```
+
+## Getting Started
+
+### Frater API
+To start using the Frater
+```python
+import frater
+```
+
+### Frater System
+
 We’re currently looking for people interested in helping to make Frater’s vision into a 
 reality. If you’re interested, contact John Henning at
+
 
 - Email: [john.l.henning@ibm.com](mailto:john.l.henning@ibm.com)
 - Slack (IBM): @john-l-henning 
