@@ -15,6 +15,7 @@ class ActivityClassifierConfig:
     batch_size: int = 1
     modality: str = field(default='RGB')
     gpus: List[int] = field(default_factory=list)
+    input_components: int = 1
 
     @property
     def modality_type(self) -> Modality:
@@ -27,6 +28,12 @@ class ActivityClassifier(IOTask):
         self.config = config
         self.current_batch: List[ActivityProposal] = list()
 
+        self.eos_count = 0
+
+    @property
+    def input_components(self):
+        return self.config.input_components
+
     @property
     def batch_size(self):
         return self.config.batch_size
@@ -37,14 +44,17 @@ class ActivityClassifier(IOTask):
     def run(self):
         for data in self.input_stream:
             if type(data) is StreamState and data == StreamState.EOS:
-                if len(self.current_batch) > 0:
-                    outputs = self.perform_task(self.current_batch)
-                    for output in outputs:
-                        self.output_stream(output)
-                    self.reset_batch()
+                self.eos_count += 1
+                if self.eos_count >= self.input_components:
+                    if len(self.current_batch) > 0:
+                        outputs = self.perform_task(self.current_batch)
+                        for output in outputs:
+                            self.output_stream(output)
+                        self.reset_batch()
 
-                self._active = False
-                self.output_stream(data)
+                    self.eos_count = 0
+                    self._active = False
+                    self.output_stream(data)
             else:
                 self._active = True
                 self.add_to_batch(data)
