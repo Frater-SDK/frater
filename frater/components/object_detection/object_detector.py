@@ -31,7 +31,8 @@ class ObjectDetector(IOTask):
             else:
                 self._active = True
                 frame = self.frame_store.load_image_for_frame(data)
-                self.add_to_batch(frame)
+                if frame:
+                    self.add_to_batch(frame)
                 if self.batch_is_ready():
                     outputs = self.perform_task(self.current_batch)
                     for output in outputs:
