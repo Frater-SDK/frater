@@ -17,6 +17,8 @@ class FrameStore(FileStore):
     @lru_cache(maxsize=128)
     def get_frame(self, video, frame_index, modality=Modality.RGB, experiment: str = '', timestamp: str = ''):
         frame_path = self.get_frame_path(video, modality, frame_index)
+        if not os.path.exists(frame_path):
+            return None
         frame_img = Image.open(frame_path)
 
         return Frame(frame_img, modality, index=frame_index, source_video=video,
