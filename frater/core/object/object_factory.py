@@ -64,7 +64,7 @@ def object_to_diva_format(obj: Object) -> Dict:
         'objectType': obj.object_type.long_name,
         'localization': {
             obj.source_video: {
-                str(bounding_box.frame): {
+                str(bounding_box.frame_index): {
                     'boundingBox': {
                         'x': bounding_box.x,
                         'y': bounding_box.y,
@@ -81,6 +81,4 @@ def diva_format_to_object(obj: Dict) -> Object:
     source_video = list(obj['localization'].keys())[0]
     trajectory = diva_format_to_trajectory(obj['localization'][source_video])
     object_id = obj['objectID']
-    experiment = ''
-    return Object(object_id=object_id, object_type=object_type, trajectory=trajectory, source_video=source_video,
-                  experiment=experiment)
+    return Object(object_id=object_id, object_type=object_type, trajectory=trajectory, source_video=source_video)
