@@ -9,6 +9,18 @@ from ..temporal_range import TemporalRange
 class Trajectory:
     bounding_boxes: List[BoundingBox] = field(default_factory=list)
 
+    def __init__(self, bounding_boxes: List[BoundingBox] = None, **kwargs):
+        super(Trajectory, self).__init__(**kwargs)
+        if bounding_boxes is None:
+            bounding_boxes = list()
+
+        self.bounding_boxes = list()
+        for bounding_box in bounding_boxes:
+            self.add_bounding_box(bounding_box)
+
+    def __len__(self):
+        return len(self.temporal_range)
+
     def __getitem__(self, item: Union[int, slice]) -> Union[BoundingBox, 'Trajectory']:
         if isinstance(item, int):
             return self.bounding_boxes[item - self.start_frame]

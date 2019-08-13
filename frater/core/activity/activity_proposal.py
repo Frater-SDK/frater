@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Union
 from uuid import uuid4
 
+from frater.core import BoundingBox
 from ..object import Object
 from ..trajectory import Trajectory
 
@@ -25,3 +26,15 @@ class ActivityProposal:
     @property
     def end_frame(self):
         return self.temporal_range.end_frame
+
+    def __len__(self):
+        return len(self.temporal_range)
+
+    def __getitem__(self, item: Union[int, slice]) -> Union[BoundingBox, 'ActivityProposal']:
+        if isinstance(item, int):
+            return self.trajectory[item]
+        elif isinstance(item, slice):
+            trajectory = self.trajectory[item]
+            objects = [object[max(item.start, object.start_frame):min(item.stop, object.end_frame)]
+                       for object in self.objects]
+            return ActivityProposal(self.proposal_id, trajectory, objects, self.source_video, self.experiment)

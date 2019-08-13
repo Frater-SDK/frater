@@ -16,13 +16,16 @@ class Object:
     source_video: str = ''
     experiment: str = ''
 
+    def __len__(self):
+        return len(self.temporal_range)
+
     def __getitem__(self, item: Union[int, slice]) -> Union[BoundingBox, 'Object']:
         if isinstance(item, int):
             return self.trajectory[item]
         elif isinstance(item, slice):
             trajectory = self.trajectory[item]
             return Object(self.object_id, self.object_type, trajectory, self.source_video, self.experiment)
-
+    
     @property
     def temporal_range(self) -> TemporalRange:
         return self.trajectory.temporal_range
