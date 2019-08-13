@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import List, Union
 from uuid import uuid4
 
-from frater.core import BoundingBox
+from frater.core import BoundingBox, ActivityProposal
 from .activity_type import ActivityType
 from ..object import Object
 from ..trajectory import Trajectory
@@ -34,7 +34,7 @@ class Activity:
             return Activity(self.activity_id, self.proposal_id, self.activity_type,
                             trajectory, objects, self.source_video, self.experiment,
                             self.confidence, self.probabilities)
-    
+
     @property
     def temporal_range(self):
         return self.trajectory.temporal_range
@@ -46,3 +46,12 @@ class Activity:
     @property
     def end_frame(self):
         return self.temporal_range.end_frame
+
+    @classmethod
+    def init_from_activity_proposal(cls, proposal: ActivityProposal,
+                                    activity_type: ActivityType = ActivityType.NULL,
+                                    confidence: float = 0.0, probabilities: List[float] = None):
+        return Activity(proposal_id=proposal.proposal_id, activity_type=activity_type,
+                        trajectory=proposal.trajectory, objects=proposal.objects,
+                        source_video=proposal.source_video, experiment=proposal.experiment,
+                        confidence=confidence, probabilities=probabilities)
