@@ -60,7 +60,7 @@ def object_detection_to_json(detection: ObjectDetection) -> Dict:
 
 def object_to_diva_format(obj: Object) -> Dict:
     return {
-        'objectID': obj.object_id,
+        'objectID': id(obj.object_id),
         'objectType': obj.object_type.long_name,
         'localization': {
             obj.source_video: {
@@ -80,5 +80,5 @@ def diva_format_to_object(obj: Dict) -> Object:
     object_type = ObjectType.from_long_name(obj['objectType'])
     source_video = list(obj['localization'].keys())[0]
     trajectory = diva_format_to_trajectory(obj['localization'][source_video])
-    object_id = obj['objectID']
+    object_id = str(obj['objectID'])
     return Object(object_id=object_id, object_type=object_type, trajectory=trajectory, source_video=source_video)

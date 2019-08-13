@@ -45,7 +45,7 @@ def activity_to_json(activity: Activity) -> Dict:
 
 def diva_format_to_activity(activity: Dict) -> Activity:
     activity_type = ActivityType.from_long_name(activity['activity'])
-    activity_id = activity['activityID']
+    activity_id = str(activity['activityID'])
     confidence = activity['presenceConf']
     source_video = list(activity['localization'].keys())[0]
     objects = [diva_format_to_object(obj) for obj in activity['objects']]
@@ -58,7 +58,7 @@ def diva_format_to_activity(activity: Dict) -> Activity:
 
 def activity_to_diva_format(activity: Activity) -> Dict:
     return {
-        'activityID': activity.activity_id,
+        'activityID': id(activity.activity_id),
         'activity': activity.activity_type.long_name,
         'presenceConf': activity.confidence,
         'localization': {
