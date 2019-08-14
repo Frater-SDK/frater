@@ -84,3 +84,8 @@ Push tag:
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME-gpu
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME-gpu
+
+Trigger DIVA System Build:
+  stage: deploy
+  script:
+    - "curl -X POST -F token=717383ef754b0ec8501389c56b4973 -F ref=master https://gitlab.com/api/v4/projects/12811740/trigger/pipeline"
