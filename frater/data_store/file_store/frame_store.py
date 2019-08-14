@@ -16,12 +16,12 @@ class FrameStore(FileStore):
 
     @lru_cache(maxsize=128)
     def get_frame(self, video, frame_index, modality=Modality.RGB, experiment: str = '', timestamp: str = ''):
-        frame_path = self.get_frame_path(video, modality, frame_index)
-        if not os.path.exists(frame_path):
+        if not self.frame_exists(video, modality, frame_index):
             return None
+        
+        frame_path = self.get_frame_path(video, modality, frame_index)
         frame_img = Image.open(frame_path)
-
-        return Frame(frame_img, modality, index=frame_index, source_video=video,
+        return Frame(frame_img, modality=modality, index=frame_index, source_video=video,
                      experiment=experiment, timestamp=timestamp)
 
     def get_frames(self, video, frame_indices, modality=Modality.RGB, experiment: str = ''):
@@ -39,5 +39,24 @@ class FrameStore(FileStore):
     def get_frame_filename(self, frame_index):
         return self.frame_filename_format % (frame_index, self.extension)
 
+    def get_video_root_path(self, video: str) -> str:
+        return os.path.join(self.root, video)
+
     def load_image_for_frame(self, frame: Frame):
         return self.get_frame(frame.source_video, frame.index, frame.modality, frame.experiment, frame.experiment)
+
+    def frame_exists(self, video: str, modality: Modality, frame_index: int) -> bool:
+        frame_path = self.get_frame_path(video, modality, frame_index)
+        return os.path.exists(frame_path)
+
+    def get_max_frame(self, video: str, modality: Modality = Modality.RGB):
+        video_root = self.get_video_root_path(video)
+        if not self.ignore_modality:
+            video_root = os.path.join(video_root, modality.name)
+        return max([int(os.path.splitext(os.path.basename(filename))[0]) for filename in os.listdir(video_root)])
+
+    def get_min_frame(self, video: str, modality: Modality = Modality.RGB):
+        video_root = self.get_video_root_path(video)
+        if not self.ignore_modality:
+            video_root = os.path.join(video_root, modality.name)
+        return max([int(os.path.splitext(os.path.basename(filename))[0]) for filename in os.listdir(video_root)])
