@@ -18,7 +18,7 @@ class FrameStore(FileStore):
     def get_frame(self, video, frame_index, modality=Modality.RGB, experiment: str = '', timestamp: str = ''):
         if not self.frame_exists(video, modality, frame_index):
             return None
-        
+
         frame_path = self.get_frame_path(video, modality, frame_index)
         frame_img = Image.open(frame_path)
         return Frame(frame_img, modality=modality, index=frame_index, source_video=video,
@@ -59,4 +59,4 @@ class FrameStore(FileStore):
         video_root = self.get_video_root_path(video)
         if not self.ignore_modality:
             video_root = os.path.join(video_root, modality.name)
-        return max([int(os.path.splitext(os.path.basename(filename))[0]) for filename in os.listdir(video_root)])
+        return min([int(os.path.splitext(os.path.basename(filename))[0]) for filename in os.listdir(video_root)])
