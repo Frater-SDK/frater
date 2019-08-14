@@ -4,6 +4,7 @@ image: docker:18
 stages:
   - build
   - push
+  - deploy
 
 variables:
   # fill those if you have a proxy in your environment
