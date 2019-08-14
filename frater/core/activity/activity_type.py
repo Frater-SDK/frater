@@ -90,3 +90,54 @@ class ActivityType(Enum):
     @classmethod
     def from_long_name(cls, long_name: str) -> 'ActivityType':
         return ActivityType(__long_names__.index(long_name))
+
+
+class ActivityTypeGroup:
+    VEHICLE_ACTIVITIES = {
+        ActivityType.VEHICLE_TURNING_LEFT,
+        ActivityType.VEHICLE_TURNING_RIGHT,
+        ActivityType.VEHICLE_U_TURN,
+        ActivityType.VEHICLE_STOPPING,
+        ActivityType.VEHICLE_STARTING,
+        ActivityType.VEHICLE_REVERSING
+    }
+    MULTIPLE_PERSON_ACTIVITIES = {
+        ActivityType.PEOPLE_TALKING,
+        ActivityType.OBJECT_TRANSFER,
+        ActivityType.HAND_INTERACTION,
+        ActivityType.PERSON_PERSON_EMBRACE,
+        ActivityType.PERSON_PURCHASING
+    }
+
+    VEHICLE_PERSON_ACTIVITIES = {
+        ActivityType.PERSON_OPENS_VEHICLE_DOOR,
+        ActivityType.PERSON_CLOSES_VEHICLE_DOOR,
+        ActivityType.PERSON_ENTERS_VEHICLE,
+        ActivityType.PERSON_EXITS_VEHICLE,
+        ActivityType.PERSON_OPENS_TRUNK,
+        ActivityType.PERSON_CLOSES_TRUNK,
+        ActivityType.PERSON_LOADS_VEHICLE,
+        ActivityType.PERSON_UNLOADS_VEHICLE,
+        ActivityType.VEHICLE_PICKS_UP_PERSON,
+        ActivityType.VEHICLE_DROPS_OFF_PERSON,
+    }
+    BIKE_ACTIVITIES = {
+        ActivityType.RIDING
+    }
+    PERSON_ACTIVITIES = {
+        ActivityType.PERSON_OPENS_FACILITY_DOOR,
+        ActivityType.PERSON_CLOSES_FACILITY_DOOR,
+        ActivityType.PERSON_ENTERS_THROUGH_STRUCTURE,
+        ActivityType.PERSON_EXITS_THROUGH_STRUCTURE,
+        ActivityType.PERSON_TALKING_ON_PHONE,
+        ActivityType.PERSON_TEXTING_ON_PHONE,
+        ActivityType.PERSON_SITTING_DOWN,
+        ActivityType.PERSON_STANDING_UP,
+        ActivityType.PERSON_READING_DOCUMENT,
+        ActivityType.PERSON_PICKS_UP_OBJECT,
+        ActivityType.PERSON_SETS_DOWN_OBJECT,
+        ActivityType.PERSON_HEAVY_CARRY,
+        ActivityType.PERSON_LAPTOP_INTERACTION,
+        ActivityType.ABANDON_PACKAGE,
+        ActivityType.THEFT
+    }
