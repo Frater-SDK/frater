@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import List, Union
 from uuid import uuid4
 
-from frater.core import BoundingBox
+from ..bounding_box import BoundingBox
 from ..object import Object
 from ..trajectory import Trajectory
 
