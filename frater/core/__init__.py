@@ -1,4 +1,4 @@
-from .activity import Activity, ActivityType, ActivityProposal, activity_defaults
+from .activity import Activity, ActivityProposal, ActivityType, ActivityTypeGroup, activity_defaults
 from .bounding_box import BoundingBox, bounding_box_defaults
 from .frame import Frame, CroppedFrame, Modality, frame_defaults
 from .object import Object, ObjectType, ObjectDetection, object_defaults
