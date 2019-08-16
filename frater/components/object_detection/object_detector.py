@@ -23,7 +23,8 @@ class ObjectDetector(IOTask):
                 if len(self.current_batch) > 0:
                     outputs = self.perform_task(self.current_batch)
                     for output in outputs:
-                        self.output_stream(output)
+                        if output.object_type in self.object_types:
+                            self.output_stream(output)
                     self.reset_batch()
 
                 self._active = False
