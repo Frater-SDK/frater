@@ -34,6 +34,7 @@ Build:
       --build-arg VCS_URL=$CI_PROJECT_URL
       --cache-from $CI_REGISTRY_IMAGE:latest
       --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+      -f docker/Dockerfile
       .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
@@ -49,7 +50,7 @@ Build:
       --build-arg VCS_URL=$CI_PROJECT_URL
       --cache-from $CI_REGISTRY_IMAGE:latest-gpu
       --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
-      -f GPU.Dockerfile
+      -f docker/GPU.Dockerfile
       .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
 
