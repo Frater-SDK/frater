@@ -31,6 +31,7 @@ Test Frater:
     - pip3 install -r requirements-dev.txt
     - apk del .build-deps
     - docker-compose -f tests/docker-compose.yml up -d
+    - docker-compose -f tests/docker-compose.yml ps
   script:
     - pytest
 
