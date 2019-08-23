@@ -26,6 +26,7 @@ pytest_plugins = ["docker_compose"]
 def wait_for_kafka(function_scoped_container_getter):
     service: NetworkInfo = function_scoped_container_getter.get('kafka').network_info[0]
     servers = [f'{service.hostname}:{service.host_port}']
+    print(servers)
     wait_for_kafka_servers(servers)
     return servers
 
