@@ -6,14 +6,16 @@ from kafka import KafkaAdminClient
 logger = logging.getLogger()
 
 
-def wait_for_kafka_servers(servers):
+def wait_for_kafka_servers(servers, max_retries=10, sleep=1):
     logger.info(f'waiting for servers: {servers}')
-    unavailable = True
-    while unavailable:
-        unavailable = not kafka_servers_available(servers)
-        logging.info(f'Hosts: {", ".join(servers)}, Available: {not unavailable}')
-        if unavailable:
-            time.sleep(4)
+    for i in range(max_retries):
+        available = kafka_servers_available(servers)
+        logging.info(f'Hosts: {", ".join(servers)}, Available: {available}')
+        if available:
+            break
+        time.sleep(sleep)
+    else:
+        raise ConnectionError(f'Failed to connect to Kafka Servers {servers}. Attempted max retries.')
 
 
 def kafka_servers_available(servers):

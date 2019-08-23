@@ -1,3 +1,4 @@
+from .activity_type import ActivityType
 from ..trajectory import trajectory_defaults
 
 ACTIVITY_JSON_DEFAULT = {
@@ -8,7 +9,8 @@ ACTIVITY_JSON_DEFAULT = {
     'trajectory': trajectory_defaults.TRAJECTORY_JSON_DEFAULT,
     'source_video': '',
     'experiment': '',
-    'confidence': 0.0
+    'confidence': 0.0,
+    'probabilities': [0.0] * len(ActivityType)
 }
 
 ACTIVITY_PROPOSAL_JSON_DEFAULT = {
@@ -17,5 +19,4 @@ ACTIVITY_PROPOSAL_JSON_DEFAULT = {
     'trajectory': trajectory_defaults.TRAJECTORY_JSON_DEFAULT,
     'source_video': '',
     'experiment': '',
-    'confidence': 0.0
 }
