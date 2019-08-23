@@ -50,13 +50,16 @@ class FrameStore(FileStore):
         return os.path.exists(frame_path)
 
     def get_max_frame(self, video: str, modality: Modality = Modality.RGB):
-        video_root = self.get_video_root_path(video)
-        if not self.ignore_modality:
-            video_root = os.path.join(video_root, modality.name)
-        return max([int(os.path.splitext(os.path.basename(filename))[0]) for filename in os.listdir(video_root)])
+        available_frames = self.get_available_frames(video, modality)
+        return max(available_frames)
 
     def get_min_frame(self, video: str, modality: Modality = Modality.RGB):
+        available_frames = self.get_available_frames(video, modality)
+        return min(available_frames)
+
+    @lru_cache(maxsize=100)
+    def get_available_frames(self, video: str, modality: Modality = Modality.RGB):
         video_root = self.get_video_root_path(video)
         if not self.ignore_modality:
             video_root = os.path.join(video_root, modality.name)
-        return min([int(os.path.splitext(os.path.basename(filename))[0]) for filename in os.listdir(video_root)])
+        return [int(os.path.splitext(os.path.basename(filename))[0]) for filename in os.listdir(video_root)]

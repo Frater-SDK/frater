@@ -2,9 +2,9 @@ import os
 
 from PIL import Image
 
-from frater.data_store.file_store import FileStore
-from frater.utilities.image import load_image_from_url, load_image_from_file, save_image_to_file
-from frater.utilities.url import is_url
+from .file_store import FileStore
+from ...utilities.image import load_image_from_url, load_image_from_file, save_image_to_file
+from ...utilities.url import is_url
 
 
 class ImageStore(FileStore):

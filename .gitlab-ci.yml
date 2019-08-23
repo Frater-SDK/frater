@@ -2,6 +2,7 @@
 image: docker:18
 
 stages:
+  - test
   - build
   - push
   - deploy
@@ -12,14 +13,26 @@ variables:
   https_proxy: ''
   no_proxy: ''
 
-# Use this if your GitLab runner does not use socket binding
 services:
   - docker:dind
 
 before_script:
   - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
 
-Build:
+Test Frater:
+  stage: test
+  image: registry.gitlab.com/diva-phase-2/frater-test-tools
+  before_script:
+    - export DOCKER_HOST_IP=docker
+    - docker-compose -f tests/docker-compose.yml up -d
+  script:
+    - export DOCKER_HOST_IP=docker
+    - pytest
+
+  after_script:
+    - docker-compose -f tests/docker-compose.yml down
+
+Build Frater:
   stage: build
   script:
     # CPU build
@@ -54,8 +67,7 @@ Build:
       .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-gpu
 
-# Here, the goal is to tag the "master" branch as "latest"
-Push latest:
+Push Frater latest:
   variables:
     GIT_STRATEGY: none
   stage: push
@@ -72,7 +84,7 @@ Push latest:
     - docker push $CI_REGISTRY_IMAGE:latest-gpu
 
 
-Push tag:
+Push Frater tag:
   variables:
     GIT_STRATEGY: none
   stage: push
@@ -89,6 +101,8 @@ Push tag:
 
 Trigger DIVA System Build:
   stage: deploy
+  only:
+    - master
   before_script:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:

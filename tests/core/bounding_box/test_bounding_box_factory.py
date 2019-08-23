@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from frater.core.bounding_box.bounding_box_factory import *
-from ..mocks import MOCKS
+from ...mocks import MOCKS
 
 
 class TestBoundingBoxFactory(TestCase):
