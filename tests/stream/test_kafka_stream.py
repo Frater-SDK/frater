@@ -26,7 +26,7 @@ pytest_plugins = ["docker_compose"]
 @pytest.fixture(scope='function')
 def wait_for_kafka(function_scoped_container_getter):
     service: NetworkInfo = function_scoped_container_getter.get('kafka').network_info[0]
-    hostname = os.environ['KAFKA_HOST_IP'] if 'KAFKA_HOST_IP' in os.environ else service.hostname
+    hostname = os.environ['DOCKER_HOST_IP'] if 'DOCKER_HOST_IP' in os.environ else service.hostname
     servers = [f'{hostname}:{service.host_port}']
     logger.info(servers)
     wait_for_kafka_servers(servers, sleep=3)
