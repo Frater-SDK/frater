@@ -23,7 +23,7 @@ Test Frater:
   stage: test
   before_script:
     - apk add --no-cache --update python3
-    - pip install --upgrade pip setuptools
+    - pip install --upgrade pip setuptools py-pip
     - pip install docker-compose pytest pytest-docker-compose
     - docker-compose -f tests/docker-compose.yml up -d
   script:
