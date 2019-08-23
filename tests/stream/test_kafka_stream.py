@@ -27,7 +27,7 @@ def wait_for_kafka(function_scoped_container_getter):
     service: NetworkInfo = function_scoped_container_getter.get('kafka').network_info[0]
     servers = [f'{service.hostname}:{service.host_port}']
     print(servers)
-    wait_for_kafka_servers(servers)
+    wait_for_kafka_servers(servers, sleep=3)
     return servers
 
 
