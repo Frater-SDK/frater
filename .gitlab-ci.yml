@@ -25,8 +25,8 @@ Test Frater:
   before_script:
     - export DOCKER_HOST_IP=docker
     - docker-compose -f tests/docker-compose.yml up -d
-    - echo $DOCKER_HOST
   script:
+    - export DOCKER_HOST_IP=docker
     - pytest
 
   after_script:
