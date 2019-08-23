@@ -7,6 +7,7 @@ from ..core.frame import *
 from ..core.object import *
 from ..core.temporal_range import *
 from ..core.trajectory import *
+from ..core.video import *
 from ..utilities.stream import json_to_stream_state
 
 __all__ = ['json_to_frater', 'get_kafka_deserializer']
@@ -19,10 +20,10 @@ JSON_DESERIALIZERS = {
     'trajectory': json_to_trajectory,
     'bounding_box': json_to_bounding_box,
     'temporal_range': json_to_temporal_range,
+    'video': json_to_video,
     'frame': json_to_frame,
     'cropped_frame': json_to_cropped_frame,
     'stream_state': json_to_stream_state
-
 }
 
 

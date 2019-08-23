@@ -7,6 +7,7 @@ from ..core.frame import *
 from ..core.object import *
 from ..core.temporal_range import *
 from ..core.trajectory import *
+from ..core.video import *
 from ..utilities.json import is_json_serializable
 from ..utilities.stream import StreamState, stream_state_to_json
 
@@ -20,6 +21,7 @@ JSON_SERIALIZERS = {
     Trajectory: trajectory_to_json,
     BoundingBox: bounding_box_to_json,
     TemporalRange: temporal_range_to_json,
+    Video: video_to_json,
     Frame: frame_to_json,
     CroppedFrame: cropped_frame_to_json,
     StreamState: stream_state_to_json
