@@ -13,19 +13,13 @@ variables:
   https_proxy: ''
   no_proxy: ''
 
-services:
-  - docker:dind
-
-before_script:
-  - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
-
 Test Frater:
   stage: test
+  services:
+    - python:3.7.4-alpine3.10
   before_script:
-    - apk add --no-cache --virtual .build-deps g++ python3-dev libffi-dev openssl-dev make
-    - apk add --no-cache --update python3
-    - pip3 install --upgrade pip setuptools
     - pip3 install docker-compose pytest pytest-docker-compose
+    - pip3 install -r requirements.txt
     - docker-compose -f tests/docker-compose.yml up -d
   script:
     - pytest
@@ -35,6 +29,11 @@ Test Frater:
 
 Build Frater:
   stage: build
+  services:
+    - docker:dind
+
+  before_script:
+    - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
   script:
     # CPU build
     - docker pull $CI_REGISTRY_IMAGE:latest || true
@@ -72,6 +71,11 @@ Push Frater latest:
   variables:
     GIT_STRATEGY: none
   stage: push
+  services:
+    - docker:dind
+
+  before_script:
+    - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
   only:
     - master
   script:
@@ -89,6 +93,11 @@ Push Frater tag:
   variables:
     GIT_STRATEGY: none
   stage: push
+  services:
+    - docker:dind
+
+  before_script:
+    - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
   only:
     - tags
   script:
