@@ -89,6 +89,8 @@ Push tag:
 
 Trigger DIVA System Build:
   stage: deploy
+  only:
+    - master
   before_script:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:
