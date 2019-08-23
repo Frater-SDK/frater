@@ -1,1 +1,1 @@
-from .mocks import *
+from .mock_data import *

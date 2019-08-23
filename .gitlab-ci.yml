@@ -23,6 +23,7 @@ Test Frater:
   stage: test
   image: registry.gitlab.com/diva-phase-2/frater-test-tools
   before_script:
+    - export DOCKER_HOST_IP=docker
     - docker-compose -f tests/docker-compose.yml up -d
   script:
     - pytest
