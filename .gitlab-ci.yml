@@ -21,7 +21,7 @@ before_script:
 
 Test Frater:
   stage: test
-  image: python:3.7.4-alpine3.10
+  image: python:slim-stretch
   before_script:
     - pip3 install --upgrade pip setuptools
     - pip3 install -r requirements.txt
