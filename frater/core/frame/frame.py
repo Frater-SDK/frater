@@ -2,8 +2,10 @@ from dataclasses import dataclass, field
 
 from PIL.Image import Image
 
-from frater.core import BoundingBox
+from .frame_summary import get_frame_summary, get_cropped_frame_summary
 from .modality import Modality
+from ..bounding_box import BoundingBox
+from ...logging import get_summary
 
 
 @dataclass
@@ -23,6 +25,10 @@ class Frame:
     def height(self):
         return self.image.height
 
+    @property
+    def summary(self):
+        return get_summary(self, get_frame_summary, True)
+
     def crop(self, bounding_box: BoundingBox) -> 'CroppedFrame':
         location = bounding_box.get_corners()
         if self.image:
@@ -36,3 +42,7 @@ class Frame:
 @dataclass
 class CroppedFrame(Frame):
     source_location: BoundingBox = field(default_factory=BoundingBox)
+
+    @property
+    def summary(self):
+        return get_summary(self, get_cropped_frame_summary, True)

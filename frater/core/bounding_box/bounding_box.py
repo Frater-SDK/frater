@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from typing import Tuple
 
+from . import get_bounding_box_summary
+from ...logging import get_summary
+
 
 @dataclass
 class BoundingBox:
@@ -47,6 +50,10 @@ class BoundingBox:
     @property
     def center(self) -> Tuple[float, float]:
         return self.x + (self.w / 2), self.y + (self.h / 2)
+
+    @property
+    def summary(self):
+        return get_summary(self, get_bounding_box_summary, True)
 
     def get_corners(self):
         return self.x_0, self.y_0, self.x_1, self.y_1

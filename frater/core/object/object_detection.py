@@ -1,8 +1,10 @@
 from dataclasses import dataclass, field
 from uuid import uuid4
 
+from .object_summary import get_object_detection_summary
 from .object_type import ObjectType
 from ..bounding_box import BoundingBox
+from ...logging import get_summary
 
 
 @dataclass
@@ -21,3 +23,7 @@ class ObjectDetection:
     @property
     def frame_index(self):
         return self.bounding_box.frame_index
+
+    @property
+    def summary(self):
+        return get_summary(self, get_object_detection_summary, True)
