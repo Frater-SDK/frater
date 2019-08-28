@@ -8,7 +8,7 @@ def get_object_summary(object, eol=' '):
     return (
         f'object id: {object.object_id}{eol}'
         f'object type: {object.object_type.long_name}{eol}'
-        f'trajectory: {eol}{get_trajectory_summary(object.trajectory, eol)}{eol}'
+        f'trajectory:{eol}{get_trajectory_summary(object.trajectory, eol)}{eol}'
         f'source video: {object.source_video}{eol}'
         f'experiment: {object.experiment}{eol}'
     )
