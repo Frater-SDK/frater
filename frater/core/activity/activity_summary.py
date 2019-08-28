@@ -9,7 +9,7 @@ def get_activity_summary(activity, eol=' '):
     return (
         f'activity id: {activity.activity_id}{eol}'
         f'activity type: {activity.activity_type.long_name}{eol}'
-        f'proposal id {activity.proposal_id}{eol}'
+        f'proposal id: {activity.proposal_id}{eol}'
         f'confidence: {activity.confidence:.3f}{eol}'
         f'temporal range: {get_temporal_range_summary(activity.temporal_range, eol)}'
         f'trajectory: {eol}{get_trajectory_summary(activity.trajectory, eol)}{eol}'

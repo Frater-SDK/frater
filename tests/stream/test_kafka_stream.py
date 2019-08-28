@@ -75,7 +75,6 @@ def test_kafka_streams_sequence(wait_for_kafka):
 
     t = threading.Thread(target=get_data)
     t.start()
-
     # give time to start listening for results
     time.sleep(0.5)
     data = [{'test': 12345, 'experiment': 'hello_world', 'index': i} for i in range(count)]
