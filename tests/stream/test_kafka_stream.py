@@ -48,7 +48,9 @@ def test_kafka_streams(wait_for_kafka):
     time.sleep(0.5)
     data = {'test': 12345, 'experiment': 'hello_world'}
     output_stream(data)
-    t.join()
+    t.join(timeout=3)
+    assert not t.is_alive()
+
     received_data = inputs[0]
     assert data == received_data
 
@@ -79,6 +81,7 @@ def test_kafka_streams_sequence(wait_for_kafka):
     data = [{'test': 12345, 'experiment': 'hello_world', 'index': i} for i in range(count)]
     for output_data in data:
         output_stream(output_data)
-    t.join()
+    t.join(timeout=3)
+    assert not t.is_alive()
 
     assert data == inputs
