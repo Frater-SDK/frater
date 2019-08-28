@@ -3,10 +3,9 @@ from setuptools import setup, find_packages
 packages = find_packages(exclude=['tests*'])
 setup(
     name='frater',
-    version='0.1.0',
+    version='0.2.0',
     packages=packages,
-    url='https://github.ibm.com/john-l-henning/frater',
-    license='Apache 2.0 License',
+    url='https://gitlab.com/diva-phase-2/frater',
     author='John Henning',
     author_email='john.l.henning@ibm.com',
     description='A Machine Learning System Framework and Toolkit',

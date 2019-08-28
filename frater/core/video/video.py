@@ -1,5 +1,8 @@
 from dataclasses import dataclass
 
+from .video_summary import get_video_summary
+from ...logging import get_summary
+
 
 @dataclass
 class Video:
@@ -14,6 +17,10 @@ class Video:
     @property
     def size(self):
         return self.width, self.height
+
+    @property
+    def summary(self):
+        return get_summary(self, get_video_summary, True)
 
     def __len__(self):
         return self.end_frame - self.start_frame

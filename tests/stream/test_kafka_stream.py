@@ -28,11 +28,13 @@ def wait_for_kafka(function_scoped_container_getter):
     service: NetworkInfo = function_scoped_container_getter.get('kafka').network_info[0]
     hostname = os.environ['DOCKER_HOST_IP'] if 'DOCKER_HOST_IP' in os.environ else service.hostname
     servers = [f'{hostname}:{service.host_port}']
-    logger.info(servers)
     wait_for_kafka_servers(servers, sleep=3)
     return servers
 
 
+@pytest.mark.kafka
+@pytest.mark.slow
+@pytest.mark.docker_compose
 def test_kafka_streams(wait_for_kafka):
     topic_name = str(uuid4())
 
@@ -40,15 +42,46 @@ def test_kafka_streams(wait_for_kafka):
     output_stream = KafkaOutputStream(topic_name, servers=wait_for_kafka)
     inputs = list()
 
+    t = threading.Thread(target=lambda: inputs.append(next(input_stream)))
+    t.start()
+
+    time.sleep(0.5)
+    data = {'test': 12345, 'experiment': 'hello_world'}
+    output_stream(data)
+    t.join(timeout=3)
+    assert not t.is_alive()
+
+    received_data = inputs[0]
+    assert data == received_data
+
+
+@pytest.mark.kafka
+@pytest.mark.slow
+@pytest.mark.docker_compose
+def test_kafka_streams_sequence(wait_for_kafka):
+    topic_name = str(uuid4())
+
+    input_stream = KafkaInputStream(topic_name, servers=wait_for_kafka)
+    output_stream = KafkaOutputStream(topic_name, servers=wait_for_kafka)
+    inputs = list()
+
+    count = 10
+
     def get_data():
-        inputs.append(next(input_stream))
+        for i, d in enumerate(input_stream):
+            inputs.append(d)
+            if i + 1 >= count:
+                break
 
     t = threading.Thread(target=get_data)
     t.start()
 
-    time.sleep(1)
-    data = {'test': 12345, 'experiment': 'hello_world'}
-    output_stream(data)
-    t.join()
-    received_data = inputs[0]
-    assert data == received_data
+    # give time to start listening for results
+    time.sleep(0.5)
+    data = [{'test': 12345, 'experiment': 'hello_world', 'index': i} for i in range(count)]
+    for output_data in data:
+        output_stream(output_data)
+    t.join(timeout=3)
+    assert not t.is_alive()
+
+    assert data == inputs

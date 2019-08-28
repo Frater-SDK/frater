@@ -1,10 +1,17 @@
 from dataclasses import dataclass
 
+from .temporal_range_summary import get_temporal_range_summary
+from ...logging import get_summary
+
 
 @dataclass
 class TemporalRange:
     start_frame: int = 0
     end_frame: int = 0
+
+    @property
+    def summary(self):
+        return get_summary(self, get_temporal_range_summary, True)
 
     def __len__(self):
         return max(0, self.end_frame - self.start_frame + 1)

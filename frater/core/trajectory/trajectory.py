@@ -1,8 +1,10 @@
 from dataclasses import dataclass, field
 from typing import List, Union
 
+from .trajectory_summary import get_trajectory_summary
 from ..bounding_box import BoundingBox, combine_bounding_boxes, linear_interpolate_bounding_boxes
 from ..temporal_range import TemporalRange
+from ...logging import get_summary
 
 
 @dataclass
@@ -18,7 +20,13 @@ class Trajectory:
         for bounding_box in bounding_boxes:
             self.add_bounding_box(bounding_box)
 
+    @property
+    def summary(self):
+        return get_summary(self, get_trajectory_summary, True)
+
     def __len__(self):
+        if len(self.bounding_boxes) == 0:
+            return 0
         return len(self.temporal_range)
 
     def __getitem__(self, item: Union[int, slice]) -> Union[BoundingBox, 'Trajectory']:

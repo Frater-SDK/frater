@@ -3,10 +3,12 @@ from typing import List, Union
 from uuid import uuid4
 
 from .activity_proposal import ActivityProposal
+from .activity_summary import get_activity_summary
 from .activity_type import ActivityType
 from ..bounding_box import BoundingBox
 from ..object import Object
 from ..trajectory import Trajectory
+from ...logging import get_summary
 
 
 @dataclass
@@ -47,6 +49,10 @@ class Activity:
     @property
     def end_frame(self):
         return self.temporal_range.end_frame
+
+    @property
+    def summary(self):
+        return get_summary(self, get_activity_summary, True)
 
     @classmethod
     def init_from_activity_proposal(cls, proposal: ActivityProposal,
