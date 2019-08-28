@@ -21,8 +21,21 @@ class Trajectory:
             self.add_bounding_box(bounding_box)
 
     @property
-    def summary(self):
-        return get_summary(self, get_trajectory_summary, True)
+    def temporal_range(self):
+        start = self.bounding_boxes[0].frame_index if len(self.bounding_boxes) > 0 else 0
+        end = self.bounding_boxes[-1].frame_index if len(self.bounding_boxes) > 0 else 0
+        return TemporalRange(start, end)
+
+    @property
+    def start_frame(self) -> int:
+        return self.temporal_range.start_frame
+
+    @property
+    def end_frame(self) -> int:
+        return self.temporal_range.end_frame
+
+    def summary(self, multiline=True):
+        return get_summary(self, get_trajectory_summary, multiline)
 
     def __len__(self):
         if len(self.bounding_boxes) == 0:
@@ -52,20 +65,6 @@ class Trajectory:
             bounding_boxes.append(combine_bounding_boxes(current_boxes))
 
         return Trajectory(bounding_boxes)
-
-    @property
-    def temporal_range(self):
-        start = self.bounding_boxes[0].frame_index if len(self.bounding_boxes) > 0 else 0
-        end = self.bounding_boxes[-1].frame_index if len(self.bounding_boxes) > 0 else 0
-        return TemporalRange(start, end)
-
-    @property
-    def start_frame(self) -> int:
-        return self.temporal_range.start_frame
-
-    @property
-    def end_frame(self) -> int:
-        return self.temporal_range.end_frame
 
     def volume(self):
         return sum(bounding_box.area() for bounding_box in self.bounding_boxes)

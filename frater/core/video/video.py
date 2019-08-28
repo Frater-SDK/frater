@@ -18,9 +18,8 @@ class Video:
     def size(self):
         return self.width, self.height
 
-    @property
-    def summary(self):
-        return get_summary(self, get_video_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_video_summary, multiline)
 
     def __len__(self):
         return self.end_frame - self.start_frame

@@ -29,9 +29,8 @@ class ActivityProposal:
     def end_frame(self):
         return self.temporal_range.end_frame
 
-    @property
-    def summary(self):
-        return get_summary(self, get_activity_proposal_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_activity_proposal_summary, multiline)
 
     def __len__(self):
         return len(self.temporal_range)

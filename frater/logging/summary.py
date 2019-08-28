@@ -7,3 +7,7 @@ def get_summary(data, summarizer=None, multiline=True):
         summarizer = get_default_summary
     eol = '\n' if multiline else ' '
     return summarizer(data, eol)
+
+
+def summarize(data, multiline=True):
+    return data.summary(multiline) if hasattr(data, 'summary') else get_summary(data, multiline=multiline)

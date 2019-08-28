@@ -1,1 +1,1 @@
-from .summary import get_summary
+from .summary import get_summary, summarize
