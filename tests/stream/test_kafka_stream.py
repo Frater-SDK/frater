@@ -45,7 +45,7 @@ def test_kafka_streams(wait_for_kafka):
     t = threading.Thread(target=lambda: inputs.append(next(input_stream)))
     t.start()
 
-    time.sleep(0.3)
+    time.sleep(0.5)
     data = {'test': 12345, 'experiment': 'hello_world'}
     output_stream(data)
     t.join()
