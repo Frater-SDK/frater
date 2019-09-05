@@ -1,6 +1,4 @@
-import logging
 import os
-import sys
 import threading
 import time
 from uuid import uuid4
@@ -10,15 +8,6 @@ from pytest_docker_compose import NetworkInfo
 
 from frater.stream import KafkaInputStream, KafkaOutputStream
 from frater.utilities.kafka import wait_for_kafka_servers
-
-logger = logging.getLogger('test-kafka-stream')
-logger.setLevel(logging.DEBUG)
-
-handler = logging.StreamHandler(sys.stdout)
-handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
 
 pytest_plugins = ["docker_compose"]
 

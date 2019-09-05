@@ -37,7 +37,7 @@ pip install .
 ## Getting Started
 
 ### Frater API
-To start using the Frater
+To start using the Frater API
 ```python
 import frater
 ```
