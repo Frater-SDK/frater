@@ -25,6 +25,7 @@ Test Frater:
   before_script:
     - export DOCKER_HOST_IP=docker
     - docker-compose -f tests/docker-compose.yml up -d
+    - pip install requirements.txt
   script:
     - export DOCKER_HOST_IP=docker
     - pytest
