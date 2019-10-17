@@ -42,7 +42,6 @@ class TaskServer:
         if self.task and self.task_thread:
             self.server.logger.info('stopping task')
             self.task.stop()
-            self.server.logger.info('joining thread')
 
             self.task = None
             self.task_thread = None
