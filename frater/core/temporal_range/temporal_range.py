@@ -9,9 +9,8 @@ class TemporalRange:
     start_frame: int = 0
     end_frame: int = 0
 
-    @property
-    def summary(self):
-        return get_summary(self, get_temporal_range_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_temporal_range_summary, multiline)
 
     def __len__(self):
         return max(0, self.end_frame - self.start_frame + 1)

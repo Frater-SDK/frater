@@ -25,9 +25,8 @@ class Frame:
     def height(self):
         return self.image.height
 
-    @property
-    def summary(self):
-        return get_summary(self, get_frame_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_frame_summary, multiline)
 
     def crop(self, bounding_box: BoundingBox) -> 'CroppedFrame':
         location = bounding_box.get_corners()
@@ -43,6 +42,5 @@ class Frame:
 class CroppedFrame(Frame):
     source_location: BoundingBox = field(default_factory=BoundingBox)
 
-    @property
-    def summary(self):
-        return get_summary(self, get_cropped_frame_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_cropped_frame_summary, multiline)

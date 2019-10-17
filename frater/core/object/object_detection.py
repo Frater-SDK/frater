@@ -24,6 +24,5 @@ class ObjectDetection:
     def frame_index(self):
         return self.bounding_box.frame_index
 
-    @property
-    def summary(self):
-        return get_summary(self, get_object_detection_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_object_detection_summary, multiline)

@@ -51,9 +51,8 @@ class BoundingBox:
     def center(self) -> Tuple[float, float]:
         return self.x + (self.w / 2), self.y + (self.h / 2)
 
-    @property
-    def summary(self):
-        return get_summary(self, get_bounding_box_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_bounding_box_summary, multiline)
 
     def get_corners(self):
         return self.x_0, self.y_0, self.x_1, self.y_1

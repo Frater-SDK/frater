@@ -40,9 +40,8 @@ class Object:
     def end_frame(self) -> int:
         return self.temporal_range.end_frame
 
-    @property
-    def summary(self):
-        return get_summary(self, get_object_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_object_summary, multiline)
 
     def add_bounding_box(self, bounding_box: BoundingBox):
         self.trajectory.add_bounding_box(bounding_box)

@@ -50,9 +50,8 @@ class Activity:
     def end_frame(self):
         return self.temporal_range.end_frame
 
-    @property
-    def summary(self):
-        return get_summary(self, get_activity_summary, True)
+    def summary(self, multiline=True):
+        return get_summary(self, get_activity_summary, multiline)
 
     @classmethod
     def init_from_activity_proposal(cls, proposal: ActivityProposal,
