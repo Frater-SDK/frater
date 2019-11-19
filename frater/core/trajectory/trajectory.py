@@ -53,8 +53,14 @@ class Trajectory:
             return Trajectory(bounding_boxes)
 
     def __add__(self, other: 'Trajectory') -> 'Trajectory':
+        if len(self) == 0:
+            return Trajectory(other.bounding_boxes)
+        if len(other) == 0:
+            return Trajectory(self.bounding_boxes)
+
         temporal_range = self.temporal_range.union(other.temporal_range)
         bounding_boxes = list()
+        
         for frame_index in range(temporal_range.start_frame, temporal_range.end_frame + 1):
             current_boxes = list()
             if frame_index in self.temporal_range:

@@ -7,6 +7,7 @@ from .activity import Activity, ActivityType
 from .activity_defaults import ACTIVITY_JSON_DEFAULT, ACTIVITY_PROPOSAL_JSON_DEFAULT
 from .activity_proposal import ActivityProposal
 from ..object.object_factory import *
+from ..trajectory import Trajectory
 from ..trajectory.trajectory_factory import *
 from ...validation.json import validate_json
 
@@ -52,7 +53,7 @@ def diva_format_to_activity(activity: Dict) -> Activity:
     confidence = activity['presenceConf'] if 'presenceConf' in activity else 1.0
     source_video = list(activity['localization'].keys())[0]
     objects = [diva_format_to_object(obj) for obj in activity['objects']]
-    trajectory = reduce(operator.add, [object.trajectory for object in objects])
+    trajectory = reduce(operator.add, [object.trajectory for object in objects], Trajectory)
     experiment = ''
 
     return Activity(activity_id=activity_id, activity_type=activity_type, trajectory=trajectory, objects=objects,
