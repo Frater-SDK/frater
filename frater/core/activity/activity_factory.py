@@ -1,3 +1,6 @@
+import operator
+import uuid
+from functools import reduce
 from typing import Dict
 
 from .activity import Activity, ActivityType
@@ -45,11 +48,11 @@ def activity_to_json(activity: Activity) -> Dict:
 
 def diva_format_to_activity(activity: Dict) -> Activity:
     activity_type = ActivityType.from_long_name(activity['activity'])
-    activity_id = str(activity['activityID'])
-    confidence = activity['presenceConf']
+    activity_id = uuid.UUID(int=activity['activityID']) if 'activityID' in activity else uuid.uuid4()
+    confidence = activity['presenceConf'] if 'presenceConf' in activity else 1.0
     source_video = list(activity['localization'].keys())[0]
     objects = [diva_format_to_object(obj) for obj in activity['objects']]
-    trajectory = sum(object.trajectory for object in objects)
+    trajectory = reduce(operator.add, objects)
     experiment = ''
 
     return Activity(activity_id=activity_id, activity_type=activity_type, trajectory=trajectory, objects=objects,
@@ -58,7 +61,7 @@ def diva_format_to_activity(activity: Dict) -> Activity:
 
 def activity_to_diva_format(activity: Activity) -> Dict:
     return {
-        'activityID': id(activity.activity_id),
+        'activityID': uuid.UUID(activity.activity_id).int,
         'activity': activity.activity_type.long_name,
         'presenceConf': activity.confidence,
         'localization': {

@@ -1,6 +1,7 @@
 from setuptools import setup, find_packages
 
 packages = find_packages(exclude=['tests*'])
+
 setup(
     name='frater',
     version='0.2.0',
@@ -17,5 +18,5 @@ setup(
         'pyyaml',
         'kafka-python',
         'pillow',
-    ]
+    ],
 )
