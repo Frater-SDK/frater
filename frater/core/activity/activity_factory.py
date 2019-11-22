@@ -49,15 +49,19 @@ def activity_to_json(activity: Activity) -> Dict:
 
 def diva_format_to_activity(activity: Dict) -> Activity:
     activity_type = ActivityType.from_long_name(activity['activity'])
-    activity_id = uuid.UUID(int=activity['activityID']) if 'activityID' in activity else uuid.uuid4()
     confidence = activity['presenceConf'] if 'presenceConf' in activity else 1.0
+    probabilities = [0.0 if i != activity_type.value else confidence for i in range(len(ActivityType))]
+    activity_id = uuid.UUID(int=activity['activityID']) if 'activityID' in activity else uuid.uuid4()
+
     source_video = list(activity['localization'].keys())[0]
     objects = [diva_format_to_object(obj) for obj in activity['objects']]
     trajectory = reduce(operator.add, [object.trajectory for object in objects], Trajectory())
     experiment = ''
 
-    return Activity(activity_id=activity_id, activity_type=activity_type, trajectory=trajectory, objects=objects,
-                    source_video=source_video, experiment=experiment, confidence=confidence)
+    return Activity(activity_id=activity_id, activity_type=activity_type,
+                    trajectory=trajectory, objects=objects,
+                    source_video=source_video, experiment=experiment,
+                    confidence=confidence, probabilities=probabilities)
 
 
 def activity_to_diva_format(activity: Activity) -> Dict:
