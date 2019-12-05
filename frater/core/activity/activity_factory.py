@@ -58,7 +58,7 @@ def diva_format_to_activity(activity: Dict) -> Activity:
     trajectory = reduce(operator.add, [object.trajectory for object in objects], Trajectory())
     experiment = ''
 
-    return Activity(activity_id=activity_id, activity_type=activity_type,
+    return Activity(activity_id=str(activity_id), activity_type=activity_type,
                     trajectory=trajectory, objects=objects,
                     source_video=source_video, experiment=experiment,
                     confidence=confidence, probabilities=probabilities)
