@@ -38,22 +38,3 @@ def get_config_annotations(cls: type) -> Dict:
     annotations.update(cls.__annotations__)
 
     return annotations
-
-
-@dataclass
-class TestConfig(Config):
-    test_field: str = ''
-
-
-def main():
-    config_dict = {'hello': 'world', 'name': 'my_config_123456', 'test_field': 'this is a test'}
-
-    config = Config.init_from_config_dict(config_dict)
-    print(config)
-
-    test_config = TestConfig.init_from_config_dict(config_dict)
-    print(test_config)
-
-
-if __name__ == '__main__':
-    main()
