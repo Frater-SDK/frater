@@ -14,6 +14,7 @@ def wait_for_mongo(function_scoped_container_getter):
     return hostname, int(service.host_port)
 
 
+@pytest.mark.skip('Issues with docker-compose')
 @pytest.mark.mongo
 @pytest.mark.slow
 @pytest.mark.docker_compose

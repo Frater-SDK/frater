@@ -21,6 +21,7 @@ def wait_for_kafka(function_scoped_container_getter):
     return servers
 
 
+@pytest.mark.skip('Issues with docker-compose')
 @pytest.mark.kafka
 @pytest.mark.slow
 @pytest.mark.docker_compose
@@ -44,6 +45,7 @@ def test_kafka_streams(wait_for_kafka):
     assert data == received_data
 
 
+@pytest.mark.skip('Issues with docker-compose')
 @pytest.mark.kafka
 @pytest.mark.slow
 @pytest.mark.docker_compose
