@@ -16,7 +16,7 @@ def combine_bounding_boxes(bounding_boxes: List[BoundingBox]) -> Union[BoundingB
     elif len(bounding_boxes) == 1:
         return bounding_boxes[0]
     else:
-        return None
+        raise IndexError('Not enough bounding boxes to combine. List cannot be empty.')
 
 
 def compute_spatial_iou(bounding_box: BoundingBox, other_bounding_box: BoundingBox) -> float:

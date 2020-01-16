@@ -60,7 +60,7 @@ class Trajectory:
 
         temporal_range = self.temporal_range.union(other.temporal_range)
         bounding_boxes = list()
-        
+
         for frame_index in range(temporal_range.start_frame, temporal_range.end_frame + 1):
             current_boxes = list()
             if frame_index in self.temporal_range:
@@ -68,7 +68,8 @@ class Trajectory:
             if frame_index in other.temporal_range:
                 current_boxes.append(other.bounding_boxes[frame_index - other.start_frame])
 
-            bounding_boxes.append(combine_bounding_boxes(current_boxes))
+            if len(current_boxes) > 0:
+                bounding_boxes.append(combine_bounding_boxes(current_boxes))
 
         return Trajectory(bounding_boxes)
 
