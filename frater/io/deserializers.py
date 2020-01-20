@@ -1,13 +1,13 @@
 import json
 from typing import Callable
 
-from ..core.activity import *
-from ..core.bounding_box import *
-from ..core.frame import *
-from ..core.object import *
-from ..core.temporal_range import *
-from ..core.trajectory import *
-from ..core.video import *
+from ..core.activity.activity_factory import *
+from ..core.bounding_box.bounding_box_factory import *
+from ..core.frame.frame_factory import *
+from ..core.object.object_factory import *
+from ..core.temporal_range.temporal_range_factory import *
+from ..core.trajectory.trajectory_factory import *
+from ..core.video.video_factory import *
 from ..utilities.stream import json_to_stream_state
 
 __all__ = ['json_to_frater', 'get_kafka_deserializer']
