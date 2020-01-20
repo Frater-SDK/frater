@@ -38,3 +38,25 @@ def json_to_frater(data):
 
 def get_kafka_deserializer() -> Callable:
     return lambda m: json_to_frater(json.loads(m.decode('utf-8')))
+
+
+def register_json_deserializer(data_type: str, deserializer: Callable):
+    if data_type in JSON_DESERIALIZERS:
+        raise DeserializerExistsError(f'Deserializer {data_type} already exists. Please use a different data_type.')
+
+    JSON_DESERIALIZERS[data_type] = deserializer
+
+
+def unregister_json_deserializer(data_type: str):
+    if data_type not in JSON_DESERIALIZERS:
+        raise DeserializerDoesNotExistError(f'Deserializer {data_type} does not exist.')
+
+    del JSON_DESERIALIZERS[data_type]
+
+
+class DeserializerExistsError(Exception):
+    pass
+
+
+class DeserializerDoesNotExistError(Exception):
+    pass
