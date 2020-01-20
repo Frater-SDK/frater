@@ -1,0 +1,3 @@
+"""
+Frater base module
+"""

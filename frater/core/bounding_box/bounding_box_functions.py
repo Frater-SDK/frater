@@ -7,7 +7,7 @@ from frater.utilities.interpolation import lerp
 from .bounding_box import BoundingBox
 
 __all__ = ['combine_bounding_boxes', 'compute_spatial_iou', 'linear_interpolate_bounding_boxes',
-           'scale_bounding_box']
+           'scale_bounding_box', 'convert_descriptors_to_bounding_box']
 
 
 def combine_bounding_boxes(bounding_boxes: List[BoundingBox]) -> Union[BoundingBox, None]:

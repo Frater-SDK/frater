@@ -2,6 +2,10 @@ from typing import List
 
 
 class Stream:
+    """
+    Base Stream class. Only inherited by InputStream and Output Stream
+    """
+
     def __init__(self, stream_type: type = None):
         self._stream_type = stream_type
 
@@ -30,6 +34,10 @@ class OutputStream(Stream):
 
 
 class MultiOutputStream(OutputStream):
+    """
+    MultiOutputStream allows for multiple output sources
+    """
+
     def __init__(self, output_streams: List[OutputStream] = None, stream_type: type = None):
         super(MultiOutputStream, self).__init__(stream_type)
         if output_streams is None:
