@@ -1,3 +1,2 @@
-from .file_store import FileStore
-from .frame_store import FrameStore
-from .image_store import ImageStore
+from .file_store import FileStore, FileStoreConfig
+from .image_store import ImageStore, ImageStoreConfig

@@ -1,4 +1,12 @@
+from dataclasses import dataclass
 from typing import List
+
+from ..config import Config
+
+
+@dataclass
+class StreamConfig(Config):
+    data_type: str = ''
 
 
 class Stream:
@@ -6,20 +14,20 @@ class Stream:
     Base Stream class. Only inherited by InputStream and Output Stream
     """
 
-    def __init__(self, stream_type: type = None):
-        self._stream_type = stream_type
+    def __init__(self, config: StreamConfig = None):
+        self.config = config
 
     @property
-    def stream_type(self):
-        return self._stream_type
+    def data_type(self):
+        return self.config.data_type
 
     def close(self):
         pass
 
 
 class InputStream(Stream):
-    def __next__(self):
-        raise NotImplementedError
+    def __init__(self, data_type=None):
+        super(InputStream, self).__init__(data_type)
 
     def __iter__(self):
         raise NotImplementedError
@@ -38,8 +46,8 @@ class MultiOutputStream(OutputStream):
     MultiOutputStream allows for multiple output sources
     """
 
-    def __init__(self, output_streams: List[OutputStream] = None, stream_type: type = None):
-        super(MultiOutputStream, self).__init__(stream_type)
+    def __init__(self, output_streams: List[OutputStream] = None, data_type: type = None):
+        super(MultiOutputStream, self).__init__(data_type)
         if output_streams is None:
             output_streams: List[OutputStream] = list()
         self.output_streams = output_streams

@@ -5,13 +5,10 @@ from ..io import frater_to_json, json_to_frater
 
 
 class JSONInputStream(InputStream):
-    def __init__(self, filename: str, stream_type: type = None):
-        super(JSONInputStream, self).__init__(stream_type)
+    def __init__(self, filename: str, data_type: type = None):
+        super(JSONInputStream, self).__init__(data_type)
         self.filename = filename
         self.input_file = self.open_file()
-
-    def __next__(self):
-        return next(self.__iter__())
 
     def __iter__(self):
         for line in self.input_file:
@@ -28,8 +25,8 @@ class JSONInputStream(InputStream):
 
 
 class JSONOutputStream(OutputStream):
-    def __init__(self, filename, stream_type: type = None):
-        super(JSONOutputStream, self).__init__(stream_type)
+    def __init__(self, filename, data_type: type = None):
+        super(JSONOutputStream, self).__init__(data_type)
         self.filename = filename
         self.output_file = self.open_file()
 

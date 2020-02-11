@@ -1,12 +1,23 @@
+from dataclasses import dataclass, field
+from typing import List
+
 from kafka import KafkaProducer, KafkaConsumer
 
 from .stream import OutputStream, InputStream
+from ..config import Config
 from ..io import get_kafka_serializer, get_kafka_deserializer
 
 
+@dataclass
+class KafkaOutputStreamConfig(Config):
+    topic: str = ''
+    data_type: str = ''
+    servers: List[str] = field(default_factory=lambda: ['localhost:9092'])
+
+
 class KafkaOutputStream(OutputStream):
-    def __init__(self, topic, stream_type=None, servers=None, serializer=None):
-        super(KafkaOutputStream, self).__init__(stream_type)
+    def __init__(self, topic, data_type=None, servers=None, serializer=None):
+        super(KafkaOutputStream, self).__init__(data_type)
         if servers is None:
             servers = ['localhost:9092']
 
@@ -25,8 +36,8 @@ class KafkaOutputStream(OutputStream):
 
 
 class KafkaInputStream(InputStream):
-    def __init__(self, *topics, stream_type=None, servers=None, deserializer=None):
-        super(KafkaInputStream, self).__init__(stream_type)
+    def __init__(self, *topics, data_type=None, servers=None, deserializer=None):
+        super(KafkaInputStream, self).__init__(data_type)
         if servers is None:
             servers = ['localhost:9092']
 
@@ -36,9 +47,6 @@ class KafkaInputStream(InputStream):
         self._consumer = KafkaConsumer(*topics, bootstrap_servers=servers,
                                        value_deserializer=deserializer)
         self.topics = list(topics)
-
-    def __next__(self):
-        return next(self._consumer).value
 
     def __iter__(self):
         for msg in self._consumer:
