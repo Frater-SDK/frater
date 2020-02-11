@@ -1,31 +1,12 @@
 import json
 from typing import Callable
 
-from ..core import *
-from ..core.activity.activity_factory import *
-from ..core.bounding_box.bounding_box_factory import *
-from ..core.frame.frame_factory import *
-from ..core.object.object_factory import *
-from ..core.temporal_range.temporal_range_factory import *
-from ..core.trajectory.trajectory_factory import *
-from ..core.video.video_factory import *
 from ..utilities.json import is_json_serializable
-from ..utilities.stream import StreamState, stream_state_to_json
 
-__all__ = ['frater_to_json', 'get_kafka_serializer']
+__all__ = ['frater_to_json', 'get_kafka_serializer', 'register_json_serializer', 'unregister_json_serializer']
 
 JSON_SERIALIZERS = {
-    Activity: activity_to_json,
-    ActivityProposal: activity_proposal_to_json,
-    Object: object_to_json,
-    ObjectDetection: object_detection_to_json,
-    Trajectory: trajectory_to_json,
-    BoundingBox: bounding_box_to_json,
-    TemporalRange: temporal_range_to_json,
-    Video: video_to_json,
-    Frame: frame_to_json,
-    CroppedFrame: cropped_frame_to_json,
-    StreamState: stream_state_to_json
+
 }
 
 

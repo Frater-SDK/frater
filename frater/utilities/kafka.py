@@ -8,7 +8,7 @@ logger = logging.getLogger()
 
 def wait_for_kafka_servers(servers, max_retries=10, sleep=1):
     logger.info(f'waiting for servers: {servers}')
-    for i in range(max_retries):
+    for _ in range(max_retries):
         available = kafka_servers_available(servers)
         logging.info(f'Hosts: {", ".join(servers)}, Available: {available}')
         if available:

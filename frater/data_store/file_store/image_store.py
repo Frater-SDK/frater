@@ -1,10 +1,16 @@
 import os
+from dataclasses import dataclass
 
 from PIL import Image
 
-from .file_store import FileStore
+from .file_store import FileStore, FileStoreConfig
 from ...utilities.image import load_image_from_url, load_image_from_file, save_image_to_file
 from ...utilities.url import is_url
+
+
+@dataclass
+class ImageStoreConfig(FileStoreConfig):
+    name: str = 'image_store_config'
 
 
 class ImageStore(FileStore):

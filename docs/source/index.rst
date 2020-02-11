@@ -5,7 +5,6 @@ Welcome to Frater's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   core
    stream
 
 

@@ -3,11 +3,13 @@ from dataclasses import dataclass, field
 from pymongo import MongoClient
 
 from .stream import InputStream, OutputStream
+from ..config import Config
 from ..io import json_to_frater, frater_to_json
 
 
 @dataclass
-class MongoStreamConfig:
+class MongoStreamConfig(Config):
+    name: str = 'mongo_stream_config'
     host: str = 'localhost'
     port: int = 27017
     db: str = 'db'
@@ -16,8 +18,8 @@ class MongoStreamConfig:
 
 
 class MongoInputStream(InputStream):
-    def __init__(self, config: MongoStreamConfig = None, stream_type=None):
-        super(MongoInputStream, self).__init__(stream_type)
+    def __init__(self, config: MongoStreamConfig = None, data_type=None):
+        super(MongoInputStream, self).__init__(data_type)
         self.config = config if config is not None else MongoStreamConfig()
         self.client = MongoClient(self.config.host, self.config.port)
 
@@ -29,17 +31,14 @@ class MongoInputStream(InputStream):
     def collection(self):
         return self.db[self.config.collection]
 
-    def __next__(self):
-        return next(self.__iter__())
-
     def __iter__(self):
         for item in self.collection.find(filter=self.config.filter):
             yield json_to_frater(item)
 
 
 class MongoOutputStream(OutputStream):
-    def __init__(self, config: MongoStreamConfig = None, stream_type=None):
-        super(MongoOutputStream, self).__init__(stream_type)
+    def __init__(self, config: MongoStreamConfig = None, data_type=None):
+        super(MongoOutputStream, self).__init__(data_type)
         self.config = config if config is not None else MongoStreamConfig()
         self.client = MongoClient(self.config.host, self.config.port)
 

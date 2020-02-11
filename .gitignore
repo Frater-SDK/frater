@@ -109,3 +109,5 @@ example/
 *.DS_Store
 
 scripts/
+
+notebooks/playground
