@@ -30,12 +30,12 @@ class InputStream(Stream):
         super(InputStream, self).__init__(data_type)
 
     def __iter__(self):
-        raise NotImplementedError
+        raise NotImplemented
 
 
 class OutputStream(Stream):
     def send(self, data):
-        raise NotImplementedError
+        raise NotImplemented
 
     def __call__(self, *args, **kwargs):
         return self.send(*args, **kwargs)

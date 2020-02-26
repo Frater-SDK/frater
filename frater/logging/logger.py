@@ -1,14 +1,25 @@
 import logging
-import sys
+from dataclasses import field, dataclass
+
+from .handler.factory import get_handler
+from ..config import Config
 
 
-def get_logger(name='', handler=None, formatter=None, level=logging.INFO):
-    if handler is None:
-        handler = logging.StreamHandler(sys.stdout)
-    if formatter is None:
-        formatter = logging.Formatter('%(asctime)s | %(name)s | %(levelname)s | %(message)s')
+@dataclass
+class LoggerConfig(Config):
+    name: str = field(default=__name__)
+    handler: str = 'stdout'
+    format: str = '%(asctime)s | %(name)s | %(levelname)s | %(message)s'
+    level: int = logging.INFO
+
+
+def get_logger(config: LoggerConfig) -> logging.Logger:
+    handler = get_handler(config.handler)
+    formatter = logging.Formatter(config.format)
     handler.setFormatter(formatter)
-    logger = logging.getLogger(name)
+
+    logger = logging.getLogger(config.name)
     logger.addHandler(handler)
-    logger.setLevel(level)
+    logger.setLevel(config.level)
+
     return logger

@@ -1,5 +1,5 @@
 def get_default_summary(data, eol=' '):
-    return str(data)
+    return str(data) + eol
 
 
 def get_summary(data, summarizer=None, multiline=True):

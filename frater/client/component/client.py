@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
 from uuid import uuid4
 
-from ..component import ComponentConfig
-from ...client import API
+from .. import API
+from ...component import ComponentConfig
 from ...config import Config
-from ...server import NetworkConfig
+from ...utilities import NetworkConfig
 
 __all__ = ['ComponentClient', 'ComponentClientConfig', 'get_component_client_config']
 
 
 @dataclass
 class ComponentClientConfig(Config):
+    name: str = 'component_client_config'
     component_id: str = field(default_factory=lambda: str(uuid4()))
-    name: str = ''
     host: str = 'localhost'
     port: int = 3000
 

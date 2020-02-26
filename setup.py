@@ -2,21 +2,15 @@ from setuptools import setup, find_packages
 
 packages = find_packages(exclude=['tests*'])
 
+dependencies = list(line.strip() for line in open('requirements.txt').readlines())
+
 setup(
     name='frater',
-    version='0.2.0',
+    version='0.2.1',
     packages=packages,
-    url='https://gitlab.com/diva-phase-2/frater',
+    url='https://github.com/frater-sdk/frater',
     author='John Henning',
     author_email='john.l.henning@ibm.com',
-    description='A Machine Learning System Framework and Toolkit',
-    install_requires=[
-        'flask',
-        'requests',
-        'easydict',
-        'numpy',
-        'pyyaml',
-        'kafka-python',
-        'pillow',
-    ],
+    description='A Data-Driven Component System Framework and Toolkit',
+    install_requires=dependencies
 )

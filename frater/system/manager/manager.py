@@ -1,7 +1,7 @@
 from typing import Dict
 
-from frater.component import ComponentClientConfig, ComponentClient
-from frater.server import Handler, ServerManager
+from ...client import ComponentClientConfig, ComponentClient
+from ...utilities import Handler
 
 __all__ = ['SystemManager']
 
@@ -29,7 +29,7 @@ class SystemManager:
 
             return {'registered': True, 'message': f'Component {client_config.component_id} successfully registered'}
 
-    def start_component(self, params):
+    def start(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'started': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -40,8 +40,8 @@ class SystemManager:
 
         return response
 
-    def start_all_components(self):
-        return [self.start_component({'component_id': component_id}) for component_id in self.components]
+    def start_all(self):
+        return [self.start({'component_id': component_id}) for component_id in self.components]
 
     def started_component(self, params):
         component_id = params['component_id']
@@ -55,10 +55,10 @@ class SystemManager:
 
         return response
 
-    def started_all_components(self):
+    def all_started(self):
         return [self.started_component({'component_id': component_id}) for component_id in self.components]
 
-    def stop_component(self, params):
+    def stop(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'stopped': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -69,10 +69,10 @@ class SystemManager:
 
         return response
 
-    def stop_all_components(self):
-        return [self.stop_component({'component_id': component_id}) for component_id in self.components]
+    def stop_all(self):
+        return [self.stop({'component_id': component_id}) for component_id in self.components]
 
-    def stopped_component(self, params):
+    def stopped(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'stopped': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -84,10 +84,10 @@ class SystemManager:
 
         return response
 
-    def stopped_all_components(self):
-        return [self.stopped_component({'component_id': component_id}) for component_id in self.components]
+    def all_stopped(self):
+        return [self.stopped({'component_id': component_id}) for component_id in self.components]
 
-    def toggle_pause_component(self, params):
+    def toggle_pause(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'paused': None, 'message': f'Component {component_id} is not registered in this system.'}
@@ -99,10 +99,10 @@ class SystemManager:
 
         return response
 
-    def toggle_pause_all_components(self):
-        return [self.toggle_pause_component({'component_id': component_id}) for component_id in self.components]
+    def toggle_pause_all(self):
+        return [self.toggle_pause({'component_id': component_id}) for component_id in self.components]
 
-    def pause_component(self, params):
+    def pause(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'paused': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -113,10 +113,10 @@ class SystemManager:
 
         return response
 
-    def pause_all_components(self):
-        return [self.pause_component({'component_id': component_id}) for component_id in self.components]
+    def pause_all(self):
+        return [self.pause({'component_id': component_id}) for component_id in self.components]
 
-    def unpause_component(self, params):
+    def unpause(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'unpaused': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -128,10 +128,10 @@ class SystemManager:
 
         return response
 
-    def unpause_all_components(self):
-        return [self.unpause_component({'component_id': component_id}) for component_id in self.components]
+    def unpause_all(self):
+        return [self.unpause({'component_id': component_id}) for component_id in self.components]
 
-    def paused_component(self, params):
+    def paused(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'paused': None, 'message': f'Component {component_id} is not registered in this system.'}
@@ -143,10 +143,10 @@ class SystemManager:
 
         return response
 
-    def paused_all_components(self):
-        return [self.paused_component({'component_id': component_id}) for component_id in self.components]
+    def all_paused(self):
+        return [self.paused({'component_id': component_id}) for component_id in self.components]
 
-    def active_component(self, params):
+    def active(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'active': None, 'message': f'Component {component_id} is not registered in this system.'}
@@ -158,10 +158,10 @@ class SystemManager:
 
         return response
 
-    def active_all_components(self):
-        return [self.active_component({'component_id': component_id}) for component_id in self.components]
+    def all_active(self):
+        return [self.active({'component_id': component_id}) for component_id in self.components]
 
-    def reset_component(self, params):
+    def reset(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'reset': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -173,10 +173,10 @@ class SystemManager:
 
         return response
 
-    def reset_all_components(self):
-        return [self.reset_component({'component_id': component_id}) for component_id in self.components]
+    def reset_all(self):
+        return [self.reset({'component_id': component_id}) for component_id in self.components]
 
-    def error_component(self, params):
+    def error(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'error': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -188,10 +188,10 @@ class SystemManager:
 
         return response
 
-    def error_all_components(self):
-        return [self.error_component({'component_id': component_id}) for component_id in self.components]
+    def all_error(self):
+        return [self.error({'component_id': component_id}) for component_id in self.components]
 
-    def update_component_config(self, data):
+    def update_config(self, data):
         component_id = data['component_id']
         config = data['config']
         if component_id not in self.components:
@@ -204,7 +204,7 @@ class SystemManager:
 
         return response
 
-    def get_component_config(self, params):
+    def get_config(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'stopped': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -215,10 +215,10 @@ class SystemManager:
 
         return response
 
-    def get_all_component_configs(self):
-        return [self.get_component_config({'component_id': component_id}) for component_id in self.components]
+    def get_all_configs(self):
+        return [self.get_config({'component_id': component_id}) for component_id in self.components]
 
-    def get_component_state(self, params):
+    def get_state(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'stopped': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -229,10 +229,10 @@ class SystemManager:
 
         return response
 
-    def get_all_component_states(self):
-        return [self.get_component_state({'component_id': component_id}) for component_id in self.components]
+    def get_all_states(self):
+        return [self.get_state({'component_id': component_id}) for component_id in self.components]
 
-    def get_component_status(self, params):
+    def get_status(self, params):
         component_id = params['component_id']
         if component_id not in self.components:
             return {'stopped': False, 'message': f'Component {component_id} is not registered in this system.'}
@@ -244,46 +244,42 @@ class SystemManager:
 
         return response
 
-    def get_all_component_statuses(self):
-        return [self.get_component_status({'component_id': component_id}) for component_id in self.components]
-
-    def register_endpoints(self, server_manager: ServerManager):
-        for handler in self.get_default_endpoints():
-            server_manager.add_handler(handler)
+    def get_all_statuses(self):
+        return [self.get_status({'component_id': component_id}) for component_id in self.components]
 
     def get_default_endpoints(self):
         return [
-            Handler('dependency', 'check_dependency', self.check_dependency),
-            Handler('component', 'get_component', self.get_component),
-            Handler('component/register', 'register_component', self.register_component, methods=['POST']),
-            Handler('component/start', 'start_component', self.start_component),
-            Handler('component/started', 'started_component', self.started_component),
-            Handler('component/stop', 'stop_component', self.stop_component),
-            Handler('component/stopped', 'stopped_component', self.stopped_component),
-            Handler('component/toggle_pause', 'toggle_pause_component', self.toggle_pause_component),
-            Handler('component/pause', 'pause_component', self.pause_component),
-            Handler('component/unpause', 'unpause_component', self.unpause_component),
-            Handler('component/paused', 'paused_component', self.paused_component),
-            Handler('component/active', 'active_component', self.active_component),
-            Handler('component/reset', 'reset_component', self.reset_component),
-            Handler('component/error', 'error_component', self.error_component),
-            Handler('component/config', 'get_component_config', self.get_component_config),
-            Handler('component/config', 'update_component_config', self.update_component_config, methods=['PATCH']),
-            Handler('component/state', 'get_component_state', self.get_component_state),
-            Handler('component/status', 'get_component_status', self.get_component_status),
-            Handler('components', 'get_components', self.get_components),
-            Handler('components/start', 'start_all_components', self.start_all_components),
-            Handler('components/started', 'started_all_components', self.started_all_components),
-            Handler('components/stop', 'stop_all_components', self.stop_all_components),
-            Handler('components/stopped', 'stopped_all_components', self.stopped_all_components),
-            Handler('components/toggle_pause', 'toggle_pause_all_components', self.toggle_pause_all_components),
-            Handler('components/pause', 'pause_all_components', self.pause_all_components),
-            Handler('components/unpause', 'unpause_all_components', self.unpause_all_components),
-            Handler('components/paused', 'paused_all_components', self.paused_all_components),
-            Handler('components/active', 'active_all_components', self.active_all_components),
-            Handler('components/reset', 'reset_all_components', self.reset_all_components),
-            Handler('components/error', 'error_all_components', self.error_component),
-            Handler('components/config', 'get_all_component_configs', self.get_all_component_configs),
-            Handler('components/state', 'get_all_component_states', self.get_all_component_states),
-            Handler('components/status', 'get_all_component_statuses', self.get_all_component_statuses),
+            Handler('/dependency', 'check_dependency', self.check_dependency),
+            Handler('/component', 'get_component', self.get_component),
+            Handler('/component/register', 'register_component', self.register_component, methods=['POST']),
+            Handler('/component/start', 'start', self.start),
+            Handler('/component/started', 'started_component', self.started_component),
+            Handler('/component/stop', 'stop', self.stop),
+            Handler('/component/stopped', 'stopped', self.stopped),
+            Handler('/component/toggle_pause', 'toggle_pause', self.toggle_pause),
+            Handler('/component/pause', 'pause', self.pause),
+            Handler('/component/unpause', 'unpause', self.unpause),
+            Handler('/component/paused', 'paused', self.paused),
+            Handler('/component/active', 'active', self.active),
+            Handler('/component/reset', 'reset', self.reset),
+            Handler('/component/error', 'error', self.error),
+            Handler('/component/config', 'get_config', self.get_config),
+            Handler('/component/config', 'update_config', self.update_config, methods=['PATCH']),
+            Handler('/component/state', 'get_state', self.get_state),
+            Handler('/component/status', 'get_status', self.get_status),
+            Handler('/components', 'get_components', self.get_components),
+            Handler('/components/start', 'start_all', self.start_all),
+            Handler('/components/started', 'all_started', self.all_started),
+            Handler('/components/stop', 'stop_all', self.stop_all),
+            Handler('/components/stopped', 'all_stopped', self.all_stopped),
+            Handler('/components/toggle_pause', 'toggle_pause_all', self.toggle_pause_all),
+            Handler('/components/pause', 'pause_all', self.pause_all),
+            Handler('/components/unpause', 'unpause_all', self.unpause_all),
+            Handler('/components/paused', 'all_paused', self.all_paused),
+            Handler('/components/active', 'all_active', self.all_active),
+            Handler('/components/reset', 'reset_all', self.reset_all),
+            Handler('/components/error', 'all_error', self.all_error),
+            Handler('/components/config', 'get_all_configs', self.get_all_configs),
+            Handler('/components/state', 'get_all_states', self.get_all_states),
+            Handler('/components/status', 'get_all_statuses', self.get_all_statuses),
         ]

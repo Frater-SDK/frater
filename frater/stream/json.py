@@ -1,13 +1,24 @@
 import json
+from dataclasses import dataclass
 
-from .stream import InputStream, OutputStream
+from .factory import *
+from .stream import InputStream, OutputStream, StreamConfig
 from ..io import frater_to_json, json_to_frater
 
+__all__ = ['JSONStreamConfig', 'JSONInputStream', 'JSONOutputStream']
 
+
+@input_stream_configs.register('json')
+@output_stream_configs.register('json')
+@dataclass
+class JSONStreamConfig(StreamConfig):
+    filename: str = ''
+
+
+@input_stream_factory.register('json')
 class JSONInputStream(InputStream):
-    def __init__(self, filename: str, data_type: type = None):
-        super(JSONInputStream, self).__init__(data_type)
-        self.filename = filename
+    def __init__(self, config: JSONStreamConfig):
+        super(JSONInputStream, self).__init__(config)
         self.input_file = self.open_file()
 
     def __iter__(self):
@@ -21,13 +32,13 @@ class JSONInputStream(InputStream):
         self.input_file = self.open_file()
 
     def open_file(self):
-        return open(self.filename, 'r')
+        return open(self.config.filename, 'r')
 
 
+@output_stream_factory.register('json')
 class JSONOutputStream(OutputStream):
-    def __init__(self, filename, data_type: type = None):
-        super(JSONOutputStream, self).__init__(data_type)
-        self.filename = filename
+    def __init__(self, config: JSONStreamConfig, data_type: type = None):
+        super(JSONOutputStream, self).__init__(config)
         self.output_file = self.open_file()
 
     def send(self, data):
@@ -41,7 +52,7 @@ class JSONOutputStream(OutputStream):
         self.output_file = self.open_file()
 
     def open_file(self):
-        return open(self.filename, 'a')
+        return open(self.config.filename, 'a')
 
     @staticmethod
     def get_json_output(data):

@@ -3,50 +3,27 @@ from typing import List
 
 from kafka import KafkaProducer, KafkaConsumer
 
-from .stream import OutputStream, InputStream
-from ..config import Config
+from .factory import *
+from .stream import OutputStream, InputStream, StreamConfig
 from ..io import get_kafka_serializer, get_kafka_deserializer
 
 
+@input_stream_configs.register('kafka')
 @dataclass
-class KafkaOutputStreamConfig(Config):
-    topic: str = ''
-    data_type: str = ''
+class KafkaInputStreamConfig(StreamConfig):
+    topics: List[str] = field(default_factory=list)
     servers: List[str] = field(default_factory=lambda: ['localhost:9092'])
 
 
-class KafkaOutputStream(OutputStream):
-    def __init__(self, topic, data_type=None, servers=None, serializer=None):
-        super(KafkaOutputStream, self).__init__(data_type)
-        if servers is None:
-            servers = ['localhost:9092']
-
-        if serializer is None:
-            serializer = get_kafka_serializer()
-
-        self._producer = KafkaProducer(bootstrap_servers=servers,
-                                       value_serializer=serializer)
-        self.topic = topic
-
-    def send(self, data):
-        self._producer.send(self.topic, data).get()
-
-    def close(self):
-        self._producer.close()
-
-
+@input_stream_factory.register('kafka')
 class KafkaInputStream(InputStream):
-    def __init__(self, *topics, data_type=None, servers=None, deserializer=None):
-        super(KafkaInputStream, self).__init__(data_type)
-        if servers is None:
-            servers = ['localhost:9092']
+    def __init__(self, config: KafkaInputStreamConfig):
+        super(KafkaInputStream, self).__init__(config)
 
-        if deserializer is None:
-            deserializer = get_kafka_deserializer()
+        deserializer = get_kafka_deserializer()
 
-        self._consumer = KafkaConsumer(*topics, bootstrap_servers=servers,
+        self._consumer = KafkaConsumer(*self.config.topics, bootstrap_servers=self.config.servers,
                                        value_deserializer=deserializer)
-        self.topics = list(topics)
 
     def __iter__(self):
         for msg in self._consumer:
@@ -54,3 +31,26 @@ class KafkaInputStream(InputStream):
 
     def close(self):
         self._consumer.close()
+
+
+@output_stream_configs.register('kafka')
+@dataclass
+class KafkaOutputStreamConfig(StreamConfig):
+    topic: str = ''
+    servers: List[str] = field(default_factory=lambda: ['localhost:9092'])
+
+
+@output_stream_factory.register('kafka')
+class KafkaOutputStream(OutputStream):
+    def __init__(self, config: KafkaOutputStreamConfig):
+        super(KafkaOutputStream, self).__init__(config)
+
+        serializer = get_kafka_serializer()
+        self._producer = KafkaProducer(bootstrap_servers=self.config.servers,
+                                       value_serializer=serializer)
+
+    def send(self, data):
+        self._producer.send(self.config.topic, data).get()
+
+    def close(self):
+        self._producer.close()

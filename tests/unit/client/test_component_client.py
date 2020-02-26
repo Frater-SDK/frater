@@ -1,8 +1,7 @@
 from unittest import TestCase
 from unittest.mock import Mock
 
-from frater.client import API
-from frater.component import ComponentClient, ComponentClientConfig, get_component_client_config
+from frater.client import API, ComponentClient, ComponentClientConfig, get_component_client_config
 
 
 class TestComponentClient(TestCase):

@@ -69,3 +69,17 @@ def test_identity_middleware():
     wrapper = identity_middleware(mock_func)
 
     assert wrapper() == mock_func()
+
+
+def test_get_default_middleware():
+    middleware = get_default_middleware()
+
+    mock_func = get_mock_func()
+    ctx = get_context()
+
+    with ctx:
+        with patch('frater.server.middleware.request') as request:
+            request.method.return_value = 'GET'
+            func = middleware(mock_func)
+            assert func().json == {"test": 1234}
+            assert func().status_code == 200

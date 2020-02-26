@@ -4,9 +4,9 @@ from uuid import uuid4
 
 from dataclasses_json import DataClassJsonMixin
 
-from frater.dependency.dependency import Dependency
 from ...config import Config
-from ...server import Handler
+from ...dependency import Dependency
+from ...utilities import Handler
 
 __all__ = ['Component', 'ComponentConfig', 'ComponentState']
 

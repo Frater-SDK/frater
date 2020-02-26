@@ -1,6 +1,8 @@
+from typing import List
+
 from flask import Flask
 
-from .handler import Handler
+from ..utilities import Handler
 
 __all__ = ['ServerManager']
 
@@ -15,3 +17,7 @@ class ServerManager:
 
     def add_handler(self, handler: Handler):
         self.server.add_url_rule(handler.endpoint, handler.name, self.middleware(handler.func), methods=handler.methods)
+
+    def register_endpoints(self, handlers: List[Handler]):
+        for handler in handlers:
+            self.add_handler(handler)

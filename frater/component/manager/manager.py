@@ -3,8 +3,7 @@ from typing import List
 
 from .thread import ComponentThread
 from ..component import Component
-from ...server import Handler
-from ...server import ServerManager
+from ...utilities import Handler
 
 
 class ComponentManager:
@@ -125,10 +124,6 @@ class ComponentManager:
 
     def get_state(self):
         return self.component.state.to_dict()
-
-    def register_endpoints(self, server_manager: ServerManager):
-        for handler in self.get_all_handlers():
-            server_manager.add_handler(handler)
 
     def get_endpoints(self):
         return [handler.to_dict() for handler in self.get_all_handlers()]

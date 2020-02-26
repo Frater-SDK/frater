@@ -53,5 +53,5 @@ reality. If you’re interested, contact John Henning at
 - Twitter: [@johnlhenning](twitter.com/johnlhenning) 
 
 Links:
-- Code: https://github.ibm.com/john-l-henning/frater
-- Docs: https://pages.github.ibm.com/john-l-henning/frater
+- Code: https://github.com/frater-sdk/frater
+- Docs: https://pages.github.ibm.com/frater-sdk/frater

@@ -1,7 +1,14 @@
+from dataclasses import dataclass, field
 from logging import Logger
 
-from .stream import OutputStream
+from .stream import OutputStream, StreamConfig
 from ..logging import summarize
+from ..logging.logger import LoggerConfig
+
+
+@dataclass
+class LoggerOutputStreamConfig(StreamConfig):
+    logger_config: LoggerConfig = field(default_factory=LoggerConfig)
 
 
 class LoggerOutputStream(OutputStream):

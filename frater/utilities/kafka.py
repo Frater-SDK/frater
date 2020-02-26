@@ -1,7 +1,7 @@
 import logging
 import time
 
-from kafka import KafkaAdminClient
+from kafka import KafkaClient
 
 logger = logging.getLogger()
 
@@ -20,7 +20,7 @@ def wait_for_kafka_servers(servers, max_retries=10, sleep=1):
 
 def kafka_servers_available(servers):
     try:
-        client = KafkaAdminClient(bootstrap_servers=servers)
+        client = KafkaClient(bootstrap_servers=servers)
         client.close()
     except Exception:
         return False

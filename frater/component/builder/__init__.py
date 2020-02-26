@@ -1,1 +1,1 @@
-from .component_builder import ComponentBuilder
+from .builder import ComponentBuilder, ComponentBuildError
