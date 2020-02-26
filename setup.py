@@ -10,7 +10,7 @@ with open('README.md') as f:
 
 setup(
     name='frater',
-    version='0.2.2',
+    version='0.2.3',
     packages=packages,
     license='MIT',
     url='https://github.com/frater-sdk/frater',
