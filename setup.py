@@ -17,6 +17,7 @@ setup(
     author='John Henning',
     description='A Machine Learning and Data-Driven Systems Framework and Toolkit',
     long_description=description,
+    long_description_content_type='text/markdown',
     author_email='john.l.henning@ibm.com',
     install_requires=dependencies,
     python_requires='>=3.7'
