@@ -27,11 +27,11 @@ interface as well as a CLI. Frater will be able to be installed on to a local sy
 deployed in a cloud environment. 
 
 ## Install
+### Requirements:
+- `python 3.7+`
  To install Frater, execute the following:
 ```shell 
-git clone git@gitlab.com:diva-phase-2/frater.git
-cd frater/   
-pip install .
+pip install frater
 ```
 
 ## Getting Started
@@ -54,4 +54,4 @@ reality. If you’re interested, contact John Henning at
 
 Links:
 - Code: https://github.com/frater-sdk/frater
-- Docs: https://pages.github.ibm.com/frater-sdk/frater
+- Docs: https://pages.github.com/frater-sdk/frater
