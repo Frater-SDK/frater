@@ -1,8 +1,8 @@
 # Frater
-> Frater - Streamlining Large Scale Machine Learning Systems
+> Frater - A Machine Learning and Data-Driven Systems Framework and Toolkit
 
 Frater is a framework and toolkit whose goal is to simplify and streamline building 
-large scale machine learning systems in research and production, as well as providing 
+large scale machine learning and data driven systems in research and production, as well as providing 
 insight into a system at each step of the pipeline. Currently, transitioning a machine 
 learning project from a research model to a production system requires a lot of time and effort. 
 Even more, building systems that use more than one model can be an even bigger headache. 
