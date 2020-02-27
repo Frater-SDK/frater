@@ -13,6 +13,9 @@ __all__ = ['Component', 'ComponentConfig', 'ComponentState']
 
 @dataclass
 class ComponentConfig(Config):
+    """Base
+    :param component_id: Base :py:class:`~frater.config.Config` class for components
+    """
     component_id: str = field(default_factory=lambda: str(uuid4()))
     name: str = 'component_config'
     dependencies: List[Dependency] = field(default_factory=list)
@@ -20,11 +23,26 @@ class ComponentConfig(Config):
 
 @dataclass
 class ComponentState(DataClassJsonMixin):
+    """
+    :param state_id: test
+    :type state_id: str
+    """
     state_id: str = field(default_factory=lambda: str(uuid4()))
 
 
 class Component:
-    def __init__(self, config: ComponentConfig = ComponentConfig()):
+    def __init__(self, config: ComponentConfig = None):
+        """Base class for components in Frater. Generally shouldn't be used for direct subclassing, outside of\
+        advanced use cases. In general, use :py:class:`~frater.component.component.io_component.IOComponent`,
+        :py:class:`~frater.component.component.output_component.OutputComponent`, \
+        :py:class:`~frater.component.component.input_component.InputComponent` or their subclasses as starting points.
+
+        :param config: config object for the component. Should be a :py:class:`~frater.component.ComponentConfig` or a \
+        subclass with more fields.
+        """
+        if config is None:
+            config = ComponentConfig()
+
         self.started = False
         self.paused = False
         self.active = False

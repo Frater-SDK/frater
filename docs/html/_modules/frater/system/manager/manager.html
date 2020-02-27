@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>frater.system.manager.manager &mdash; Frater  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Frater
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation/installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/frater.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Frater</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>frater.system.manager.manager</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for frater.system.manager.manager</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">...client</span> <span class="k">import</span> <span class="n">ComponentClientConfig</span><span class="p">,</span> <span class="n">ComponentClient</span>
+<span class="kn">from</span> <span class="nn">...utilities</span> <span class="k">import</span> <span class="n">Handler</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SystemManager&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="SystemManager"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager">[docs]</a><span class="k">class</span> <span class="nc">SystemManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ComponentClient</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SystemManager.check_dependency"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.check_dependency">[docs]</a>    <span class="k">def</span> <span class="nf">check_dependency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="c1"># TODO implement dependency checking. For now, dependencies are always ready</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ready&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_component"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_component">[docs]</a>    <span class="k">def</span> <span class="nf">get_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_components"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_components">[docs]</a>    <span class="k">def</span> <span class="nf">get_components</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">component</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span></div>
+
+<div class="viewcode-block" id="SystemManager.register_component"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.register_component">[docs]</a>    <span class="k">def</span> <span class="nf">register_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">client_config</span> <span class="o">=</span> <span class="n">ComponentClientConfig</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">client_config</span><span class="o">.</span><span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;registered&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{client_config.component_id}</span><span class="s1"> already registered&#39;</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">client_config</span><span class="o">.</span><span class="n">component_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">ComponentClient</span><span class="p">(</span><span class="n">client_config</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;registered&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{client_config.component_id}</span><span class="s1"> successfully registered&#39;</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="SystemManager.start"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;started&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.start_all"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.start_all">[docs]</a>    <span class="k">def</span> <span class="nf">start_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.started_component"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.started_component">[docs]</a>    <span class="k">def</span> <span class="nf">started_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;started&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">started</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.all_started"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.all_started">[docs]</a>    <span class="k">def</span> <span class="nf">all_started</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">started_component</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.stop"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;stopped&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.stop_all"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.stop_all">[docs]</a>    <span class="k">def</span> <span class="nf">stop_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.stopped"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.stopped">[docs]</a>    <span class="k">def</span> <span class="nf">stopped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;stopped&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stopped</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.all_stopped"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.all_stopped">[docs]</a>    <span class="k">def</span> <span class="nf">all_stopped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stopped</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.toggle_pause"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.toggle_pause">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_pause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;paused&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">toggle_pause</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.toggle_pause_all"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.toggle_pause_all">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_pause_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_pause</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.pause"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.pause">[docs]</a>    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;paused&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.pause_all"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.pause_all">[docs]</a>    <span class="k">def</span> <span class="nf">pause_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pause</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.unpause"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.unpause">[docs]</a>    <span class="k">def</span> <span class="nf">unpause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;unpaused&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stopped</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.unpause_all"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.unpause_all">[docs]</a>    <span class="k">def</span> <span class="nf">unpause_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">unpause</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.paused"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.paused">[docs]</a>    <span class="k">def</span> <span class="nf">paused</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;paused&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">paused</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.all_paused"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.all_paused">[docs]</a>    <span class="k">def</span> <span class="nf">all_paused</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">paused</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.active"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.active">[docs]</a>    <span class="k">def</span> <span class="nf">active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;active&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">active</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.all_active"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.all_active">[docs]</a>    <span class="k">def</span> <span class="nf">all_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.reset"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;reset&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.reset_all"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.reset_all">[docs]</a>    <span class="k">def</span> <span class="nf">reset_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.error"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">error</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.all_error"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.all_error">[docs]</a>    <span class="k">def</span> <span class="nf">all_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.update_config"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.update_config">[docs]</a>    <span class="k">def</span> <span class="nf">update_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;updated&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_config"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_config">[docs]</a>    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;stopped&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_all_configs"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_all_configs">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_configs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_config</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_state"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;stopped&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">get_status</span><span class="p">()}</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_all_states"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_all_states">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_status"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_status">[docs]</a>    <span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">component_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;component_id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">component_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;stopped&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;Component </span><span class="si">{component_id}</span><span class="s1"> is not registered in this system.&#39;</span><span class="p">}</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">component_id</span><span class="p">]</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_all_statuses"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_all_statuses">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_statuses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_status</span><span class="p">({</span><span class="s1">&#39;component_id&#39;</span><span class="p">:</span> <span class="n">component_id</span><span class="p">})</span> <span class="k">for</span> <span class="n">component_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SystemManager.get_default_endpoints"><a class="viewcode-back" href="../../../../api/frater.system.manager.manager.html#frater.system.manager.manager.SystemManager.get_default_endpoints">[docs]</a>    <span class="k">def</span> <span class="nf">get_default_endpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/dependency&#39;</span><span class="p">,</span> <span class="s1">&#39;check_dependency&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_dependency</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component&#39;</span><span class="p">,</span> <span class="s1">&#39;get_component&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_component</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/register&#39;</span><span class="p">,</span> <span class="s1">&#39;register_component&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_component</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">]),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/start&#39;</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/started&#39;</span><span class="p">,</span> <span class="s1">&#39;started_component&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">started_component</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/stop&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/stopped&#39;</span><span class="p">,</span> <span class="s1">&#39;stopped&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stopped</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/toggle_pause&#39;</span><span class="p">,</span> <span class="s1">&#39;toggle_pause&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle_pause</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/pause&#39;</span><span class="p">,</span> <span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pause</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/unpause&#39;</span><span class="p">,</span> <span class="s1">&#39;unpause&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpause</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/paused&#39;</span><span class="p">,</span> <span class="s1">&#39;paused&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">paused</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/active&#39;</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/reset&#39;</span><span class="p">,</span> <span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/error&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/config&#39;</span><span class="p">,</span> <span class="s1">&#39;get_config&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/config&#39;</span><span class="p">,</span> <span class="s1">&#39;update_config&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_config</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PATCH&#39;</span><span class="p">]),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/state&#39;</span><span class="p">,</span> <span class="s1">&#39;get_state&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/component/status&#39;</span><span class="p">,</span> <span class="s1">&#39;get_status&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_status</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components&#39;</span><span class="p">,</span> <span class="s1">&#39;get_components&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_components</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/start&#39;</span><span class="p">,</span> <span class="s1">&#39;start_all&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_all</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/started&#39;</span><span class="p">,</span> <span class="s1">&#39;all_started&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_started</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/stop&#39;</span><span class="p">,</span> <span class="s1">&#39;stop_all&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_all</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/stopped&#39;</span><span class="p">,</span> <span class="s1">&#39;all_stopped&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_stopped</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/toggle_pause&#39;</span><span class="p">,</span> <span class="s1">&#39;toggle_pause_all&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle_pause_all</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/pause&#39;</span><span class="p">,</span> <span class="s1">&#39;pause_all&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pause_all</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/unpause&#39;</span><span class="p">,</span> <span class="s1">&#39;unpause_all&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpause_all</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/paused&#39;</span><span class="p">,</span> <span class="s1">&#39;all_paused&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_paused</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/active&#39;</span><span class="p">,</span> <span class="s1">&#39;all_active&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_active</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/reset&#39;</span><span class="p">,</span> <span class="s1">&#39;reset_all&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_all</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/error&#39;</span><span class="p">,</span> <span class="s1">&#39;all_error&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_error</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/config&#39;</span><span class="p">,</span> <span class="s1">&#39;get_all_configs&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_configs</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/state&#39;</span><span class="p">,</span> <span class="s1">&#39;get_all_states&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_states</span><span class="p">),</span>
+            <span class="n">Handler</span><span class="p">(</span><span class="s1">&#39;/components/status&#39;</span><span class="p">,</span> <span class="s1">&#39;get_all_statuses&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_statuses</span><span class="p">),</span>
+        <span class="p">]</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, John Henning
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

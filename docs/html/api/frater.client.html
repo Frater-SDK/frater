@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>frater.client package &mdash; Frater  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="frater.client.api module" href="frater.client.api.html" />
+    <link rel="prev" title="API" href="frater.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Frater
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/installation.html">Installation Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="frater.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">frater.client package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="frater.client.api.html">frater.client.api module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="frater.client.component.html">frater.client.component module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="frater.client.system.html">frater.client.system module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="frater.component.html">frater.component package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.config.html">frater.config package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.data_store.html">frater.data_store package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.data_type.html">frater.data_type package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.dependency.html">frater.dependency package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.factory.html">frater.factory package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.io.html">frater.io package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.logging.html">frater.logging package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.server.html">frater.server package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.stream.html">frater.stream package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.system.html">frater.system package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.utilities.html">frater.utilities package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frater.validation.html">frater.validation package</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Frater</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="frater.html">API</a> &raquo;</li>
+        
+      <li>frater.client package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/frater.client.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-frater.client">
+<span id="frater-client-package"></span><h1>frater.client package<a class="headerlink" href="#module-frater.client" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="frater.client.API">
+<em class="property">class </em><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">host</em>, <em class="sig-param">port</em>, <em class="sig-param">protocol='http://'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/api.html#API"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.API" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="frater.client.API.api_url">
+<em class="property">property </em><code class="sig-name descname">api_url</code><a class="headerlink" href="#frater.client.API.api_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.API.build_endpoint_url">
+<code class="sig-name descname">build_endpoint_url</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/api.html#API.build_endpoint_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.API.build_endpoint_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.API.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">params=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/api.html#API.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.API.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.API.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/api.html#API.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.API.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.API.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/api.html#API.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.API.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.API.patch">
+<code class="sig-name descname">patch</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/api.html#API.patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.API.patch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.API.put">
+<code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/api.html#API.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.API.put" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frater.client.ComponentClient">
+<em class="property">class </em><code class="sig-name descname">ComponentClient</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="frater.client.ComponentClient.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.started">
+<code class="sig-name descname">started</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.started"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.started" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.stopped">
+<code class="sig-name descname">stopped</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.stopped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.stopped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.toggle_pause">
+<code class="sig-name descname">toggle_pause</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.toggle_pause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.toggle_pause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.pause">
+<code class="sig-name descname">pause</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.pause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.pause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.unpause">
+<code class="sig-name descname">unpause</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.unpause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.unpause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.paused">
+<code class="sig-name descname">paused</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.paused"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.paused" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.active">
+<code class="sig-name descname">active</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.update_config">
+<code class="sig-name descname">update_config</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.update_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.update_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.get_config">
+<code class="sig-name descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.get_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.get_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.get_state">
+<code class="sig-name descname">get_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.get_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.get_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.get_status">
+<code class="sig-name descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.get_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.get_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.ComponentClient.get_endpoints">
+<code class="sig-name descname">get_endpoints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClient.get_endpoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClient.get_endpoints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frater.client.ComponentClientConfig">
+<em class="property">class </em><code class="sig-name descname">ComponentClientConfig</code><span class="sig-paren">(</span><em class="sig-param">name='component_client_config'</em>, <em class="sig-param">config_id=&lt;factory&gt;</em>, <em class="sig-param">meta=&lt;factory&gt;</em>, <em class="sig-param">component_id=&lt;factory&gt;</em>, <em class="sig-param">host='localhost'</em>, <em class="sig-param">port=3000</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#ComponentClientConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.ComponentClientConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="frater.config.config.html#frater.config.config.Config" title="frater.config.config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">frater.config.config.Config</span></code></a></p>
+<dl class="attribute">
+<dt id="frater.client.ComponentClientConfig.name">
+<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = 'component_client_config'</em><a class="headerlink" href="#frater.client.ComponentClientConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="frater.client.ComponentClientConfig.component_id">
+<code class="sig-name descname">component_id</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#frater.client.ComponentClientConfig.component_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="frater.client.ComponentClientConfig.host">
+<code class="sig-name descname">host</code><em class="property">: str</em><em class="property"> = 'localhost'</em><a class="headerlink" href="#frater.client.ComponentClientConfig.host" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="frater.client.ComponentClientConfig.port">
+<code class="sig-name descname">port</code><em class="property">: int</em><em class="property"> = 3000</em><a class="headerlink" href="#frater.client.ComponentClientConfig.port" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="frater.client.get_component_client_config">
+<code class="sig-name descname">get_component_client_config</code><span class="sig-paren">(</span><em class="sig-param">component_config</em>, <em class="sig-param">network_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/component.html#get_component_client_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.get_component_client_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="frater.client.SystemClient">
+<em class="property">class </em><code class="sig-name descname">SystemClient</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="frater.client.SystemClient.wait_for_dependencies">
+<code class="sig-name descname">wait_for_dependencies</code><span class="sig-paren">(</span><em class="sig-param">dependencies</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.wait_for_dependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.wait_for_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.check_dependency">
+<code class="sig-name descname">check_dependency</code><span class="sig-paren">(</span><em class="sig-param">dependency</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.check_dependency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.check_dependency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_component">
+<code class="sig-name descname">get_component</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_component" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.register_component">
+<code class="sig-name descname">register_component</code><span class="sig-paren">(</span><em class="sig-param">component_client_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.register_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.register_component" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.started">
+<code class="sig-name descname">started</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.started"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.started" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.stopped">
+<code class="sig-name descname">stopped</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.stopped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.stopped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.toggle_pause">
+<code class="sig-name descname">toggle_pause</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.toggle_pause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.toggle_pause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.pause">
+<code class="sig-name descname">pause</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.pause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.pause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.unpause">
+<code class="sig-name descname">unpause</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.unpause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.unpause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.paused">
+<code class="sig-name descname">paused</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.paused"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.paused" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.active">
+<code class="sig-name descname">active</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_config">
+<code class="sig-name descname">get_config</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.update_config">
+<code class="sig-name descname">update_config</code><span class="sig-paren">(</span><em class="sig-param">component_id</em>, <em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.update_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.update_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_state">
+<code class="sig-name descname">get_state</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_status">
+<code class="sig-name descname">get_status</code><span class="sig-paren">(</span><em class="sig-param">component_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_components">
+<code class="sig-name descname">get_components</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_components"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_components" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.start_all">
+<code class="sig-name descname">start_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.start_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.start_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.all_started">
+<code class="sig-name descname">all_started</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.all_started"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.all_started" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.stop_all">
+<code class="sig-name descname">stop_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.stop_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.stop_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.all_stopped">
+<code class="sig-name descname">all_stopped</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.all_stopped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.all_stopped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.toggle_pause_all">
+<code class="sig-name descname">toggle_pause_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.toggle_pause_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.toggle_pause_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.pause_all">
+<code class="sig-name descname">pause_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.pause_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.pause_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.unpause_all">
+<code class="sig-name descname">unpause_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.unpause_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.unpause_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.all_paused">
+<code class="sig-name descname">all_paused</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.all_paused"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.all_paused" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.all_active">
+<code class="sig-name descname">all_active</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.all_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.all_active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.reset_all">
+<code class="sig-name descname">reset_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.reset_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.reset_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.all_error">
+<code class="sig-name descname">all_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.all_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.all_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_all_configs">
+<code class="sig-name descname">get_all_configs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_all_configs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_all_configs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_all_states">
+<code class="sig-name descname">get_all_states</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_all_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_all_states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frater.client.SystemClient.get_all_statuses">
+<code class="sig-name descname">get_all_statuses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClient.get_all_statuses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClient.get_all_statuses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frater.client.SystemClientConfig">
+<em class="property">class </em><code class="sig-name descname">SystemClientConfig</code><span class="sig-paren">(</span><em class="sig-param">name='system_client_config'</em>, <em class="sig-param">config_id=&lt;factory&gt;</em>, <em class="sig-param">meta=&lt;factory&gt;</em>, <em class="sig-param">network_config=&lt;factory&gt;</em>, <em class="sig-param">polling_timeout=3</em>, <em class="sig-param">max_retries=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/frater/client/system.html#SystemClientConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frater.client.SystemClientConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="frater.config.config.html#frater.config.config.Config" title="frater.config.config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">frater.config.config.Config</span></code></a></p>
+<dl class="attribute">
+<dt id="frater.client.SystemClientConfig.name">
+<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = 'system_client_config'</em><a class="headerlink" href="#frater.client.SystemClientConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="frater.client.SystemClientConfig.network_config">
+<code class="sig-name descname">network_config</code><em class="property">: NetworkConfig</em><em class="property"> = None</em><a class="headerlink" href="#frater.client.SystemClientConfig.network_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="frater.client.SystemClientConfig.polling_timeout">
+<code class="sig-name descname">polling_timeout</code><em class="property">: int</em><em class="property"> = 3</em><a class="headerlink" href="#frater.client.SystemClientConfig.polling_timeout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="frater.client.SystemClientConfig.max_retries">
+<code class="sig-name descname">max_retries</code><em class="property">: int</em><em class="property"> = 10</em><a class="headerlink" href="#frater.client.SystemClientConfig.max_retries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="frater.client.api.html">frater.client.api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frater.client.component.html">frater.client.component module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frater.client.system.html">frater.client.system module</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="frater.client.api.html" class="btn btn-neutral float-right" title="frater.client.api module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="frater.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, John Henning
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

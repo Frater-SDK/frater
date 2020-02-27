@@ -5,7 +5,7 @@ from .component import ComponentState
 from .io_component import IOComponent, IOComponentConfig
 from ...stream import InputStream, OutputStream
 
-__all__ = ['BatchComponent', 'BatchComponentConfig']
+__all__ = ['BatchComponent', 'BatchComponentConfig', 'BatchComponentState']
 
 
 @dataclass

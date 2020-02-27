@@ -46,6 +46,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx_autodoc_typehints',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -182,3 +183,6 @@ epub_exclude_files = ['search.html']
 todo_include_todos = True
 
 autoclass_content = 'both'
+add_module_names = False
+autodoc_member_order = 'bysource'
+html_style = 'css/style.css'

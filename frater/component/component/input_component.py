@@ -1,11 +1,18 @@
+from dataclasses import dataclass
+
 from .component import Component, ComponentConfig
 from ...stream import InputStream, is_end_of_stream, is_start_of_stream
 
-__all__ = ['InputComponent']
+__all__ = ['InputComponent', 'InputComponentConfig']
+
+
+@dataclass
+class InputComponentConfig(ComponentConfig):
+    name: str = 'input_component_config'
 
 
 class InputComponent(Component):
-    def __init__(self, config: ComponentConfig, input_stream: InputStream):
+    def __init__(self, config: InputComponentConfig, input_stream: InputStream):
         super(InputComponent, self).__init__(config)
         self.input_stream = input_stream
 

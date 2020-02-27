@@ -1,0 +1,10 @@
+/*noinspection CssUnknownTarget*/
+@import url("theme.css");
+
+.wy-nav-content {
+    max-width: none;
+}
+
+.highlight-python {
+    max-width: 1200px !important;
+}

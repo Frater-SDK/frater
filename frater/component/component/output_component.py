@@ -1,7 +1,14 @@
+from dataclasses import dataclass
+
 from .component import Component, ComponentConfig
 from ...stream import OutputStream
 
-__all__ = ['OutputComponent']
+__all__ = ['OutputComponent', 'OutputComponentConfig']
+
+
+@dataclass
+class OutputComponentConfig(ComponentConfig):
+    name: str = 'output_component_config'
 
 
 class OutputComponent(Component):

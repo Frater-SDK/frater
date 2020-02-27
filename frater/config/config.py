@@ -9,6 +9,20 @@ from dataclasses_json import DataClassJsonMixin
 
 @dataclass
 class Config(DataClassJsonMixin):
+    """Base class for building configs in Frater. Used in :py:mod:`frater.component`, :py:mod:`frater.stream` and \
+    several other modules
+
+
+     :param name: name for the given config. Defaults to "config"
+     :type name: str
+     :param config_id: config_id for the given config. Generally should let this stay default,\
+     unless deserializing an existing config. Will default to a random uuid4
+     :type config_id: str
+     :param meta: dictionary for storing extra metadata passed into config that is not an existing field for the\
+     class. If using the default constructor, then you just supply the dictionary. If using any of the constructors\
+     from json/yaml/dict, it will gather extra parameters for those fields.
+     :type meta: dict
+    """
     name: str = 'config'
     config_id: str = field(default_factory=lambda: str(uuid4()))
     meta: Dict = field(default_factory=dict)
