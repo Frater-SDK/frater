@@ -20,5 +20,5 @@ setup(
     long_description_content_type='text/markdown',
     author_email='john.l.henning@ibm.com',
     install_requires=dependencies,
-    python_requires='>=3.7'
+    python_requires='>=3.6'
 )

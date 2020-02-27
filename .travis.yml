@@ -1,0 +1,42 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+services: docker
+
+jobs:
+  include:
+    - stage: "Unit Tests"
+    - install:
+        - pip install -r requirements.txt
+        - pip install -r requirements-dev.txt
+    - script: pytest tests/unit/
+
+    - stage: "Integration Tests"
+    - install:
+        - pip install -r requirements.txt
+        - pip install -r requirements-dev.txt
+    - script: pytest tests/integration
+
+    - stage: "Functional Tests"
+    - install:
+        - pip install -r requirements.txt
+        - pip install -r requirements-dev.txt
+    - script: pytest tests/functional
+
+    - stage: "End to End Tests"
+    - install:
+        - pip install -r requirements.txt
+        - pip install -r requirements-dev.txt
+    - script: pytest tests/e2e
+
+    - stage: "Build and Push Docker Images"
+    - before_script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - script:
+        - docker build -f docker/Dockerfile . -t frater/frater
+        - docker build -f docker/GPU.Dockerfile . -t frater/frater:latest-gpu
+        - docker push frater/frater
+        - docker push frater/frater:latest-gpu

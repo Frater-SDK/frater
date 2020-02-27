@@ -6,3 +6,4 @@ kafka-python
 pillow
 dataclasses-json
 inflection
+dataclasses

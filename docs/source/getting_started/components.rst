@@ -15,5 +15,6 @@ it receives over time.
     :language: python
     :lines: 1-22
 
+
 Here we've defined the :py:class:`SummationComponent` with its corresponding state `SummationComponentState` that will\
- hold the state info of
+hold the state info of
