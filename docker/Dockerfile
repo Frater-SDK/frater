@@ -1,10 +1,8 @@
 FROM python:slim-stretch
 
-# install dependencies
-ADD requirements.txt requirements.txt
-RUN pip install -r requirements.txt
 
 WORKDIR /src
+ADD requirements.txt requirements.txt
 ADD frater frater/
 ADD setup.py setup.py
 
