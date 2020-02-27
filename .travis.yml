@@ -1,18 +1,5 @@
 language: python
 
-jobs:
-  include:
-    - stage: "Build and Push Docker Images"
-    - services: docker
-    - python: 3.7
-    - before_script:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - script:
-        - docker build -f docker/Dockerfile . -t frater/frater
-        - docker build -f docker/GPU.Dockerfile . -t frater/frater:latest-gpu
-        - docker push frater/frater
-        - docker push frater/frater:latest-gpu
-
 python:
   - "3.6"
   - "3.7"

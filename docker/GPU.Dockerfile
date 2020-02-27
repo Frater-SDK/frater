@@ -18,6 +18,7 @@ RUN conda install python=3.7
 
 WORKDIR /src
 ADD requirements.txt requirements.txt
+ADD README.md README.md
 ADD frater frater/
 ADD setup.py setup.py
 
