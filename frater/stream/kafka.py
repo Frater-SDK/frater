@@ -25,6 +25,9 @@ class KafkaInputStream(InputStream):
         self._consumer = KafkaConsumer(*self.config.topics, bootstrap_servers=self.config.servers,
                                        value_deserializer=deserializer)
 
+    def __next__(self):
+        return next(self._consumer).value
+
     def __iter__(self):
         for msg in self._consumer:
             yield msg.value
