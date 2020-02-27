@@ -54,4 +54,4 @@ reality. If you’re interested, contact John Henning at
 
 Links:
 - Code: https://github.com/frater-sdk/frater
-- Docs: https://pages.github.com/frater-sdk/frater
+- Docs: https://frater.readthedocs.io
