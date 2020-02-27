@@ -8,9 +8,9 @@ python:
   - "3.8"
 install:
   - pip install -r requirements.txt
-  - pip install -r requirements-dev.txt
+  - pip install -r requirements-dev.txt --upgrade
 
-script: pytest tests
+script: pytest tests/
 
 jobs:
   include:
