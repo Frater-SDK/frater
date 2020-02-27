@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from frater.server import Handler
+from frater.utilities import Handler
 
 
 class TestHandler(TestCase):
