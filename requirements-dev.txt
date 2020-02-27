@@ -1,4 +1,6 @@
 pytest
-hypothesis
+pytest-docker-compose
+docker-compose
 attrs
 responses
+hypothesis
