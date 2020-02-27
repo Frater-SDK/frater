@@ -2,49 +2,18 @@ language: python
 
 
 services: docker
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+install:
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+
+script: pytest tests
 
 jobs:
   include:
-    - stage: "Unit Tests"
-    - python:
-        - "3.6"
-        - "3.7"
-        - "3.8"
-    - install:
-        - pip install -r requirements.txt
-        - pip install -r requirements-dev.txt
-    - script: pytest tests/unit/
-
-    - stage: "Integration Tests"
-    - python:
-        - "3.6"
-        - "3.7"
-        - "3.8"
-    - install:
-        - pip install -r requirements.txt
-        - pip install -r requirements-dev.txt
-    - script: pytest tests/integration
-
-    - stage: "Functional Tests"
-    - python:
-        - "3.6"
-        - "3.7"
-        - "3.8"
-    - install:
-        - pip install -r requirements.txt
-        - pip install -r requirements-dev.txt
-    - script: pytest tests/functional
-
-    - stage: "End to End Tests"
-    - python:
-        - "3.6"
-        - "3.7"
-        - "3.8"
-    - install:
-        - pip install -r requirements.txt
-        - pip install -r requirements-dev.txt
-    - script: pytest tests/e2e
-
     - stage: "Build and Push Docker Images"
     - services: docker
     - before_script:
