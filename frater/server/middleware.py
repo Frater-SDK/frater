@@ -30,7 +30,7 @@ def response_middleware(handler: Callable):
             return jsonify(handler(request.json))
         else:
             if has_argument(handler, 'params'):
-                return jsonify(handler(request.args))
+                return jsonify(handler(request.args.to_dict()))
             return jsonify(handler())
 
     return wrapper
