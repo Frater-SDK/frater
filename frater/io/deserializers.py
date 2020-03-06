@@ -14,7 +14,7 @@ def json_to_frater(data):
     if isinstance(data, list):
         return [json_to_frater(item) for item in data]
     elif d_type in data_types:
-        return data_types
+        return data_types[d_type].from_dict(data)
     elif d_type in json_deserializers:
         return json_deserializers[d_type](data)
     else:
