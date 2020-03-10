@@ -67,6 +67,7 @@ class Component:
         self.started = True
 
     def stop(self):
+        self.set_inactive()
         self.started = False
 
     def pause(self):
