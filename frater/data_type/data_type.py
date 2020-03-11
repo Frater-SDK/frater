@@ -1,13 +1,19 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict
 
 import inflection
 from dataclasses_json import DataClassJsonMixin
 from dataclasses_json.core import Json
 
+from frater.utilities import datetime
+
 
 @dataclass
 class DataType(DataClassJsonMixin):
+    created: str = field(default_factory=datetime.now)
+    updated: str = field(default_factory=datetime.now)
+    accessed: str = field(default_factory=datetime.now)
+
     @classmethod
     def data_type(cls):
         return inflection.underscore(cls.__name__)

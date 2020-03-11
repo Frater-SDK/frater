@@ -71,12 +71,13 @@ class Config(DataClassJsonMixin):
         return required_config, optional_config
 
     @classmethod
-    def from_yaml(cls, s: str, from_file=False):
+    def from_yaml(cls, s: str, from_file=False, **kwargs):
         if from_file:
             with open(s) as f:
-                return cls.from_dict(yaml.load(f, yaml.FullLoader))
+                d = yaml.load(f, yaml.FullLoader)
+                return cls.from_dict(d, **kwargs)
 
-        return cls.from_dict(yaml.load(s))
+        return cls.from_dict(yaml.load(s), **kwargs)
 
     def to_yaml(self, filename=''):
         d = self.to_dict()
@@ -91,6 +92,8 @@ def process_config_value(annotation_type: type, value):
     if isinstance(value, list):
         list_type = getattr(annotation_type, '__args__')[0]
         return [process_config_value(list_type, item) for item in value]
+    elif annotation_type is Dict:
+        return dict(value)
     elif issubclass(annotation_type, Config):
         return annotation_type.from_dict(value)
     else:
