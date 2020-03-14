@@ -10,9 +10,9 @@ from frater.utilities import datetime
 
 @dataclass
 class DataType(DataClassJsonMixin):
-    created: str = field(default_factory=datetime.now)
-    updated: str = field(default_factory=datetime.now)
-    accessed: str = field(default_factory=datetime.now)
+    created: str = field(default_factory=datetime.utcnow)
+    updated: str = field(default_factory=datetime.utcnow)
+    accessed: str = field(default_factory=datetime.utcnow)
 
     @classmethod
     def data_type(cls):
