@@ -1,3 +1,5 @@
+import sys
+
 from setuptools import setup, find_packages
 
 packages = find_packages(exclude=['tests*'])
@@ -5,12 +7,15 @@ packages = find_packages(exclude=['tests*'])
 with open('requirements.txt') as f:
     dependencies = list(line.strip() for line in f.readlines())
 
+if sys.version_info < (3, 7):
+    dependencies.append('dataclasses')
+
 with open('README.md') as f:
     description = f.read()
 
 setup(
     name='frater',
-    version='0.3.1.9',
+    version='0.3.1.10',
     packages=packages,
     license='MIT',
     url='https://github.com/frater-sdk/frater',
