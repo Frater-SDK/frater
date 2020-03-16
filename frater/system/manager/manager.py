@@ -123,7 +123,7 @@ class SystemManager:
 
         client = self.components[component_id]
 
-        response = client.stopped()
+        response = client.unpause()
         response.update({'component_id': component_id})
 
         return response
