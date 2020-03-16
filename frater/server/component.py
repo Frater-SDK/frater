@@ -43,6 +43,6 @@ def serve_component(component_class: type, component_config_class: type,
     # register component endpoints with server
     server_manager.register_endpoints(component_manager.get_all_handlers())
     # register component with system
-    client_config = get_component_client_config(server_config.component_config, server_config.network_config)
+    client_config = get_component_client_config(component_config, server_config.network_config)
     system_client.register_component(client_config)
     return server_manager.get_server()
