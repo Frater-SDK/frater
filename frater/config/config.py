@@ -94,7 +94,7 @@ def process_config_value(annotation_type: type, value):
         return [process_config_value(list_type, item) for item in value]
     elif annotation_type is Dict:
         return dict(value)
-    elif issubclass(annotation_type, Config):
+    elif issubclass(annotation_type, DataClassJsonMixin):
         return annotation_type.from_dict(value)
     else:
         return value
