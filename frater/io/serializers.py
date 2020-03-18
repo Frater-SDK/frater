@@ -1,7 +1,7 @@
 import json
 from typing import Callable
 
-from ..data_type import DataType
+from frater.data.data_type import DataType
 from ..factory import Factory
 from ..utilities.json import is_json_serializable
 

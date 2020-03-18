@@ -1,8 +1,8 @@
 import os
 from dataclasses import dataclass
 
-from ...config import Config
-from ...utilities import Singleton
+from frater.config import Config
+from frater.utilities import Singleton
 
 
 @dataclass

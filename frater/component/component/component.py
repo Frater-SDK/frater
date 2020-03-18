@@ -6,6 +6,7 @@ from dataclasses_json import DataClassJsonMixin
 
 from ...config import Config
 from ...dependency import Dependency
+from ...stream import is_start_of_stream, is_end_of_stream
 from ...utilities import Handler
 
 __all__ = ['Component', 'ComponentConfig', 'ComponentState']
@@ -54,11 +55,12 @@ class Component:
     def stopped(self):
         return not self.started
 
+    @property
+    def _input_stream(self):
+        return []
+
     def init_state(self) -> ComponentState:
         return ComponentState()
-
-    def run(self):
-        raise NotImplementedError
 
     def reset(self):
         self.state = self.init_state()
@@ -85,9 +87,70 @@ class Component:
     def set_inactive(self):
         self.active = False
 
+    def run(self):
+        self.start()
+        while self.started:
+            for data in self._input_stream:
+                if self.stopped:
+                    break
+                if self.paused:
+                    self.wait()
+
+                if is_start_of_stream(data):
+                    self.reset()
+                    self.set_active()
+                    self.on_start_of_stream(data)
+                    self.send_output(data)
+                elif is_end_of_stream(data):
+                    self.on_end_of_stream(data)
+                    self.send_output(data)
+                    self.set_inactive()
+                else:
+                    self.component_lifecycle(data)
+
     def wait(self):
         while self.paused:
             continue
+
+    def component_lifecycle(self, data):
+        self.before_preprocess(data)
+        preprocessed_input = self.preprocess(data)
+        self.before_process(preprocessed_input)
+        output = self.process(preprocessed_input)
+        self.after_process(output)
+        postprocessed_output = self.postprocess(output)
+        self.after_postprocess(postprocessed_output)
+        self.send_output(postprocessed_output)
+
+    def before_preprocess(self, data):
+        pass
+
+    def preprocess(self, data):
+        return data
+
+    def before_process(self, data):
+        pass
+
+    def process(self, data):
+        raise NotImplementedError
+
+    def after_process(self, data):
+        pass
+
+    def postprocess(self, data):
+        return data
+
+    def after_postprocess(self, data):
+        pass
+
+    def send_output(self, data):
+        pass
+
+    def on_start_of_stream(self, data):
+        pass
+
+    def on_end_of_stream(self, data):
+        pass
 
     # noinspection PyMethodMayBeStatic
     def get_additional_handlers(self) -> List[Handler]:

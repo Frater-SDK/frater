@@ -3,7 +3,7 @@ from typing import Callable
 
 __all__ = ['json_deserializers', 'json_to_frater', 'get_kafka_deserializer']
 
-from ..data_type import data_types
+from frater.data.data_type import data_types
 from ..factory import Factory
 
 json_deserializers = Factory()

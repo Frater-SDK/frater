@@ -3,7 +3,7 @@ from typing import List
 
 from dataclasses_json import DataClassJsonMixin
 
-from frater.category import Category
+from frater.data.category import Category
 
 
 @dataclass

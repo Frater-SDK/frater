@@ -4,6 +4,10 @@ from typing import List
 from ..config import Config
 
 
+class StreamError(Exception):
+    pass
+
+
 @dataclass
 class StreamConfig(Config):
     data_type: str = ''
@@ -16,13 +20,27 @@ class Stream:
 
     def __init__(self, config: StreamConfig = None):
         self.config = config
+        self._closed = False
+
+    def __str__(self):
+        return self.__class__.__name__
+
+    def __repr__(self):
+        return self.__class__.__name__
+
+    @property
+    def closed(self):
+        return self._closed
 
     @property
     def data_type(self):
         return self.config.data_type
 
     def close(self):
-        pass
+        if self._closed:
+            raise StreamError(f'Stream {self} already closed')
+
+        self._closed = True
 
 
 class InputStream(Stream):

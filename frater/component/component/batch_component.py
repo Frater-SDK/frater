@@ -62,9 +62,12 @@ class BatchComponent(IOComponent):
     def reset_batch(self):
         self.state.batch = list()
 
-    def send_output(self, outputs):
-        for output in outputs:
-            self.output_stream.send(output)
+    def send_output(self, data):
+        if isinstance(data, list):
+            for output in data:
+                self.output_stream.send(output)
+        else:
+            self.output_stream.send(data)
 
     def batch_lifecycle(self, batch):
         output = self.process(batch)

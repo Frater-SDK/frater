@@ -21,15 +21,17 @@ class JSONInputStream(InputStream):
         super(JSONInputStream, self).__init__(config)
         self.input_file = self.open_file()
 
+    def __next__(self):
+        line = next(self.input_file)
+        return json.loads(line.strip())
+
     def __iter__(self):
         for line in self.input_file:
             yield json_to_frater(json.loads(line.strip()))
 
     def close(self):
         self.input_file.close()
-
-    def open(self):
-        self.input_file = self.open_file()
+        self._closed = True
 
     def open_file(self):
         return open(self.config.filename, 'r')
@@ -46,6 +48,7 @@ class JSONOutputStream(OutputStream):
         self.output_file.write(json_output)
 
     def close(self):
+        super(JSONOutputStream, self).close()
         self.output_file.close()
 
     def open(self):
