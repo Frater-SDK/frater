@@ -8,7 +8,7 @@ from ..config import Config
 @dataclass
 class LoggerConfig(Config):
     name: str = field(default=__name__)
-    handler: str = 'stdout'
+    handler: str = 'std'
     format: str = '%(asctime)s | %(name)s | %(levelname)s | %(message)s'
     level: int = logging.INFO
 

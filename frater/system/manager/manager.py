@@ -225,7 +225,7 @@ class SystemManager:
 
         client = self.components[component_id]
 
-        response = {'component_id': component_id, 'state': client.get_status()}
+        response = {'component_id': component_id, 'state': client.get_state()}
 
         return response
 
